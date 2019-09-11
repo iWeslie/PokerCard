@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PokerCard"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A new generation of Alert View with fluid design."
   s.homepage     = "https://github.com/iWeslie/PokerCard"
   s.license      = "MIT"
@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.swift_version = '5.0'
   s.source       = { :git => "https://github.com/iWeslie/PokerCard.git", :tag => s.version.to_s }
-  s.source_files = 'Sources/**/*'
+  s.source_files = 'Sources/*.swift'
   s.framework  = "UIKit"
 end
