@@ -15,7 +15,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        PokerCard.show()
+//        PokerCard.show()
+        
+        let view = PokerAlertView(title: "Are you sure to make a contribution?")
+        view.center = self.view.center
+        self.view.addSubview(view)
+        
     }
 
 

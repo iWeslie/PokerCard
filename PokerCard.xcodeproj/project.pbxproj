@@ -12,6 +12,10 @@
 		D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */; };
 		D36B3FD82328CCB900E0B4D8 /* PokerCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FD62328CCB900E0B4D8 /* PokerCardTests.swift */; };
 		D36B3FD92328CCB900E0B4D8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36B3FD72328CCB900E0B4D8 /* Info.plist */; };
+		D38001CE2328F8C900980988 /* PokerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001CD2328F8C900980988 /* PokerView.swift */; };
+		D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D02328FCF400980988 /* UIView+KeyWindow.swift */; };
+		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
+		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,10 @@
 		D36B3FDD2328CD1100E0B4D8 /* PokerCard.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = PokerCard.podspec; sourceTree = "<group>"; };
 		D36B3FDE2328CD2000E0B4D8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D36B3FE02328CD4300E0B4D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D38001CD2328F8C900980988 /* PokerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerView.swift; sourceTree = "<group>"; };
+		D38001D02328FCF400980988 /* UIView+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+KeyWindow.swift"; sourceTree = "<group>"; };
+		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
+		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */,
+				D38001D22328FDD200980988 /* Views */,
+				D38001CF2328FBFD00980988 /* Utils */,
+				D38001D52328FF1200980988 /* Model */,
 				D36B3FD12328CC6A00E0B4D8 /* Extension */,
 				D36B3FD42328CC8500E0B4D8 /* Supporting Files */,
 			);
@@ -126,6 +137,31 @@
 				D36B3FE02328CD4300E0B4D8 /* README.md */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		D38001CF2328FBFD00980988 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D38001D02328FCF400980988 /* UIView+KeyWindow.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		D38001D22328FDD200980988 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D38001CD2328F8C900980988 /* PokerView.swift */,
+				D38001E9232911B300980988 /* PokerAlertView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D38001D52328FF1200980988 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D38001D62328FF2000980988 /* PKColor.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,7 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
+				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
+				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
+				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

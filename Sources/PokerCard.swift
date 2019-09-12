@@ -9,7 +9,8 @@
 import Foundation
 
 public class PokerCard {
-    public static func show() {
-        print("hello!")
+    
+    init() {
+        
     }
 }
