@@ -8,16 +8,29 @@
 
 import UIKit
 
-/// base Poker Alert View
+/// Base Poker Alert View
 public class PokerAlertView: PokerView {
     
-    var titleLabel: UILabel!
-    var confirmButton: UIButton!
-    var cancelButton: UIButton!
+    public enum Style {
+//        public typealias RawValue = <#type#>
+        
+        case `default`  // gray
+        case primary    // blue
+        case info       // teal
+        case warn       // orange
+        case danger     // red
+        case success    // green
+    }
     
-    private var titleHorizontalInset: CGFloat = 24
-    private var titleVerticalInset: CGFloat = 18
-    private var buttonHorizontalInset: CGFloat = 40
+    public var titleLabel: UILabel!
+    public var detailLabel: UILabel?
+    public var confirmButton: UIButton!
+    internal var cancelButton: UIButton!
+    
+    internal var titleHorizontalInset: CGFloat = 24
+    internal var titleVerticalInset: CGFloat = 18
+    internal var detailHorizontalInset: CGFloat = 15
+    internal var buttonHorizontalInset: CGFloat = 40
     
     private var titleLabelEstimatedHeight: CGFloat {
         get {
@@ -27,9 +40,17 @@ public class PokerAlertView: PokerView {
         }
     }
     
+    private var detailLabelEstimatedHeight: CGFloat {
+        get {
+            let labelWidth = frame.width - 2 * detailHorizontalInset
+            detailLabel?.preferredMaxLayoutWidth = labelWidth
+            return detailLabel?.intrinsicContentSize.height ?? 0
+        }
+    }
+    
 //    public convenience init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
     
-    public convenience init(title: String) {
+    public convenience init(title: String, detail: String? = nil) {
         self.init(frame: CGRect(x: 0, y: 0, width: 265, height: 159))
         
         backgroundColor = PKColor.background
@@ -37,13 +58,31 @@ public class PokerAlertView: PokerView {
         setupLabel(with: title)
         setupConfirmCancelButton()
         
+        setupDetail(with: detail)
+        
     }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
+        _ = layoutViews
     }
+    
+    private lazy var layoutViews: Void = {
+        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
+        
+        // resize title label
+        // offset = estimated - original
+        //
+        // height = height - original + estimated
+        // height -= original - estimated
+        frame.size.height -= titleLabel.frame.height - titleLabelEstimatedHeight
+        frame.size.height -= (detailLabel?.frame.height ?? 0) - detailLabelEstimatedHeight
+        
+        // align to center
+        guard let superView = self.superview else { return }
+        frame.origin.y = superView.frame.midY - frame.size.height / 2
+    }()
     
     private func setupLabel(with title: String) {
         titleLabel = UILabel()
@@ -57,16 +96,41 @@ public class PokerAlertView: PokerView {
         
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true
         titleLabel.constraint(withLeadingTrailing: titleHorizontalInset)
+        
+    }
+    
+    private func setupDetail(with detail: String?) {
+        guard let detail = detail, !detail.isEmpty else { return }
+        
+        detailLabel = UILabel()
+        detailLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        detailLabel?.text = detail
+        detailLabel?.textAlignment = detailLabel?.numberOfLines == 1 ? .center : .natural
+        detailLabel?.textColor = PKColor.label
+        detailLabel?.numberOfLines = 0
+        detailLabel?.translatesAutoresizingMaskIntoConstraints = false
+//        detailLabel?.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
+        addSubview(detailLabel!)
+        
+        let detailAndConfirmConstraint = detailLabel?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
+        detailAndConfirmConstraint?.priority = .defaultHigh
+        detailAndConfirmConstraint?.isActive = true
+        
+        detailLabel?.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        detailLabel?.constraint(withLeadingTrailing: detailHorizontalInset)
     }
     
     private func setupConfirmCancelButton() {
         confirmButton = UIButton()
-        confirmButton.backgroundColor = PKColor.blue
         confirmButton.setTitle("Confirm", for: .normal)
+        confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        confirmButton.backgroundColor = PKColor.blue
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(confirmButton)
         
-        confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset).isActive = true
+        let buttonAndTitleConstraint = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
+        buttonAndTitleConstraint.priority = .defaultHigh
+        buttonAndTitleConstraint.isActive = true
         confirmButton.constraint(withLeadingTrailing: buttonHorizontalInset)
         confirmButton.heightAnchor.constraint(equalToConstant: 38).isActive = true
         
@@ -90,7 +154,7 @@ public class PokerAlertView: PokerView {
 
 extension UIView {
     /// set leading and trailing anchor
-    func constraint(withLeadingTrailing inset: CGFloat) {
+    internal func constraint(withLeadingTrailing inset: CGFloat) {
         guard let superView = self.superview else { return }
         self.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: inset).isActive = true
         self.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset).isActive = true

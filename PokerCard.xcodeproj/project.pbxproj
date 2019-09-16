@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D312ABB2232F61CC000E3BCD /* PokerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB1232F61CC000E3BCD /* PokerPresenter.swift */; };
+		D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */; };
+		D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */; };
+		D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */; };
 		D36B3FB82328CB1F00E0B4D8 /* PokerCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */; };
 		D36B3FCD2328CC3100E0B4D8 /* PokerCard.h in Headers */ = {isa = PBXBuildFile; fileRef = D36B3FCA2328CC3100E0B4D8 /* PokerCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */; };
@@ -29,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D312ABB1232F61CC000E3BCD /* PokerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPresenter.swift; sourceTree = "<group>"; };
+		D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPresenterView.swift; sourceTree = "<group>"; };
+		D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputView.swift; sourceTree = "<group>"; };
 		D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PokerCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36B3FB72328CB1F00E0B4D8 /* PokerCardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerCardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36B3FCA2328CC3100E0B4D8 /* PokerCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerCard.h; sourceTree = "<group>"; };
@@ -88,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */,
+				D312ABB1232F61CC000E3BCD /* PokerPresenter.swift */,
 				D38001D22328FDD200980988 /* Views */,
 				D38001CF2328FBFD00980988 /* Utils */,
 				D38001D52328FF1200980988 /* Model */,
@@ -100,6 +109,7 @@
 		D36B3FD12328CC6A00E0B4D8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -151,7 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				D38001CD2328F8C900980988 /* PokerView.swift */,
+				D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */,
 				D38001E9232911B300980988 /* PokerAlertView.swift */,
+				D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -277,7 +289,11 @@
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
+				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
+				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
+				D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */,
+				D312ABB2232F61CC000E3BCD /* PokerPresenter.swift in Sources */,
 				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

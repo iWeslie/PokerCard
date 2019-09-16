@@ -39,7 +39,6 @@ public class PokerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     /// Call this method to dismiss Poker View with animation 
     @objc
     public func dismiss() {

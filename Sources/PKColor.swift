@@ -37,12 +37,38 @@ public class PKColor {
             return UIColor.lightGray
         }
     }
-    
+}
+
+
+extension PKColor {
+    /// System red color
+    static var red: UIColor {
+        return UIColor.systemRed
+    }
+    /// System orange color
+    static var orange: UIColor {
+        return UIColor.systemOrange
+    }
+    /// System yellow color
+    static var yellow: UIColor {
+        return UIColor.systemYellow
+    }
+    /// System green color
+    static var green: UIColor {
+        return UIColor.systemGreen
+    }
     /// System blue color
     static var blue: UIColor {
         return UIColor.systemBlue
     }
-    
+    /// System teal color
+    static var teal: UIColor {
+        return UIColor.systemTeal
+    }
+    /// System purple color
+    static var purple: UIColor {
+        return UIColor.systemPurple
+    }
     /// System pink color
     static var pink: UIColor {
         return UIColor.systemPink
