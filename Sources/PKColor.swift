@@ -37,6 +37,24 @@ public class PKColor {
             return UIColor.lightGray
         }
     }
+    
+    /// Seperator line color 
+    static var seperator: UIColor {
+        return UIColor(white: 0.4, alpha: 0.15)
+    }
+    
+    /// Generate color from Alert Style
+    /// - Parameter style: `PokerAlertView` confirm button style
+    static func fromAlertView(_ style: PokerAlertView.Style) -> UIColor {
+        switch style {
+        case .default: return PKColor.cancel
+        case .primary: return PKColor.blue
+        case .info: return PKColor.teal
+        case .warn: return PKColor.orange
+        case .danger: return PKColor.red
+        case .success: return PKColor.green
+        }
+    }
 }
 
 

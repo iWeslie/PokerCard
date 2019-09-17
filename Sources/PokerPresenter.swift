@@ -12,11 +12,9 @@ public class PokerPresenter {
     
     public init() { }
     
-    var pokerView: PokerView? {
-        didSet {
-            
-        }
-    }
+    var pokerView: PokerView?
+    
+    private static var inputText: ((_ text: String) -> Void)!
     
     @discardableResult
     public func showAlert(title: String, detail: String? = nil, style: PokerAlertView.Style = .warn) -> PokerPresenter {
@@ -25,24 +23,14 @@ public class PokerPresenter {
         let backgroundView = PokerPresenterView(frame: keyWindow.frame)
         keyWindow.addSubview(backgroundView)
         
-        // load popupView
-        let pokerView = PokerAlertView(title: title, detail: detail)
+//        let pokerView = PokerAlertView(title: title, detail: detail)
 //        let pokerView = PokerInputView(title: title, detail: detail, style: .danger, placeholder: "ddd")
+        let pokerView = PokerInputView(title: title, promotion: "This is dsfbih vbovbefsdf sdfs df dsf dsfs dfivb w vi dbvid ovbh efn vfvbh ifevn bif", secondary: "sfiuvbefnovebf", placeholder: "febvefiv", style: .danger)
         backgroundView.addSubview(pokerView)
         backgroundView.pokerView = pokerView
         
-        var color = PKColor.cancel
-        switch style {
-        case .danger: color = PKColor.red
-        case .default: color = PKColor.cancel
-        case .info: color = PKColor.teal
-        case .primary: color = PKColor.blue
-        case .success: color = PKColor.green
-        case .warn: color = PKColor.orange
-        }
-        pokerView.confirmButton.backgroundColor = color
+        pokerView.confirmButton.backgroundColor = PKColor.fromAlertView(style)
         
-        // animation
         pokerView.center = CGPoint(x: backgroundView.frame.width / 2, y: backgroundView.frame.height + 50)
         pokerView.alpha = 0
         UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
@@ -77,6 +65,31 @@ public class PokerPresenter {
         alertView.confirmButton.addAction(action: handler)
         
         return self
+    }
+    
+    @discardableResult
+    public func submit(_ handler: @escaping (_ text: String) -> Void) -> PokerPresenter {
+        guard let alertView = self.pokerView as? PokerInputView else {
+            preconditionFailure("You must call confirm on a PokerInputView")
+        }
+        
+        PokerPresenter.inputText = handler
+        
+        alertView.confirmButton.addTarget(PokerPresenter.self, action: #selector(PokerPresenter.submitInput(_:)), for: .touchUpInside)
+        
+        return self
+    }
+    
+    @objc
+    private static func submitInput(_ sender: UIButton) {
+        print("hey")
+        guard let inputView = sender.superview as? PokerInputView else {
+            preconditionFailure("cannot get superview")
+        }
+        guard let text = inputView.inputTextField.text else { return }
+        inputText(text)
+        
+        inputView.dismiss()
     }
     
 }

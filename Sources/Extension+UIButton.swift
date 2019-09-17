@@ -12,7 +12,8 @@ extension UIButton {
     
     /// define associated calsses
     private struct AssociatedClass {
-        var confirm: (PokerAlertView) -> Void
+        var confirm: ((PokerAlertView) -> Void)? = nil
+        var submit: ((String) -> Void)? = nil
     }
     
     /// define associated keys
@@ -41,7 +42,13 @@ extension UIButton {
         guard let alertView = sender.superview as? PokerAlertView else {
             preconditionFailure("Cannot get superview")
         }
-        eventClosureObj.confirm(alertView)
+        
+        if let inputView = alertView as? PokerInputView {
+            eventClosureObj.submit?(inputView.inputTextField.text ?? "")
+        } else {
+            eventClosureObj.confirm?(alertView)
+        }
+
         
         alertView.dismiss()
     }

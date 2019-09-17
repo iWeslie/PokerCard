@@ -26,13 +26,12 @@ class ViewController: UIViewController {
     
     @objc func popup() {
         
-//        PokerPresenter().showAlert(title: "This is an alert", detail: "速递结构和沉稳扽好", style: .warn).confirm { confirmView in
-//            print("confirm")
-//        }
+//        PokerPresenter().showAlert(title: "Thiss  is an alert", detail: "This is an alers is an alertThiss is an alertThistTh", style: .danger)
         
-//        PokerPresenter().showAlert(title: "This is an alertThis is an alertThis is an alert", style: .danger)
-        PokerPresenter().showAlert(title: "This is an alert", detail: "This is an alertTh", style: .danger)
         
+        PokerPresenter().showAlert(title: "Please input your name", detail: "safsdufsdfds", style: .info).submit { name in
+            print(name)
+        }
     }
 
 

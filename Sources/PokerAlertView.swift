@@ -12,8 +12,6 @@ import UIKit
 public class PokerAlertView: PokerView {
     
     public enum Style {
-//        public typealias RawValue = <#type#>
-        
         case `default`  // gray
         case primary    // blue
         case info       // teal
@@ -31,40 +29,32 @@ public class PokerAlertView: PokerView {
     internal var titleVerticalInset: CGFloat = 18
     internal var detailHorizontalInset: CGFloat = 15
     internal var buttonHorizontalInset: CGFloat = 40
+    internal var lineSpacing: CGFloat = 8
     
-    private var titleLabelEstimatedHeight: CGFloat {
-        get {
-            let labelWidth = frame.width - 2 * titleHorizontalInset
-            titleLabel.preferredMaxLayoutWidth = labelWidth
-            return titleLabel.intrinsicContentSize.height
-        }
-    }
-    
-    private var detailLabelEstimatedHeight: CGFloat {
-        get {
-            let labelWidth = frame.width - 2 * detailHorizontalInset
-            detailLabel?.preferredMaxLayoutWidth = labelWidth
-            return detailLabel?.intrinsicContentSize.height ?? 0
-        }
-    }
+    var titleBDetailTCons: NSLayoutConstraint!
+    var titleBConfirmTCons: NSLayoutConstraint!
+    var detailBConfirmTCons: NSLayoutConstraint!
     
 //    public convenience init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
     
     public convenience init(title: String, detail: String? = nil) {
-        self.init(frame: CGRect(x: 0, y: 0, width: 265, height: 159))
+//        self.init(frame: CGRect(x: 0, y: 0, width: 265, height: 159))
+        self.init()
+        
+        frame.size.width = 265
+        frame.size.height = 134
         
         backgroundColor = PKColor.background
         
         setupLabel(with: title)
         setupConfirmCancelButton()
-        
         setupDetail(with: detail)
         
     }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         _ = layoutViews
     }
     
@@ -76,11 +66,15 @@ public class PokerAlertView: PokerView {
         //
         // height = height - original + estimated
         // height -= original - estimated
-        frame.size.height -= titleLabel.frame.height - titleLabelEstimatedHeight
-        frame.size.height -= (detailLabel?.frame.height ?? 0) - detailLabelEstimatedHeight
+        frame.size.height -= titleLabel.frame.height - titleLabel.estimatedHeight(for: titleHorizontalInset)
+        if let detailLabel = detailLabel {
+            frame.size.height -= detailLabel.frame.height - detailLabel.estimatedHeight(for: detailHorizontalInset)
+        }
         
         // align to center
-        guard let superView = self.superview else { return }
+        guard let superView = self.superview else {
+            preconditionFailure("cannot get superview")
+        }
         frame.origin.y = superView.frame.midY - frame.size.height / 2
     }()
     
@@ -112,12 +106,15 @@ public class PokerAlertView: PokerView {
 //        detailLabel?.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
         addSubview(detailLabel!)
         
-        let detailAndConfirmConstraint = detailLabel?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
-        detailAndConfirmConstraint?.priority = .defaultHigh
-        detailAndConfirmConstraint?.isActive = true
-        
-        detailLabel?.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        titleBDetailTCons = detailLabel?.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
+        titleBDetailTCons.isActive = true
         detailLabel?.constraint(withLeadingTrailing: detailHorizontalInset)
+        
+        detailBConfirmTCons = detailLabel?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
+        detailBConfirmTCons?.priority = .defaultHigh
+        detailBConfirmTCons?.isActive = true
+        
+        titleBConfirmTCons.isActive = false
     }
     
     private func setupConfirmCancelButton() {
@@ -128,9 +125,10 @@ public class PokerAlertView: PokerView {
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(confirmButton)
         
-        let buttonAndTitleConstraint = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
-        buttonAndTitleConstraint.priority = .defaultHigh
-        buttonAndTitleConstraint.isActive = true
+        titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
+        titleBConfirmTCons.priority = .defaultHigh
+        titleBConfirmTCons.isActive = true
+        
         confirmButton.constraint(withLeadingTrailing: buttonHorizontalInset)
         confirmButton.heightAnchor.constraint(equalToConstant: 38).isActive = true
         
@@ -153,10 +151,27 @@ public class PokerAlertView: PokerView {
 }
 
 extension UIView {
-    /// set leading and trailing anchor
+    /// Set leading and trailing anchor
     internal func constraint(withLeadingTrailing inset: CGFloat) {
         guard let superView = self.superview else { return }
         self.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: inset).isActive = true
         self.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset).isActive = true
+    }
+    
+    /// Set leading and trailing anchor
+    internal func constraint(withTopBottom inset: CGFloat) {
+        guard let superView = self.superview else { return }
+        self.topAnchor.constraint(equalTo: superView.topAnchor, constant: inset).isActive = true
+        self.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset).isActive = true
+    }
+}
+
+extension UILabel {
+    /// Calculate label's intrisic content height with horizontal inset in superview
+    internal func estimatedHeight(for horizontalInset: CGFloat) -> CGFloat {
+        guard let superView = self.superview else { return 0 }
+        let labelWidth = superView.frame.width - 2 * horizontalInset
+        self.preferredMaxLayoutWidth = labelWidth
+        return self.intrinsicContentSize.height
     }
 }
