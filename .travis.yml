@@ -1,0 +1,20 @@
+language: objective-c
+osx_image: xcode10.2
+
+env:
+  global:
+  - WORKSPACE=PokerCard.xcworkspace
+  - SCHEME="PokerCard"
+  - EXAMPLE_SCHEME="Example"
+  matrix:
+  - DESTINATION="platform=iOS Simulator,name=iPhone 8"
+  
+script:
+  - set -o pipefail
+  # Build Framework
+  - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
+  # Build Example project
+  - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
+
+  - carthage build --no-skip-current
+  - pod lib lint
