@@ -14,6 +14,7 @@ extension UIButton {
     private struct AssociatedClass {
         var confirm: ((PokerAlertView) -> Void)? = nil
         var submit: ((String) -> Void)? = nil
+        var common: (() -> Void)? = nil
     }
     
     /// define associated keys
@@ -38,6 +39,13 @@ extension UIButton {
         addTarget(self, action: #selector(excuteEvent(_:)), for: .touchUpInside)
     }
     
+    /// Add touch up inside action to a UIButton instance by a closure at runtime
+    internal func touchUpInside(action: @escaping () -> Void) {
+        eventClosureObj = AssociatedClass(common: action)
+        
+        addTarget(self, action: #selector(excuteEvent(_:)), for: .touchUpInside)
+    }
+    
     @objc private func excuteEvent(_ sender: UIButton) {
         guard let alertView = sender.superview as? PokerAlertView else {
             preconditionFailure("Cannot get superview")
@@ -47,9 +55,9 @@ extension UIButton {
             eventClosureObj.submit?(inputView.inputTextField.text ?? "")
         } else {
             eventClosureObj.confirm?(alertView)
+            eventClosureObj.common?()
         }
 
-        
         alertView.dismiss()
     }
 }

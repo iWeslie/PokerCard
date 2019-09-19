@@ -32,7 +32,7 @@ public class PokerInputView: PokerAlertView {
     
     convenience init(title: String,
                      detail: String? = nil,
-                     style: PokerAlertView.Style = .primary,
+                     style: PokerStyle = .primary,
                      placeholder: String? = nil) {
         self.init(title: title, detail: detail)
         
@@ -40,7 +40,7 @@ public class PokerInputView: PokerAlertView {
         
     }
     
-    convenience init(title: String, promotion: String? = nil, secondary: String? = nil, placeholder: String? = nil, style: PokerAlertView.Style = .default) {
+    convenience init(title: String, promotion: String? = nil, secondary: String? = nil, placeholder: String? = nil, style: PokerStyle = .default) {
         self.init(title: title, detail: secondary)
         
         setupInputView(with: placeholder)
@@ -88,7 +88,7 @@ public class PokerInputView: PokerAlertView {
         inputTextField.bottomAnchor.constraint(equalTo: lineView.topAnchor).isActive = true
     }
     
-    fileprivate func setupPromotion(with promotionText: String?, style: PokerAlertView.Style) {
+    fileprivate func setupPromotion(with promotionText: String?, style: PokerStyle) {
         guard let promotion = promotionText else { return }
         
         titleBDetailTCons.isActive = false

@@ -10,27 +10,31 @@ import UIKit
 
 public class PokerPresenter {
     
-    public init() { }
-    
-    var pokerView: PokerView?
+    var pokerAlertView: PokerAlertView!
     
     private static var inputText: ((_ text: String) -> Void)!
     
-    @discardableResult
-    public func showAlert(title: String, detail: String? = nil, style: PokerAlertView.Style = .warn) -> PokerPresenter {
-        guard let keyWindow = currentWindow else { return self }
-        
+    /// Create a `PokerAlertView` with title and detail decription.
+    ///
+    /// - Parameter title:  The alert title
+    /// - Parameter detail: The alert detail description, `nil` by default
+    public init(title: String, detail: String?) {
+        guard let keyWindow = currentWindow else { return }
         let backgroundView = PokerPresenterView(frame: keyWindow.frame)
         keyWindow.addSubview(backgroundView)
         
-//        let pokerView = PokerAlertView(title: title, detail: detail)
-//        let pokerView = PokerInputView(title: title, detail: detail, style: .danger, placeholder: "ddd")
-        let pokerView = PokerInputView(title: title, promotion: "This is dsfbih vbovbefsdf sdfs df dsf dsfs dfivb w vi dbvid ovbh efn vfvbh ifevn bif", secondary: "sfiuvbefnovebf", placeholder: "febvefiv", style: .danger)
+        /* other styles
+        let pokerView = PokerInputView(title: title, detail: detail, style: .danger, placeholder: "ddd")
+        let pokerView = PokerInputView(title: title, promotion: "This is bh ifevn bif", secondary: "sfiuvbefnovebf", placeholder: "febvefiv", style: .danger)
+        */
+        let pokerView = PokerAlertView(title: title, detail: detail)
         backgroundView.addSubview(pokerView)
         backgroundView.pokerView = pokerView
         
-        pokerView.confirmButton.backgroundColor = PKColor.fromAlertView(style)
+        // default action, confirm to dismiss
+        pokerView.confirmButton.addTarget(pokerView, action: #selector(pokerAlertView.dismiss), for: .touchUpInside)
         
+        // animations
         pokerView.center = CGPoint(x: backgroundView.frame.width / 2, y: backgroundView.frame.height + 50)
         pokerView.alpha = 0
         UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
@@ -38,43 +42,71 @@ public class PokerPresenter {
             pokerView.center = backgroundView.center
         }, completion: nil)
         
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
-//
-//        }
-        
-        self.pokerView = pokerView
+        self.pokerAlertView = pokerView
+    }
+    
+    /// Modify confirm button title and background style.
+    ///
+    /// - Parameter title: The button title
+    /// - Parameter style: The button color style, **blue** by default, see `PKColor` for more detail
+    ///
+    /// - Returns: The `PokerAlertView` instance.
+    @discardableResult
+    public func confirm(title: String, style: PokerStyle = .default) -> PokerPresenter {
+        pokerAlertView.confirmButton.setTitle(title, for: .normal)
+        pokerAlertView.confirmButton.backgroundColor = PKColor.fromAlertView(style)
         
         return self
     }
     
+    /// Add action to confitm button.
+    ///
+    /// - Parameter handler: The button click action
+    @discardableResult
+    public func confirm(_ handler: @escaping () -> Void) -> PokerPresenter {
+        // remove default dismiss action
+        pokerAlertView.confirmButton.removeTarget(pokerAlertView, action: #selector(pokerAlertView.dismiss), for: .touchUpInside)
+        pokerAlertView.confirmButton.touchUpInside(action: handler)
+        
+        return self
+    }
+    
+    /// Modify confirm button style and add action to it.
+    ///
+    /// - Parameter title:      The button title
+    /// - Parameter style:      The button color style, **blue** by default, see `PKColor` for more detail
+    /// - Parameter handler:    The button click action
+    @discardableResult
+    public func confirm(
+        title: String,
+        style: PokerStyle = .default,
+        handler: @escaping () -> Void)
+        -> PokerPresenter
+    {
+        confirm(title: title, style: style)
+        confirm(handler)
+        
+        return self
+    }
+    
+    
+    //------------------ preparing refactor
     @discardableResult
     public func appearance(_ modification: @escaping (PokerAlertView) -> Void) -> PokerPresenter {
-        guard let alertView = self.pokerView as? PokerAlertView else {
-            preconditionFailure("You must call confirm on a PokerAlertView")
-        }
-        modification(alertView)
-        
-        return self
-    }
-    
-    @discardableResult
-    public func confirm(_ handler: @escaping (PokerAlertView) -> Void) -> PokerPresenter {
-        guard let alertView = self.pokerView as? PokerAlertView else {
-            preconditionFailure("You must call confirm on a PokerAlertView")
-        }
-        alertView.confirmButton.addAction(action: handler)
+        modification(pokerAlertView)
         
         return self
     }
     
     @discardableResult
     public func submit(_ handler: @escaping (_ text: String) -> Void) -> PokerPresenter {
-        guard let alertView = self.pokerView as? PokerInputView else {
+        guard let alertView = self.pokerAlertView as? PokerInputView else {
             preconditionFailure("You must call confirm on a PokerInputView")
         }
         
         PokerPresenter.inputText = handler
         
+        alertView.confirmButton.removeTarget(alertView, action: #selector(alertView.dismiss), for: .touchUpInside)
         alertView.confirmButton.addTarget(PokerPresenter.self, action: #selector(PokerPresenter.submitInput(_:)), for: .touchUpInside)
         
         return self

@@ -20,6 +20,7 @@
 		D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D02328FCF400980988 /* UIView+KeyWindow.swift */; };
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
 		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
+		D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE5EBC23336CBC001D901E /* PokerStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D38001D02328FCF400980988 /* UIView+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+KeyWindow.swift"; sourceTree = "<group>"; };
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
 		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
+		D3DE5EBC23336CBC001D901E /* PokerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				D38001D62328FF2000980988 /* PKColor.swift */,
+				D3DE5EBC23336CBC001D901E /* PokerStyle.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
+				D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,

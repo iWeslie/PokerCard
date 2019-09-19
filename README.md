@@ -11,10 +11,11 @@ import PokerCard
 class ViewController: UIViewController {
     override viewDidLoad() {
         super.viewDidLoad()
+        
         // present a poker card 
-        PokerPresenter().showAlert(title: "Please notice").confirm {
+        PokerCard.showAlert(title: "Please notice").confirm {
             // do something ...
-        } 
+        }
     }
 }
 ```
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
 ![poker-alert](http://photos.iweslie.com/github/pokercard/poker-alert.png)
 
 ```swift
-PokerPresenter().showAlert(title: "Please notice", detail: "Here is some descripttion ...")
+PokerCard.showAlert(title: "Please notice", detail: "Here is some descripttion ...")
 ```
 
 ![poker-laert-detail](http://photos.iweslie.com/github/pokercard/poker-laert-detail.png)
@@ -36,7 +37,7 @@ PokerPresenter().showAlert(title: "Please notice", detail: "Here is some descrip
 ![poker-input](http://photos.iweslie.com/github/pokercard/poker-input.png)
 
 ```swift
-PokerPresenter().showInput(title: "Please input your name").submit { inputText in 
+PokerCard.showInput(title: "Please input your name").submit { inputText in 
     print(inputText)
 }
 ```
@@ -46,7 +47,7 @@ PokerPresenter().showInput(title: "Please input your name").submit { inputText i
 ![pker-promotion](http://photos.iweslie.com/github/pokercard/poker-promotion.png)
 
 ```swift
-PokerPresenter().showPromotion(title: "Notice", promotion: "Detail description", style: .primary).submit { inputText in 
+PokerCard.showPromotion(title: "Notice", promotion: "Detail description", style: .primary).submit { inputText in 
     print(inputText)
 }
 ```

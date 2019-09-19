@@ -44,20 +44,24 @@ public class PKColor {
     }
     
     /// Generate color from Alert Style
+    /// 
     /// - Parameter style: `PokerAlertView` confirm button style
-    static func fromAlertView(_ style: PokerAlertView.Style) -> UIColor {
+    ///
+    /// - Returns: The created UIColor instance.
+    static func fromAlertView(_ style: PokerStyle) -> UIColor {
         switch style {
-        case .default: return PKColor.cancel
+        case .default: return PKColor.blue
         case .primary: return PKColor.blue
         case .info: return PKColor.teal
         case .warn: return PKColor.orange
         case .danger: return PKColor.red
         case .success: return PKColor.green
+        case .color(let color): return color
         }
     }
 }
 
-
+// MARK:- System Color Preset
 extension PKColor {
     /// System red color
     static var red: UIColor {

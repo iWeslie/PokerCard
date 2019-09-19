@@ -28,10 +28,14 @@ class ViewController: UIViewController {
         
 //        PokerPresenter().showAlert(title: "Thiss  is an alert", detail: "This is an alers is an alertThiss is an alertThistTh", style: .danger)
         
-        
-        PokerPresenter().showAlert(title: "Please input your name", detail: "safsdufsdfds", style: .info).submit { name in
-            print(name)
+        PokerCard.showAlert(title: "hey").confirm(title: "button title", style: .color(UIColor.systemPurple)) {
+            print("done")
         }
+        
+//        PokerPresenter().showAlert(title: "asss").appearance { (alertView) in
+//            alertView.confirmButton.backgroundColor = UIColor.systemBlue
+//        }
+        
     }
 
 

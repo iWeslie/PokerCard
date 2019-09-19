@@ -11,15 +11,6 @@ import UIKit
 /// Base Poker Alert View
 public class PokerAlertView: PokerView {
     
-    public enum Style {
-        case `default`  // gray
-        case primary    // blue
-        case info       // teal
-        case warn       // orange
-        case danger     // red
-        case success    // green
-    }
-    
     public var titleLabel: UILabel!
     public var detailLabel: UILabel?
     public var confirmButton: UIButton!
