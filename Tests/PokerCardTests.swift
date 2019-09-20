@@ -2,7 +2,7 @@
 //  PokerCardTests.swift
 //  PokerCardTests
 //
-//  Created by Weslie Chen on 2019/9/11.
+//  Created by Weslie on 2019/9/11.
 //  Copyright © 2019 Weslie. All rights reserved.
 //
 
