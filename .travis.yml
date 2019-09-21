@@ -8,6 +8,13 @@ env:
   - EXAMPLE_SCHEME="Example"
   matrix:
   - DESTINATION="platform=iOS Simulator,name=iPhone 8"
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+before_deploy:
+  - carthage build --no-skip-current
+  - carthage archive $SCHEME
   
 script:
   - set -o pipefail
@@ -15,7 +22,4 @@ script:
   - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
   # Build Example project
   - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
-
-  - carthage build --no-skip-current
-  - carthage archive $SCHEME
   - pod lib lint
