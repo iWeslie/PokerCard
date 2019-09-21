@@ -60,6 +60,7 @@ public class PokerView: UIView {
     /// Call this method to dismiss Poker View with animation 
     @objc
     public func dismiss() {
+        endEditing(true)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.frame.origin.y = -2 * self.frame.height
         }) { (_) in

@@ -45,23 +45,23 @@ public class PokerInputView: PokerAlertView {
         addSubview(container)
         return container
     }()
+    var promotionLeftMarginView: UIView?
     
     var promotionLabel: UILabel?
     
     convenience init(title: String,
                      detail: String? = nil,
-                     style: PokerStyle = .primary,
-                     placeholder: String? = nil) {
+                     style: PokerStyle? = .primary) {
         self.init(title: title, detail: detail)
         
-        setupInputView(with: placeholder)
+        setupInputView()
         
     }
     
-    convenience init(title: String, promotion: String? = nil, secondary: String? = nil, placeholder: String? = nil, style: PokerStyle = .default) {
+    convenience init(title: String, promotion: String? = nil, secondary: String? = nil, style: PokerStyle = .default) {
         self.init(title: title, detail: secondary)
         
-        setupInputView(with: placeholder)
+        setupInputView()
         setupPromotion(with: promotion, style: style)
     }
     
@@ -74,7 +74,7 @@ public class PokerInputView: PokerAlertView {
         frame.size.height += inputContainerViewHeight + lineSpacing * 2
     }()
     
-    fileprivate func setupInputView(with placeholder: String?) {
+    fileprivate func setupInputView() {
         
 //        detailBConfirmTCons.isActive = false
         
@@ -97,7 +97,6 @@ public class PokerInputView: PokerAlertView {
         inputTextField = UITextField()
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
         inputTextField.borderStyle = .none
-        inputTextField.placeholder = placeholder
         inputTextField.font = UIFont.systemFont(ofSize: 22, weight: .light)
         inputTextField.textAlignment = .center
         inputContainerView.addSubview(inputTextField)
@@ -136,6 +135,7 @@ public class PokerInputView: PokerAlertView {
         let leftMargin = UIView()
         leftMargin.backgroundColor = PKColor.pink
         leftMargin.translatesAutoresizingMaskIntoConstraints = false
+        self.promotionLeftMarginView = leftMargin
         promotionContainerView.addSubview(leftMargin)
         
         leftMargin.leadingAnchor.constraint(equalTo: promotionContainerView.leadingAnchor).isActive = true

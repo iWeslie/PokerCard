@@ -26,22 +26,21 @@
 
 import Foundation
 
-/// Present and basic style of `PokerAlertView` with popup animation from bottom
+/// Present a basic style of `PokerAlertView` with popup animation from bottom.
 ///
-/// There are only two style of `PokerAlertView`, `default` style and `promotion` style, you can customize
-/// confirmButton colors, inputView appearance and promotion background color now with `PokerPresenter`'s
-/// appearance method
+/// The basic style of `PokerAlertView` contains a title label and detail label, you can customize confirmButton
+/// color by calling `confirm(title:style:)`.
 ///
 /// **Example:**
 /// ```
 /// PokerCard.showAlert(title: "hey", detail: "Please notice")
-/// .appearance { alertView in
-///     alertView.confitmButton.backgroundColor = UIColor.gray
+/// .confirm(title: "Done", style: .default) {
+///     print("You've done!")
 /// }
 /// ```
 ///
-/// - Parameter title:  The alert title
-/// - Parameter detail: The alert detail description, `nil` by default
+/// - Parameter title:  The alert title.
+/// - Parameter detail: The alert detail description, `nil` by default.
 ///
 /// - Returns: The created `PokerAlertView` instance.
 @discardableResult
@@ -49,7 +48,28 @@ public func showAlert(title: String, detail: String? = nil) -> PokerPresenter {
     return PokerPresenter(title: title, detail: detail)
 }
 
-//@discardableResult
-//public func showInput(title: String, detail: String? = nil) -> PokerPresenter {
-//    return PokerPresenter().showAlert(title: title, detail: detail)
-//}
+/// Present a common `PokerInputView` with popup animation from bottom.
+///
+/// This is default style of input view, you may call `showPromotion` for more options
+///
+/// - Parameter title: The input alert title.
+/// - Parameter detail: The input alert detail description, `nil` by default.
+///
+/// - Returns: The created `PokerInputView` instance.
+@discardableResult
+public func showInput(title: String, detail: String? = nil, placeholder: String? = nil) -> PokerInputPresenter {
+    return PokerInputPresenter(style: .default, title: title, detail: detail)
+}
+
+/// Present a promotion `PokerInputView` with popup animation from bottom.
+///
+/// This is promotion style of input view, you may call `showInput` for less options.
+///
+/// - Parameter title: The input alert title.
+/// - Parameter detail: The input alert detail description, `nil` by default.
+///
+/// - Returns: The created `PokerInputView` instance.
+@discardableResult
+public func showPromotion(title: String, promotion: String, secondaryTitle: String? = nil) -> PokerInputPresenter {
+    return PokerInputPresenter(style: .promotion, title: title, promotion: promotion, detail: secondaryTitle)
+}

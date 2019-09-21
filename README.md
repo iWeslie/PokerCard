@@ -9,8 +9,8 @@ A new generation of Alert View with fluid design
 import PokerCard
 
 class ViewController: UIViewController {
-    override viewDidLoad() {
-        super.viewDidLoad()
+    override viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // present a poker card 
         PokerCard.showAlert(title: "Please notice").confirm {
@@ -47,7 +47,7 @@ PokerCard.showInput(title: "Please input your name").submit { inputText in
 ![pker-promotion](http://photos.iweslie.com/github/pokercard/poker-promotion.png)
 
 ```swift
-PokerCard.showPromotion(title: "Notice", promotion: "Detail description", style: .primary).submit { inputText in 
+PokerCard.showPromotion(title: "Notice", promotion: "Detail description").submit { inputText in 
     print(inputText)
 }
 ```

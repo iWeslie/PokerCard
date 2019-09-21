@@ -26,18 +26,21 @@ class ViewController: UIViewController {
     
     @objc func popup() {
         
-//        PokerPresenter().showAlert(title: "Thiss  is an alert", detail: "This is an alers is an alertThiss is an alertThistTh", style: .danger)
-        
-        PokerCard.showAlert(title: "hey").confirm(title: "button title", style: .color(UIColor.systemPurple)) {
-            print("done")
-        }
-        
-//        PokerPresenter().showAlert(title: "asss").appearance { (alertView) in
-//            alertView.confirmButton.backgroundColor = UIColor.systemBlue
+//        PokerCard.showAlert(title: "hey").confirm(title: "button title", style: .color(UIColor.systemPurple)) {
+//            print("done")
 //        }
         
+//        PokerCard.showInput(title: "input title").confirm(title: "Submit") { input in
+//            print(input)
+//        }
+        
+        let promotion = "This is promotion style of input view, you may call `showInput` for less options.This is promotion style of input view, you may call `showInput` for less options.This is promotion style of input view, you may call `showInput` for less options."
+        PokerCard.showPromotion(title: "promotion tile", promotion: promotion, secondaryTitle: "title").appearance(.danger, placeholder: "placeholder").confirm { (text) in
+            print(text)
+        }
+        #warning("secondary = nil will crash")
+        
     }
-
-
+    
 }
 

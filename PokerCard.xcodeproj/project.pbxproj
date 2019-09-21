@@ -11,6 +11,7 @@
 		D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */; };
 		D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */; };
 		D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */; };
+		D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */; };
 		D36B3FB82328CB1F00E0B4D8 /* PokerCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */; };
 		D36B3FCD2328CC3100E0B4D8 /* PokerCard.h in Headers */ = {isa = PBXBuildFile; fileRef = D36B3FCA2328CC3100E0B4D8 /* PokerCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */; };
@@ -38,6 +39,7 @@
 		D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPresenterView.swift; sourceTree = "<group>"; };
 		D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputView.swift; sourceTree = "<group>"; };
+		D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputPresenter.swift; sourceTree = "<group>"; };
 		D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PokerCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36B3FB72328CB1F00E0B4D8 /* PokerCardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerCardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36B3FCA2328CC3100E0B4D8 /* PokerCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerCard.h; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */,
 				D312ABB1232F61CC000E3BCD /* PokerPresenter.swift */,
+				D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */,
 				D38001D22328FDD200980988 /* Views */,
 				D38001CF2328FBFD00980988 /* Utils */,
 				D38001D52328FF1200980988 /* Model */,
@@ -294,6 +297,7 @@
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
 				D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
+				D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
