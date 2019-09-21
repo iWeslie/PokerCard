@@ -17,4 +17,5 @@ script:
   - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
 
   - carthage build --no-skip-current
+  - carthage archive $SCHEME
   - pod lib lint
