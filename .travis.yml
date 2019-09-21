@@ -1,6 +1,5 @@
 language: objective-c
 osx_image: xcode11
-
 env:
   global:
   - WORKSPACE=PokerCard.xcworkspace
@@ -8,18 +7,25 @@ env:
   - EXAMPLE_SCHEME="Example"
   matrix:
   - DESTINATION="platform=iOS Simulator,name=iPhone 8"
-
 before_install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
+- brew update
+- brew outdated carthage || brew upgrade carthage
 before_deploy:
-  - carthage build --no-skip-current
-  - carthage archive $SCHEME
-  
+- carthage build --no-skip-current
+- carthage archive $SCHEME
 script:
-  - set -o pipefail
-  # Build Framework
-  - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
-  # Build Example project
-  - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
-  - pod lib lint
+- set -o pipefail
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION"
+  | xcpretty
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination
+  "$DESTINATION" | xcpretty
+- pod lib lint
+deploy:
+  provider: releases
+  api_key:
+    secure: Ylykk7e7lpcEghFJxTfQClTEnH5veWY2TEmVcODjMenJECZdILk43+EGcnm/npY30kvzqIf0oskDoizx4K5HvJhO6P1asMJlFFIOQzUZQGYxzn/VDiik4JUT9y735PZ7nAe7a3kCpR0butEoHPBRREuX12vaAcZ55XQotsw1vxRKQFaf+6zH0C9LJW4ghjXVk881CslKvcLn+6wguvVg/0nxCVb5DbBSSIfJ+we1dM+PCgqAuon8iTf7tEJg1F04gESchmPO1UkRLO7d6CU4Ond5kAuTrFFijA5TzxbVB5/LybTtXrrm/wQ04rKRiCKTed1KRMdA45ow4VqsbkKjMWXAB+qYkJtLjYpJoYgvdP/FclpAEeiCIY29y3UAB36E4jGlktSip1EC1/hLpXTwXNrBRvTx7vWVQRZngxUUrCyVWoSdvXHwOxBvK7LqkoQp0ijZ0fZnhnlDQAdQCzX6ySKSzcHLpktPT4uvePOvU94PhlJHG5AcxQDPkmhFZ24nZjGts3iI/jSw1q78u0cKdl7RFg2bEzqMobeNUgtTB7moFUbkYWcJ0+6mXN6IoZfy0SZoF0nCGXCPiM58Wnoi1WkLyQmMOMy/W0E8TZ8DDwnT2Iqv0ld8A2c5Zy6E6V2HQuoEfqiA2tX70b4GXweObTt5plZBCdRNqFBcPsfITqQ=
+  file: PokerCard.framework.zip
+  skip_cleanup: true
+  on:
+    repo: iWeslie/PokerCard
+    tags: true
