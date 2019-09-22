@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         PokerCard.showPromotion(title: "promotion tile", promotion: promotion, secondaryTitle: "title").appearance(.danger, placeholder: "placeholder").confirm { (text) in
             print(text)
         }
-        #warning("secondary = nil will crash")
         
     }
     

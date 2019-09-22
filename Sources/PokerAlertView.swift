@@ -40,14 +40,13 @@ public class PokerAlertView: PokerView {
     internal var buttonHorizontalInset: CGFloat = 40
     internal var lineSpacing: CGFloat = 8
     
-    var titleBDetailTCons: NSLayoutConstraint!
+    var titleBDetailTCons: NSLayoutConstraint?
     var titleBConfirmTCons: NSLayoutConstraint!
     var detailBConfirmTCons: NSLayoutConstraint!
     
 //    public convenience init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
     
     public convenience init(title: String, detail: String? = nil) {
-//        self.init(frame: CGRect(x: 0, y: 0, width: 265, height: 159))
         self.init()
         
         frame.size.width = 265
@@ -112,11 +111,10 @@ public class PokerAlertView: PokerView {
         detailLabel?.textColor = PKColor.label
         detailLabel?.numberOfLines = 0
         detailLabel?.translatesAutoresizingMaskIntoConstraints = false
-//        detailLabel?.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
         addSubview(detailLabel!)
         
         titleBDetailTCons = detailLabel?.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
-        titleBDetailTCons.isActive = true
+        titleBDetailTCons?.isActive = true
         detailLabel?.constraint(withLeadingTrailing: detailHorizontalInset)
         
         detailBConfirmTCons = detailLabel?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)

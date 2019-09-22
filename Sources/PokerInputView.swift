@@ -61,13 +61,8 @@ public class PokerInputView: PokerAlertView {
     convenience init(title: String, promotion: String? = nil, secondary: String? = nil, style: PokerStyle = .default) {
         self.init(title: title, detail: secondary)
         
-        setupInputView()
         setupPromotion(with: promotion, style: style)
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-//        _ = layoutViews
+        setupInputView()
     }
     
     private lazy var layoutViews: Void = {
@@ -76,10 +71,8 @@ public class PokerInputView: PokerAlertView {
     
     fileprivate func setupInputView() {
         
-//        detailBConfirmTCons.isActive = false
-        
         inputContainerView.translatesAutoresizingMaskIntoConstraints = false
-        inputContainerView.topAnchor.constraint(equalTo: (detailLabel ?? titleLabel).bottomAnchor, constant: lineSpacing).isActive = true
+        inputContainerView.topAnchor.constraint(equalTo: (detailLabel ?? promotionLabel ?? titleLabel).bottomAnchor, constant: lineSpacing).isActive = true
         inputContainerView.constraint(withLeadingTrailing: detailHorizontalInset)
         inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -lineSpacing).isActive = true
         inputContainerView.heightAnchor.constraint(equalToConstant: inputContainerViewHeight).isActive = true
@@ -108,7 +101,8 @@ public class PokerInputView: PokerAlertView {
     fileprivate func setupPromotion(with promotionText: String?, style: PokerStyle) {
         guard let promotion = promotionText else { return }
         
-        titleBDetailTCons.isActive = false
+        titleBDetailTCons?.isActive = false
+        
         detailLabel?.font = UIFont.systemFont(ofSize: 18, weight: .light)
         
         let promotionLabel = UILabel()
