@@ -70,6 +70,8 @@ public class PokerView: UIView {
     }
     
     fileprivate func prepareInterface() {
+        backgroundColor = PKColor.background
+            
         layer.cornerRadius = 18
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -82,6 +84,42 @@ public class PokerView: UIView {
                     return UIColor(white: 0, alpha: 0.7)
                 } else {
                     return UIColor(white: 0, alpha: 0.3)
+                }
+            }
+            resolvedColor = dynamicColor.resolvedColor(with: self.traitCollection)
+        }
+        
+        layer.shadowColor = resolvedColor.cgColor
+    }
+}
+
+class PokerSubView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        prepareInterface()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func prepareInterface() {
+        backgroundColor = PKColor.secondary
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        layer.cornerRadius = 8
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 10
+        
+        var resolvedColor = UIColor(white: 0, alpha: 0.1)
+        if #available(iOS 13.0, *) {
+            let dynamicColor = UIColor { traitCollection -> UIColor in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return UIColor(white: 0, alpha: 0.3)
+                } else {
+                    return UIColor(white: 0, alpha: 0.1)
                 }
             }
             resolvedColor = dynamicColor.resolvedColor(with: self.traitCollection)

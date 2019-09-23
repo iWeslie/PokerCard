@@ -36,6 +36,8 @@ public class PokerInputPresenter {
     var pokerInputView: PokerInputView!
     
     private static var inputText: ((_ text: String) -> Void)!
+    private static var validation: ((_ text: String) -> Bool)?
+    private static var validationPassed = true
     
     /// Create a `PokerInputView` with title, detail, button style and input placeholder.
     ///
@@ -79,12 +81,22 @@ public class PokerInputPresenter {
     ///
     /// - Parameter title: The button title.
     /// - Parameter style: The button color style, **blue** by default, see `PKColor` for more detail.
+    /// - Parameter fill: The botton fill style, `true` by default.
     ///
     /// - Returns: The `PokerAlertView` instance.
     @discardableResult
-    public func confirm(title: String, style: PokerStyle = .default) -> PokerInputPresenter {
-        pokerInputView.confirmButton.setTitle(title, for: .normal)
-        pokerInputView.confirmButton.backgroundColor = PKColor.fromAlertView(style)
+    public func confirm(title: String, style: PokerStyle = .default, fill: Bool = true) -> PokerInputPresenter {
+        
+        let confirmButton: UIButton = pokerInputView.confirmButton
+        confirmButton.setTitle(title, for: .normal)
+        confirmButton.backgroundColor = PKColor.fromAlertView(style)
+        
+        if !fill {
+            confirmButton.backgroundColor = UIColor.clear
+            confirmButton.layer.borderColor = PKColor.fromAlertView(style).cgColor
+            confirmButton.layer.borderWidth = 1
+            confirmButton.setTitleColor(PKColor.fromAlertView(style), for: .normal)
+        }
         
         return self
     }
@@ -107,8 +119,15 @@ public class PokerInputPresenter {
         guard let superView = sender.superview, let inputView = superView as? PokerInputView else { return }
         
         guard let text = inputView.inputTextField.text, !text.isEmpty else { return }
-        inputText(text)
-        inputView.dismiss()
+        
+        if let validation = PokerInputPresenter.validation {
+            if validation(text) {
+                inputText(text)
+                inputView.dismiss()
+            } else {
+                inputView.shakeInputView()
+            }
+        }
     }
     
     /// Modify confirm button style and add action to it.
@@ -122,10 +141,11 @@ public class PokerInputPresenter {
     public func confirm(
         title: String,
         style: PokerStyle = .default,
+        fill: Bool = true,
         handler: @escaping (_ text: String) -> Void)
         -> PokerInputPresenter
     {
-        confirm(title: title, style: style)
+        confirm(title: title, style: style, fill: fill)
         confirm(handler)
         
         return self
@@ -138,11 +158,21 @@ public class PokerInputPresenter {
     ///
     /// - Returns: The `PokerInputPresenter` instance.
     @discardableResult
-    public func appearance(_ promotionStyle: PokerStyle, placeholder: String? = nil) -> PokerInputPresenter {
+    public func appearance(promotionStyle: PokerStyle, placeholder: String? = nil) -> PokerInputPresenter {
         pokerInputView.promotionContainerView.backgroundColor = PKColor.fromAlertView(promotionStyle).withAlphaComponent(0.1)
         pokerInputView.promotionLeftMarginView?.backgroundColor = PKColor.fromAlertView(promotionStyle)
         
         pokerInputView.inputTextField.placeholder = placeholder
+        return self
+    }
+    
+    @discardableResult
+    public func validate(_ predicate: @escaping (String) -> Bool) -> PokerInputPresenter {
+        PokerInputPresenter.validation = predicate
+//        if let input = pokerInputView.inputTextField.text, !input.isEmpty && !input.replacingOccurrences(of: " ", with: "").isEmpty {
+//            PokerInputPresenter.validationPassed = predicate(input)
+//        }
+        
         return self
     }
 

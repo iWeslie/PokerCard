@@ -35,10 +35,19 @@ class ViewController: UIViewController {
 //        }
         
         let promotion = "This is promotion style of input view, you may call `showInput` for less options.This is promotion style of input view, you may call `showInput` for less options.This is promotion style of input view, you may call `showInput` for less options."
-        PokerCard.showPromotion(title: "promotion tile", promotion: promotion, secondaryTitle: "title").appearance(.danger, placeholder: "placeholder").confirm { (text) in
+        
+        PokerCard.showPromotion(title: "Test", promotion: promotion, secondaryTitle: "secondaryTitle").validate(validNumber(_:)).confirm { (text) in
             print(text)
         }
         
+    }
+    
+    func validNumber(_ number: String) -> Bool {
+        if number == "12345" {
+            return true
+        } else {
+            return false
+        }
     }
     
 }

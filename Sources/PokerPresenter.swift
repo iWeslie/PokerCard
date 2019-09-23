@@ -67,9 +67,18 @@ public class PokerPresenter {
     ///
     /// - Returns: The `PokerAlertView` instance.
     @discardableResult
-    public func confirm(title: String, style: PokerStyle = .default) -> PokerPresenter {
-        pokerAlertView.confirmButton.setTitle(title, for: .normal)
-        pokerAlertView.confirmButton.backgroundColor = PKColor.fromAlertView(style)
+    public func confirm(title: String, style: PokerStyle = .default, fill: Bool = true) -> PokerPresenter {
+        
+        let confirmButton: UIButton = pokerAlertView.confirmButton
+        confirmButton.setTitle(title, for: .normal)
+        confirmButton.backgroundColor = PKColor.fromAlertView(style)
+        
+        if !fill {
+            confirmButton.backgroundColor = UIColor.clear
+            confirmButton.layer.borderColor = PKColor.fromAlertView(style).cgColor
+            confirmButton.layer.borderWidth = 1
+            confirmButton.setTitleColor(PKColor.fromAlertView(style), for: .normal)
+        }
         
         return self
     }
@@ -99,10 +108,11 @@ public class PokerPresenter {
     public func confirm(
         title: String,
         style: PokerStyle = .default,
+        fill: Bool = true,
         handler: @escaping () -> Void)
         -> PokerPresenter
     {
-        confirm(title: title, style: style)
+        confirm(title: title, style: style, fill: fill)
         confirm(handler)
         
         return self
