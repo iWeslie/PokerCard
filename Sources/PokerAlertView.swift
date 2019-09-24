@@ -107,9 +107,9 @@ public class PokerAlertView: PokerView {
         detailLabel = UILabel()
         detailLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
         detailLabel?.text = detail
-        detailLabel?.textAlignment = detailLabel?.numberOfLines == 1 ? .center : .natural
-        detailLabel?.textColor = PKColor.label
         detailLabel?.numberOfLines = 0
+        detailLabel?.textAlignment = detailLabel?.numberOfLines == 1 ? .center : .left
+        detailLabel?.textColor = PKColor.label
         detailLabel?.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel!)
         
@@ -170,6 +170,24 @@ extension UIView {
         guard let superView = self.superview else { return }
         self.topAnchor.constraint(equalTo: superView.topAnchor, constant: inset).isActive = true
         self.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset).isActive = true
+    }
+    
+    /// Set width and height anchor equal
+    internal func constraint(equalWidthHeight toView: UIView) {
+        self.heightAnchor.constraint(equalTo: toView.heightAnchor).isActive = true
+        self.widthAnchor.constraint(equalTo: toView.widthAnchor).isActive = true
+    }
+    
+    /// Set equal width and height with center baseline
+    internal func constraint(horizontalStack toView: UIView) {
+        self.constraint(equalWidthHeight: toView)
+        self.centerYAnchor.constraint(equalTo: toView.centerYAnchor).isActive = true
+    }
+    
+    /// Set equal width and height with center vertical
+    internal func constraint(verticalStack toView: UIView) {
+        self.constraint(equalWidthHeight: toView)
+        self.centerXAnchor.constraint(equalTo: toView.centerXAnchor).isActive = true
     }
 }
 

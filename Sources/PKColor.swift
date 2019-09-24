@@ -27,7 +27,7 @@
 import UIKit
 
 /// A color representation attribute as per user interface style
-public class PKColor {
+public enum PKColor {
     /// Pocker background color
     static var background: UIColor {
         if #available(iOS 13.0, *) {
@@ -85,6 +85,36 @@ public class PKColor {
         case .danger: return PKColor.red
         case .success: return PKColor.green
         case .color(let color): return color
+        }
+    }
+    
+    internal enum Appearance {
+        static var light: UIColor {
+            if #available(iOS 13.0, *) {
+                return UIColor.init { (trait) -> UIColor in
+                    return trait.userInterfaceStyle == .dark ? UIColor(white: 0.88, alpha: 1) : UIColor.white
+                }
+            } else {
+                return UIColor.white
+            }
+        }
+        static var dark: UIColor {
+            if #available(iOS 13.0, *) {
+                return UIColor.init { (trait) -> UIColor in
+                    return trait.userInterfaceStyle == .dark ? UIColor.black : UIColor(white: 0.18, alpha: 1)
+                }
+            } else {
+                return UIColor(white: 0.18, alpha: 1)
+            }
+        }
+        static var auto: UIColor {
+            if #available(iOS 13.0, *) {
+                return UIColor.init { (trait) -> UIColor in
+                    return trait.userInterfaceStyle == .dark ? UIColor(white: 0.18, alpha: 1) : UIColor(white: 0.92, alpha: 1)
+                }
+            } else {
+                return UIColor(white: 0.92, alpha: 1)
+            }
         }
     }
 }

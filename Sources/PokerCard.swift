@@ -73,3 +73,14 @@ public func showInput(title: String, detail: String? = nil, placeholder: String?
 public func showPromotion(title: String, promotion: String, secondaryTitle: String? = nil) -> PokerInputPresenter {
     return PokerInputPresenter(style: .promotion, title: title, promotion: promotion, detail: secondaryTitle)
 }
+
+/// Present a promotion `PokerAppearanceView` with popup animation from bottom.
+///
+/// This will set `UserDefaults` integer value with key `userInterfaceStyle`.
+/// You can override global interface style in `AppDelegate` didFinishLaunching.
+///
+/// - Returns: The created `PokerInputView` instance.
+@discardableResult
+public func showAppearanceOptions() -> PokerAppearancePresenter {
+    return PokerAppearancePresenter()
+}

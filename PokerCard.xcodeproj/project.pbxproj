@@ -17,6 +17,8 @@
 		D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */; };
 		D36B3FD82328CCB900E0B4D8 /* PokerCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3FD62328CCB900E0B4D8 /* PokerCardTests.swift */; };
 		D36B3FD92328CCB900E0B4D8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36B3FD72328CCB900E0B4D8 /* Info.plist */; };
+		D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D34B62339B405004627BD /* PokerAppearanceView.swift */; };
+		D36D34B92339BC74004627BD /* PokerAppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D34B82339BC74004627BD /* PokerAppearancePresenter.swift */; };
 		D38001CE2328F8C900980988 /* PokerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001CD2328F8C900980988 /* PokerView.swift */; };
 		D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D02328FCF400980988 /* UIView+KeyWindow.swift */; };
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
@@ -50,6 +52,8 @@
 		D36B3FDD2328CD1100E0B4D8 /* PokerCard.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = PokerCard.podspec; sourceTree = "<group>"; };
 		D36B3FDE2328CD2000E0B4D8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D36B3FE02328CD4300E0B4D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D36D34B62339B405004627BD /* PokerAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAppearanceView.swift; sourceTree = "<group>"; };
+		D36D34B82339BC74004627BD /* PokerAppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAppearancePresenter.swift; sourceTree = "<group>"; };
 		D38001CD2328F8C900980988 /* PokerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerView.swift; sourceTree = "<group>"; };
 		D38001D02328FCF400980988 /* UIView+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+KeyWindow.swift"; sourceTree = "<group>"; };
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				D36B3FCF2328CC5E00E0B4D8 /* PokerCard.swift */,
 				D312ABB1232F61CC000E3BCD /* PokerPresenter.swift */,
 				D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */,
+				D36D34B82339BC74004627BD /* PokerAppearancePresenter.swift */,
 				D38001D22328FDD200980988 /* Views */,
 				D38001CF2328FBFD00980988 /* Utils */,
 				D38001D52328FF1200980988 /* Model */,
@@ -171,6 +176,7 @@
 				D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */,
 				D38001E9232911B300980988 /* PokerAlertView.swift */,
 				D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */,
+				D36D34B62339B405004627BD /* PokerAppearanceView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -295,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
+				D36D34B92339BC74004627BD /* PokerAppearancePresenter.swift in Sources */,
 				D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */,
@@ -302,6 +309,7 @@
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
+				D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */,
 				D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */,
 				D312ABB2232F61CC000E3BCD /* PokerPresenter.swift in Sources */,
 				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,

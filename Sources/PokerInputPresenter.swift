@@ -37,7 +37,6 @@ public class PokerInputPresenter {
     
     private static var inputText: ((_ text: String) -> Void)!
     private static var validation: ((_ text: String) -> Bool)?
-    private static var validationPassed = true
     
     /// Create a `PokerInputView` with title, detail, button style and input placeholder.
     ///
@@ -56,7 +55,7 @@ public class PokerInputPresenter {
         keyWindow.addSubview(backgroundView)
         
         if style == .default {
-            pokerInputView = PokerInputView(title: title, detail: detail)
+            pokerInputView = PokerInputView(title: title, detail: detail, style: .warn)
         } else if style == .promotion {
             pokerInputView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
         }
@@ -117,7 +116,6 @@ public class PokerInputPresenter {
     @objc
     private static func submitInput(_ sender: UIButton) {
         guard let superView = sender.superview, let inputView = superView as? PokerInputView else { return }
-        
         guard let text = inputView.inputTextField.text, !text.isEmpty else { return }
         
         if let validation = PokerInputPresenter.validation {
@@ -127,6 +125,9 @@ public class PokerInputPresenter {
             } else {
                 inputView.shakeInputView()
             }
+        } else {
+            inputText(text)
+            inputView.dismiss()
         }
     }
     
@@ -166,13 +167,14 @@ public class PokerInputPresenter {
         return self
     }
     
+    /// Validate input text by the given predicate closure, shake the input field if validation failed
+    ///
+    /// - Parameter predicate: The validation predicate closure.
+    ///
+    /// - Returns: The `PokerInputPresenter` instance.
     @discardableResult
     public func validate(_ predicate: @escaping (String) -> Bool) -> PokerInputPresenter {
         PokerInputPresenter.validation = predicate
-//        if let input = pokerInputView.inputTextField.text, !input.isEmpty && !input.replacingOccurrences(of: " ", with: "").isEmpty {
-//            PokerInputPresenter.validationPassed = predicate(input)
-//        }
-        
         return self
     }
 
