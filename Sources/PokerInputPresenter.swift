@@ -116,7 +116,10 @@ public class PokerInputPresenter {
     @objc
     private static func submitInput(_ sender: UIButton) {
         guard let superView = sender.superview, let inputView = superView as? PokerInputView else { return }
-        guard let text = inputView.inputTextField.text, !text.isEmpty else { return }
+        guard let text = inputView.inputTextField.text, !text.isEmpty else {
+            inputView.shakeInputView()
+            return
+        }
         
         if let validation = PokerInputPresenter.validation {
             if validation(text) {

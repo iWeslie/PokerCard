@@ -172,6 +172,12 @@ extension UIView {
         self.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset).isActive = true
     }
     
+    /// Set width and height anchor
+    internal func constraint(withWidthHeight constant: CGFloat) {
+        self.widthAnchor.constraint(equalToConstant: constant).isActive = true
+        self.heightAnchor.constraint(equalToConstant: constant).isActive = true
+    }
+    
     /// Set width and height anchor equal
     internal func constraint(equalWidthHeight toView: UIView) {
         self.heightAnchor.constraint(equalTo: toView.heightAnchor).isActive = true

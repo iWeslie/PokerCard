@@ -84,3 +84,7 @@ public func showPromotion(title: String, promotion: String, secondaryTitle: Stri
 public func showAppearanceOptions() -> PokerAppearancePresenter {
     return PokerAppearancePresenter()
 }
+
+@discardableResult public func showContacts() -> PokerContactPresenter {
+    return PokerContactPresenter()
+}

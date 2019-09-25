@@ -63,6 +63,19 @@ class ViewController: UIViewController {
         PokerCard.showAppearanceOptions()
     }
     
+    // MARK:- Show Contacts
+    @IBAction func showContacts(_ sender: Any) {
+        let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
+        
+        PokerCard.showContacts()
+            .config(with: [.email("mail"),
+                           .message("message"),
+                           .wechat("id"),
+                           .weibo(weiboURL),
+                           .github("github")
+            ])
+    }
+    
     
     func validatePassword(_ password: String) -> Bool {
         if password == "123456" {

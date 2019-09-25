@@ -64,13 +64,7 @@ public class PokerAppearanceView: PokerView {
         frame.size.width = 280
         frame.size.height = 162
         
-        backgroundColor = PKColor.background
-        
         setupAppearanceSelectionView()
-    }
-    
-    @objc func hey() {
-        print("hey")
     }
     
     required init?(coder: NSCoder) {
