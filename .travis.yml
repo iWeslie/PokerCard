@@ -16,7 +16,7 @@ script:
 - pod lib lint
 
 before_deploy:
-- carthage build --no-skip-current
+- xcodebuild -scheme "$SCHEME" -workspace "$WORKSPACE" build
 - carthage archive $SCHEME
 deploy:
   provider: releases
