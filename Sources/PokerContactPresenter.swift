@@ -50,7 +50,8 @@ public class PokerContactPresenter {
         self.pokerContactView = pokerView
     }
     
-    public func config(with options: [PKContactOption]) {
+    public func config(with options: [PKContactOption], on target: UIViewController) {
         pokerContactView.contactOptions = options
+        pokerContactView.targetController = target
     }
 }

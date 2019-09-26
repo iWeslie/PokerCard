@@ -67,15 +67,18 @@ class ViewController: UIViewController {
     @IBAction func showContacts(_ sender: Any) {
         let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
         
+        let weiboImage = #imageLiteral(resourceName: "weibo")
+        let wechatImage = #imageLiteral(resourceName: "wechat")
+        let githubImage = #imageLiteral(resourceName: "github")
+        
         PokerCard.showContacts()
             .config(with: [.email("mail"),
                            .message("message"),
-                           .wechat("id"),
-                           .weibo(weiboURL),
-                           .github("github")
-            ])
+                           .wechat("id", wechatImage),
+                           .weibo(weiboURL, weiboImage),
+                           .github("github", githubImage)
+            ], on: self)
     }
-    
     
     func validatePassword(_ password: String) -> Bool {
         if password == "123456" {
@@ -84,4 +87,5 @@ class ViewController: UIViewController {
             return false
         }
     }
+    
 }

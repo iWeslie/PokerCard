@@ -25,6 +25,8 @@
 //
 
 import UIKit
+import MessageUI
+import SafariServices
 
 public enum PKContactOption {
     case email(_ address: String, _ symbol: UIImage? = nil)
@@ -35,6 +37,8 @@ public enum PKContactOption {
 }
 
 public class PokerContactView: PokerView {
+    
+    var targetController: UIViewController?
     
     var contactOptions: [PKContactOption]? {
         didSet {
@@ -115,7 +119,9 @@ public class PokerContactView: PokerView {
             case .message:
                 isSymbolImage = true
                 imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
-            default: break
+            case .github(_, let image), .wechat(_, let image), .weibo(_, let image):
+                isSymbolImage = false
+                imageView.image = image
             }
             
             imageView.tintColor = PKColor.label
@@ -125,23 +131,125 @@ public class PokerContactView: PokerView {
                 imageView.constraint(withWidthHeight: 32)
                 imageView.contentMode = .scaleAspectFill
             }
-            
         } else {
-//            imageView =
+            imageView.constraint(withWidthHeight: 32)
+            imageView.contentMode = .scaleAspectFill
         }
         
+        var tap = UITapGestureRecognizer()
         switch contact {
-        case .email: detailLabel.text = "Email"
-        case .github: detailLabel.text = "GitHub"
-        case .message: detailLabel.text = "iMessage"
-        case .wechat: detailLabel.text = "WeChat"
-        case .weibo: detailLabel.text = "Weibo"
+        case .email:
+            detailLabel.text = "Email"
+            tap = UITapGestureRecognizer(target: self, action: #selector(presentEmail))
+        case .github:
+            detailLabel.text = "GitHub"
+            tap = UITapGestureRecognizer(target: self, action: #selector(showGitHub))
+        case .message:
+            detailLabel.text = "iMessage"
+            tap = UITapGestureRecognizer(target: self, action: #selector(presentMessage))
+        case .wechat:
+            detailLabel.text = "WeChat"
+            tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeChat))
+        case .weibo:
+            detailLabel.text = "Weibo"
+            tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeibo))
         }
+        contactView.addGestureRecognizer(tap)
         detailLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
         
         detailLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16).isActive = true
         detailLabel.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
-        
     }
     
+    @objc
+    private func presentEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            debugPrint("You can not sent email on simulator. Please do it on a device.")
+            return
+        }
+        let mailViewController = MFMailComposeViewController()
+        mailViewController.mailComposeDelegate = self
+        
+        targetController?.present(mailViewController, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func presentMessage() {
+        guard MFMessageComposeViewController.canSendText() else {
+            debugPrint("You can not sent message on simulator. Please do it on a device.")
+            return
+        }
+        
+        let messageViewController = MFMessageComposeViewController()
+        messageViewController.messageComposeDelegate = self
+        messageViewController.subject = "Message Subject"
+        messageViewController.recipients = ["recipients"]
+        
+        targetController?.present(messageViewController, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func jumpToWeChat() {
+        let url = URL(string: "weixin://")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @objc
+    private func jumpToWeibo() {
+        let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
+        let weiboIURL = URL(string: "weibointernational://userinfo?uid=6425782290")!
+        if UIApplication.shared.canOpenURL(weiboURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(weiboURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(weiboURL)
+            }
+        } else if UIApplication.shared.canOpenURL(weiboIURL) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(weiboIURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(weiboIURL)
+            }
+        } else {
+            debugPrint("Weibo not installed.")
+        }
+    }
+    
+    @objc
+    private func showGitHub() {
+        let safariController = SFSafariViewController(url: URL(string: "https://github.com/iWeslie")!)
+        safariController.modalPresentationStyle = .popover
+        targetController?.present(safariController, animated: true, completion: nil)
+        
+    }
+}
+
+// MARK:- MFMailComposeViewControllerDelegate
+extension PokerContactView: MFMailComposeViewControllerDelegate {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) {
+            if result == .sent {
+                print("sent")
+            } else if result == .cancelled {
+                print("cancelled")
+            }
+        }
+    }
+}
+
+// MARK:- MFMessageComposeViewControllerDelegate
+extension PokerContactView: MFMessageComposeViewControllerDelegate {
+    public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true) {
+            if result == .sent {
+                print("sent")
+            } else if result == .cancelled {
+                print("cancelled")
+            }
+        }
+    }
 }
