@@ -1,0 +1,164 @@
+//
+//  PokerLanguageView.swift
+//  PokerCard
+//
+//  Created by Weslie on 2019/9/27.
+//  Copyright © 2019 Weslie (https://www.iweslie.com)
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+import UIKit
+ 
+fileprivate enum LangType {
+    case en
+    case zh
+    case auto
+}
+ 
+fileprivate protocol PKLanguageSelectionDelegate: class {
+    func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType)
+}
+
+fileprivate class PokerLanguageOptionView: PokerSubView {
+    
+    var languageType: LangType = .auto
+    
+    weak var delegate: PKLanguageSelectionDelegate?
+    
+    fileprivate var infoLabel = UILabel()
+    fileprivate var symbolImageView = UIImageView()
+    fileprivate var checkmarkImageView = UIImageView()
+    
+    init(type: LangType) {
+        super.init(frame: CGRect.zero)
+        self.languageType = type
+        
+        symbolImageView.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
+        checkmarkImageView.isHidden = false
+        
+        addSubview(infoLabel)
+        addSubview(symbolImageView)
+        addSubview(checkmarkImageView)
+        
+        switch type {
+        case .en: infoLabel.text = "English"
+        case .zh: infoLabel.text = "简体中文"
+        case .auto: infoLabel.text = "Follow System"
+        }
+        
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .thin)
+            var symbolName = "arrow.2.circlepath"
+            switch type {
+            case .en: symbolName = "textformat"
+            case .zh: symbolName = "globe"
+            case .auto: symbolName = "arrow.2.circlepath"
+            }
+            symbolImageView.image = UIImage(systemName: symbolName, withConfiguration: config)
+            symbolImageView.tintColor = PKColor.label
+            
+            checkmarkImageView.image = UIImage(systemName: "checkmark", withConfiguration: config)
+            checkmarkImageView.tintColor = PKColor.label
+            
+        } else {
+            
+        }
+        
+        symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        symbolImageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 64 / 2).isActive = true
+        infoLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 64).isActive = true
+        checkmarkImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        checkmarkImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(languageSelected(_:)))
+        addGestureRecognizer(tap)
+        
+    }
+    
+    @objc
+    func languageSelected(_ gesture: UITapGestureRecognizer) {
+        switch languageType {
+        case .en: delegate?.didSelect(self, with: .en)
+        case .zh: delegate?.didSelect(self, with: .zh)
+        case .auto: delegate?.didSelect(self, with: .auto)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+public class PokerLanguageView: PokerView {
+    
+    fileprivate var enLangView = PokerLanguageOptionView(type: .en)
+    fileprivate var zhLangView = PokerLanguageOptionView(type: .zh)
+    fileprivate var autoLangView = PokerLanguageOptionView(type: .auto)
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        
+        frame.size.height = 250
+        frame.size.width = 265
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Language"
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        titleLabel.textColor = PKColor.label
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        [enLangView, zhLangView, autoLangView].forEach { langView in
+            addSubview(langView)
+            langView.delegate = self
+            langView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+            langView.constraint(withLeadingTrailing: 20)
+        }
+        
+        enLangView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        zhLangView.topAnchor.constraint(equalTo: enLangView.bottomAnchor, constant: 12).isActive = true
+        autoLangView.topAnchor.constraint(equalTo: zhLangView.bottomAnchor, constant: 12).isActive = true
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+extension PokerLanguageView: PKLanguageSelectionDelegate {
+    fileprivate func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType) {
+        switch language {
+        case .en:
+            print("en")
+        case .zh:
+            print("zh")
+        case .auto:
+            print("auto")
+        }
+    }
+}

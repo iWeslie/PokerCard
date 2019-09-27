@@ -23,7 +23,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                 <state key="normal" title="showAlert">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8OU-aY-NdW"/>
@@ -49,7 +49,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                 <state key="normal" title="showPrompt">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showPrompt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mZT-Kz-QsM"/>
@@ -75,10 +75,23 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
                                 <state key="normal" title="showContacts">
-                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showContacts:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XCX-ka-f6W"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH5-RQ-MyH">
+                                <rect key="frame" x="0.0" y="388" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="TSq-5J-T1b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                <state key="normal" title="showLanguagePicker">
+                                    <color key="titleColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLanguagePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oiT-C0-kYZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -87,10 +100,12 @@
                             <constraint firstItem="0w2-Y9-Bgu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="96O-d8-YPF"/>
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NtX-eG-EzJ"/>
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="top" secondItem="KG4-h4-PiQ" secondAttribute="bottom" id="PuZ-4z-3xF"/>
+                            <constraint firstItem="dH5-RQ-MyH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vgd-9d-LxE"/>
                             <constraint firstItem="KG4-h4-PiQ" firstAttribute="trailing" secondItem="0w2-Y9-Bgu" secondAttribute="trailing" id="Vqk-Vx-yCc"/>
                             <constraint firstItem="KG4-h4-PiQ" firstAttribute="top" secondItem="0w2-Y9-Bgu" secondAttribute="bottom" id="Vwm-F0-A62"/>
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="trailing" secondItem="0w2-Y9-Bgu" secondAttribute="trailing" id="XHK-vM-GlK"/>
                             <constraint firstItem="0w2-Y9-Bgu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zz6-zQ-nhi"/>
+                            <constraint firstItem="dH5-RQ-MyH" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aty-Rg-Ci5"/>
                             <constraint firstItem="JcH-wv-5nx" firstAttribute="top" secondItem="uUw-Wg-8Rq" secondAttribute="bottom" id="bHi-yd-8HE"/>
                             <constraint firstItem="JcH-wv-5nx" firstAttribute="leading" secondItem="0w2-Y9-Bgu" secondAttribute="leading" id="fOc-XC-Pvs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0w2-Y9-Bgu" secondAttribute="trailing" id="kYc-AF-rOd"/>
@@ -98,6 +113,7 @@
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lMw-vm-6Mt"/>
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="leading" secondItem="0w2-Y9-Bgu" secondAttribute="leading" id="pkV-e0-i1f"/>
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="top" secondItem="JcH-wv-5nx" secondAttribute="bottom" id="qHm-8H-Oyh"/>
+                            <constraint firstItem="dH5-RQ-MyH" firstAttribute="top" secondItem="SDx-n1-sq1" secondAttribute="bottom" id="qKG-L7-wuk"/>
                             <constraint firstItem="JcH-wv-5nx" firstAttribute="trailing" secondItem="0w2-Y9-Bgu" secondAttribute="trailing" id="xcn-BQ-dcN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

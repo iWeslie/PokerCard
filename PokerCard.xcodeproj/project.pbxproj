@@ -23,6 +23,8 @@
 		D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D02328FCF400980988 /* UIView+KeyWindow.swift */; };
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
 		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
+		D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C3570233DA54C0083F737 /* PokerLanguageView.swift */; };
+		D38C3573233DAA9B0083F737 /* PokerLanguagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C3572233DAA9B0083F737 /* PokerLanguagePresenter.swift */; };
 		D3DE33E7233AFE8E00201C43 /* PokerContactPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE33E6233AFE8E00201C43 /* PokerContactPresenter.swift */; };
 		D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE5EBC23336CBC001D901E /* PokerStyle.swift */; };
 		D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8B882233AFCE800D008D2 /* PokerContactView.swift */; };
@@ -60,6 +62,8 @@
 		D38001D02328FCF400980988 /* UIView+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+KeyWindow.swift"; sourceTree = "<group>"; };
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
 		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
+		D38C3570233DA54C0083F737 /* PokerLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerLanguageView.swift; sourceTree = "<group>"; };
+		D38C3572233DAA9B0083F737 /* PokerLanguagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerLanguagePresenter.swift; sourceTree = "<group>"; };
 		D3DE33E6233AFE8E00201C43 /* PokerContactPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerContactPresenter.swift; sourceTree = "<group>"; };
 		D3DE5EBC23336CBC001D901E /* PokerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerStyle.swift; sourceTree = "<group>"; };
 		D3F8B882233AFCE800D008D2 /* PokerContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerContactView.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */,
 				D36D34B82339BC74004627BD /* PokerAppearancePresenter.swift */,
 				D3DE33E6233AFE8E00201C43 /* PokerContactPresenter.swift */,
+				D38C3572233DAA9B0083F737 /* PokerLanguagePresenter.swift */,
 				D38001D22328FDD200980988 /* Views */,
 				D38001CF2328FBFD00980988 /* Utils */,
 				D38001D52328FF1200980988 /* Model */,
@@ -183,6 +188,7 @@
 				D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */,
 				D36D34B62339B405004627BD /* PokerAppearanceView.swift */,
 				D3F8B882233AFCE800D008D2 /* PokerContactView.swift */,
+				D38C3570233DA54C0083F737 /* PokerLanguageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -308,8 +314,10 @@
 			files = (
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
 				D36D34B92339BC74004627BD /* PokerAppearancePresenter.swift in Sources */,
+				D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */,
 				D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */,
 				D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */,
+				D38C3573233DAA9B0083F737 /* PokerLanguagePresenter.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,

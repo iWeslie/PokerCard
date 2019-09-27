@@ -80,6 +80,11 @@ class ViewController: UIViewController {
             ], on: self)
     }
     
+    // MARK:- Show Language Picker
+    @IBAction func showLanguagePicker(_ sender: Any) {
+        PokerCard.showLanguagePicker()
+    }
+    
     func validatePassword(_ password: String) -> Bool {
         if password == "123456" {
             return true

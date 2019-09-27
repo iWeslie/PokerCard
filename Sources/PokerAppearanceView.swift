@@ -74,7 +74,7 @@ public class PokerAppearanceView: PokerView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        _ = layoutViews
+//        _ = layoutViews
     }
     
     private lazy var layoutViews: Void = {

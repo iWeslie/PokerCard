@@ -88,3 +88,7 @@ public func showAppearanceOptions() -> PokerAppearancePresenter {
 @discardableResult public func showContacts() -> PokerContactPresenter {
     return PokerContactPresenter()
 }
+
+@discardableResult public func showLanguagePicker() -> PokerLanguagePresenter {
+    return PokerLanguagePresenter()
+}
