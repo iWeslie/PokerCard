@@ -28,6 +28,8 @@ import UIKit
 
 class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
     
+    var presenter: PokerPresenter?
+    
     var pokerView: PokerView? {
         didSet {
             guard let pokerView = pokerView else { return }

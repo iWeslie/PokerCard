@@ -29,6 +29,8 @@ import UIKit
 /// Base Poker Alert View
 public class PokerAlertView: PokerView {
     
+    var presenter: PokerPresenter?
+    
     public var titleLabel: UILabel!
     public var detailLabel: UILabel?
     public var confirmButton: UIButton!

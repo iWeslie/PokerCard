@@ -28,6 +28,10 @@ import UIKit
 
 public class PokerPresenter {
     
+    deinit {
+        print(#function)
+    }
+    
     var pokerAlertView: PokerAlertView!
     
     /// Create a `PokerAlertView` with title and detail decription.
@@ -38,6 +42,7 @@ public class PokerPresenter {
         guard let keyWindow = currentWindow else { return }
         let backgroundView = PokerPresenterView(frame: keyWindow.frame)
         keyWindow.addSubview(backgroundView)
+        backgroundView.presenter = self
         
         /* other styles
         let pokerView = PokerInputView(title: title, promotion: "This is bh ifevn bif", secondary: "sfiuvbefnovebf", placeholder: "febvefiv", style: .danger)
