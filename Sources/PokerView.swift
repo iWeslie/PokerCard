@@ -93,10 +93,9 @@ public class PokerView: UIView {
     }
 }
 
-class PokerSubView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+class PokerSubView: PKContainerView {
+    override init() {
+        super.init()
         prepareInterface()
     }
     

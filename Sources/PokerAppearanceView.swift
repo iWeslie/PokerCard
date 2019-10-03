@@ -71,12 +71,6 @@ public class PokerAppearanceView: PokerView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-//        _ = layoutViews
-    }
-    
     private lazy var layoutViews: Void = {
         guard let superView = self.superview else {
             preconditionFailure("cannot get superview")
@@ -86,11 +80,8 @@ public class PokerAppearanceView: PokerView {
     
     private func setupAppearanceSelectionView() {
         
-        let titleLabel = UILabel()
+        let titleLabel = PKLabel(fontSize: 20)
         titleLabel.text = "Appearance"
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
-        titleLabel.textColor = PKColor.label
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

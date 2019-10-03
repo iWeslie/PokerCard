@@ -11,6 +11,11 @@
 		D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */; };
 		D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */; };
 		D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */; };
+		D323830C2346378B00232AF4 /* PKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323830B2346378B00232AF4 /* PKLabel.swift */; };
+		D323830E23463AB600232AF4 /* PKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323830D23463AB600232AF4 /* PKButton.swift */; };
+		D323831023463E8700232AF4 /* PKContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323830F23463E8700232AF4 /* PKContainerView.swift */; };
+		D330802C23433EFA009E7CC4 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D330802B23433EFA009E7CC4 /* Extension+UIView.swift */; };
+		D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D330802D23433F28009E7CC4 /* Extension+UILabel.swift */; };
 		D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */; };
 		D36B3FB82328CB1F00E0B4D8 /* PokerCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */; };
 		D36B3FCD2328CC3100E0B4D8 /* PokerCard.h in Headers */ = {isa = PBXBuildFile; fileRef = D36B3FCA2328CC3100E0B4D8 /* PokerCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,6 +50,11 @@
 		D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPresenterView.swift; sourceTree = "<group>"; };
 		D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputView.swift; sourceTree = "<group>"; };
+		D323830B2346378B00232AF4 /* PKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKLabel.swift; sourceTree = "<group>"; };
+		D323830D23463AB600232AF4 /* PKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKButton.swift; sourceTree = "<group>"; };
+		D323830F23463E8700232AF4 /* PKContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKContainerView.swift; sourceTree = "<group>"; };
+		D330802B23433EFA009E7CC4 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		D330802D23433F28009E7CC4 /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		D3340D0E2336228300B2BB19 /* PokerInputPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputPresenter.swift; sourceTree = "<group>"; };
 		D36B3FAE2328CB1F00E0B4D8 /* PokerCard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PokerCard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36B3FB72328CB1F00E0B4D8 /* PokerCardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerCardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */,
+				D330802B23433EFA009E7CC4 /* Extension+UIView.swift */,
+				D330802D23433F28009E7CC4 /* Extension+UILabel.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -197,6 +209,9 @@
 			isa = PBXGroup;
 			children = (
 				D38001D62328FF2000980988 /* PKColor.swift */,
+				D323830B2346378B00232AF4 /* PKLabel.swift */,
+				D323830D23463AB600232AF4 /* PKButton.swift */,
+				D323830F23463E8700232AF4 /* PKContainerView.swift */,
 				D3DE5EBC23336CBC001D901E /* PokerStyle.swift */,
 			);
 			name = Model;
@@ -320,15 +335,20 @@
 				D38C3573233DAA9B0083F737 /* PokerLanguagePresenter.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,
 				D3340D0F2336228300B2BB19 /* PokerInputPresenter.swift in Sources */,
+				D330802C23433EFA009E7CC4 /* Extension+UIView.swift in Sources */,
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
+				D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */,
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
 				D3DE33E7233AFE8E00201C43 /* PokerContactPresenter.swift in Sources */,
 				D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */,
 				D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */,
+				D323830E23463AB600232AF4 /* PKButton.swift in Sources */,
 				D312ABB2232F61CC000E3BCD /* PokerPresenter.swift in Sources */,
+				D323831023463E8700232AF4 /* PKContainerView.swift in Sources */,
 				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,
+				D323830C2346378B00232AF4 /* PKLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

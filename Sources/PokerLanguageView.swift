@@ -42,17 +42,15 @@ fileprivate class PokerLanguageOptionView: PokerSubView {
     
     weak var delegate: PKLanguageSelectionDelegate?
     
-    fileprivate var infoLabel = UILabel()
+    fileprivate var infoLabel = PKLabel(fontSize: 20)
     fileprivate var symbolImageView = UIImageView()
     fileprivate var checkmarkImageView = UIImageView()
     
     init(type: LangType) {
-        super.init(frame: CGRect.zero)
+        super.init()
         self.languageType = type
         
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
         checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
         checkmarkImageView.isHidden = false
         
@@ -122,11 +120,8 @@ public class PokerLanguageView: PokerView {
         frame.size.height = 250
         frame.size.width = 265
         
-        let titleLabel = UILabel()
+        let titleLabel = PKLabel(fontSize: 20)
         titleLabel.text = "Language"
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
-        titleLabel.textColor = PKColor.label
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

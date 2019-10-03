@@ -35,21 +35,20 @@ public class PokerInputView: PokerAlertView {
     }
     
     var inputContainerViewHeight: CGFloat = 36
-    lazy var inputContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = UIColor.clear
-        container.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(container, at: 0)
-        return container
-    }()
+    var inputContainerView = PKContainerView()
     
+    // promotion style
     lazy var promotionContainerView: UIView = {
-        let container = UIView()
-        container.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(container)
-        return container
+        let containerView = PKContainerView()
+        addSubview(containerView)
+        return containerView
     }()
-    var promotionLeftMarginView: UIView?
+    lazy var promotionLeftMarginView: UIView = {
+        let leftMargin = UIView()
+        leftMargin.backgroundColor = PKColor.pink
+        leftMargin.translatesAutoresizingMaskIntoConstraints = false
+        return leftMargin
+    }()
     
     var promotionLabel: UILabel?
     
@@ -74,12 +73,9 @@ public class PokerInputView: PokerAlertView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private lazy var layoutViews: Void = {
-        frame.size.height += inputContainerViewHeight + lineSpacing * 2
-    }()
-    
     fileprivate func setupInputView() {
         inputContainerViewHeight = 36
+        insertSubview(inputContainerView, at: 0)
         
         inputContainerView.translatesAutoresizingMaskIntoConstraints = false
         inputContainerView.topAnchor.constraint(equalTo: (detailLabel ?? promotionLabel ?? titleLabel).bottomAnchor, constant: lineSpacing).isActive = true
@@ -139,12 +135,9 @@ public class PokerInputView: PokerAlertView {
         
         detailLabel?.font = UIFont.systemFont(ofSize: 18, weight: .light)
         
-        let promotionLabel = UILabel()
+        let promotionLabel = PKLabel(fontSize: 14)
         promotionLabel.text = promotion
-        promotionLabel.numberOfLines = 0
         promotionLabel.textAlignment = .natural
-        promotionLabel.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        promotionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.promotionLabel = promotionLabel
         addSubview(promotionLabel)
         
@@ -160,16 +153,10 @@ public class PokerInputView: PokerAlertView {
         promotionContainerView.leadingAnchor.constraint(equalTo: promotionLabel.leadingAnchor, constant: -8).isActive = true
         promotionContainerView.trailingAnchor.constraint(equalTo: promotionLabel.trailingAnchor, constant: 5).isActive = true
         
-        let leftMargin = UIView()
-        leftMargin.backgroundColor = PKColor.pink
-        leftMargin.translatesAutoresizingMaskIntoConstraints = false
-        self.promotionLeftMarginView = leftMargin
-        promotionContainerView.addSubview(leftMargin)
-        
-        leftMargin.leadingAnchor.constraint(equalTo: promotionContainerView.leadingAnchor).isActive = true
-        leftMargin.constraint(withTopBottom: 0)
-        leftMargin.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        
+        promotionContainerView.addSubview(promotionLeftMarginView)
+        promotionLeftMarginView.leadingAnchor.constraint(equalTo: promotionContainerView.leadingAnchor).isActive = true
+        promotionLeftMarginView.constraint(withTopBottom: 0)
+        promotionLeftMarginView.widthAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     internal func shakeInputView() {
@@ -211,8 +198,6 @@ public class PokerInputView: PokerAlertView {
                 self.frame.origin.y = keyboardFrame.origin.y - popupHeight - 30
             }
         }, completion: nil)
-        
-        
     }
     
 }

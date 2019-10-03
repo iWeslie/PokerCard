@@ -28,10 +28,6 @@ import UIKit
 
 public class PokerPresenter {
     
-    deinit {
-        print(#function)
-    }
-    
     var pokerAlertView: PokerAlertView!
     
     /// Create a `PokerAlertView` with title and detail decription.

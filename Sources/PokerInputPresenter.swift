@@ -164,7 +164,7 @@ public class PokerInputPresenter {
     @discardableResult
     public func appearance(promotionStyle: PokerStyle, placeholder: String? = nil) -> PokerInputPresenter {
         pokerInputView.promotionContainerView.backgroundColor = PKColor.fromAlertView(promotionStyle).withAlphaComponent(0.1)
-        pokerInputView.promotionLeftMarginView?.backgroundColor = PKColor.fromAlertView(promotionStyle)
+        pokerInputView.promotionLeftMarginView.backgroundColor = PKColor.fromAlertView(promotionStyle)
         
         pokerInputView.inputTextField.placeholder = placeholder
         return self

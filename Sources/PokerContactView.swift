@@ -49,7 +49,7 @@ public class PokerContactView: PokerView {
         }
     }
     
-    private let titleLabel = UILabel()
+    private let titleLabel = PKLabel(fontSize: 20)
     private var lastContact: PokerSubView?
     private let contactViewHeight: CGFloat = 52
     private let contactViewWidth: CGFloat = 225
@@ -82,9 +82,6 @@ public class PokerContactView: PokerView {
     
     private func setupTitle() {
         titleLabel.text = "Contact Us"
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
-        titleLabel.textColor = PKColor.label
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
