@@ -38,9 +38,9 @@ public enum PKContactOption {
 
 public class PokerContactView: PokerView {
     
-    var targetController: UIViewController?
+    internal var targetController: UIViewController?
     
-    var contactOptions: [PKContactOption]? {
+    internal var contactOptions: [PKContactOption]? {
         didSet {
             let options = contactOptions
             options?.forEach { option in
@@ -101,8 +101,7 @@ public class PokerContactView: PokerView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contactView.addSubview(imageView)
-        let detailLabel = UILabel()
-        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        let detailLabel = PKLabel(fontSize: 20)
         contactView.addSubview(detailLabel)
         
         var isSymbolImage = false
@@ -152,7 +151,6 @@ public class PokerContactView: PokerView {
             tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeibo))
         }
         contactView.addGestureRecognizer(tap)
-        detailLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
         
         detailLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16).isActive = true
         detailLabel.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true

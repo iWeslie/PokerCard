@@ -73,7 +73,7 @@ public enum PKColor {
     
     /// Generate color from Alert Style
     /// 
-    /// - Parameter style: `PokerAlertView` confirm button style
+    /// - Parameter style: `PokerAlertView` confirm button style.
     ///
     /// - Returns: The created UIColor instance.
     static func fromAlertView(_ style: PokerStyle) -> UIColor {
@@ -88,7 +88,9 @@ public enum PKColor {
         }
     }
     
+    /// Color set for Apearance view
     internal enum Appearance {
+        /// light appearance background color
         static var light: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in
@@ -98,6 +100,7 @@ public enum PKColor {
                 return UIColor.white
             }
         }
+        /// dark appearance background color
         static var dark: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in
@@ -107,6 +110,7 @@ public enum PKColor {
                 return UIColor(white: 0.18, alpha: 1)
             }
         }
+        /// default appearance background color
         static var auto: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in

@@ -26,7 +26,9 @@
 
 import UIKit
 
+/// `PokerCard` basic container view.
 class PKContainerView: UIView {
+    /// Create a container view.
     init() {
         super.init(frame: CGRect.zero)
         

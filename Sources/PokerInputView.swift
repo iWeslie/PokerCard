@@ -93,11 +93,7 @@ public class PokerInputView: PokerAlertView {
         lineView.bottomAnchor.constraint(equalTo: inputContainerView.bottomAnchor).isActive = true
         lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        inputTextField = UITextField()
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.borderStyle = .none
-        inputTextField.font = UIFont.systemFont(ofSize: 22, weight: .light)
-        inputTextField.textAlignment = .center
+        inputTextField = PKTextField(fontSize: 22)
         inputContainerView.addSubview(inputTextField)
         inputTextField.constraint(withLeadingTrailing: 0)
         inputTextField.topAnchor.constraint(equalTo: inputContainerView.topAnchor).isActive = true
@@ -118,11 +114,7 @@ public class PokerInputView: PokerAlertView {
         
         frame.size.height += inputContainerViewHeight + lineSpacing * 2
         
-        inputTextField = UITextField()
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.borderStyle = .none
-        inputTextField.font = UIFont.systemFont(ofSize: 25, weight: .light)
-        inputTextField.textAlignment = .center
+        inputTextField = PKTextField(fontSize: 25)
         inputContainerView.addSubview(inputTextField)
         inputTextField.constraint(withLeadingTrailing: 0)
         inputTextField.constraint(withTopBottom: 0)

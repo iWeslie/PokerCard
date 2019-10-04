@@ -1,8 +1,8 @@
 //
-//  PKLabel.swift
+//  PKTextField.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/10/3.
+//  Created by Weslie on 2019/10/4.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,17 +26,16 @@
 
 import UIKit
 
-/// `PokerCard` basic label.
-class PKLabel: UILabel {
-    /// Create a Label.
-    /// - Parameter fontSize: label font size
+/// `PokerCard` basic text field.
+class PKTextField: UITextField {
+    /// Create a text field.
+    /// - Parameter fontSize: the text field font size.
     init(fontSize: CGFloat) {
         super.init(frame: CGRect.zero)
         
+        borderStyle = .none
         font = UIFont.systemFont(ofSize: fontSize, weight: .light)
         textAlignment = .center
-        textColor = PKColor.label
-        numberOfLines = 0
         translatesAutoresizingMaskIntoConstraints = false
     }
     

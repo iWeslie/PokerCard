@@ -33,25 +33,26 @@ fileprivate enum AppearanceSymbol: String {
 }
 
 public typealias PKAction = () -> Void
+
 public class PokerAppearanceView: PokerView {
     
-    var lightAppearanceView = PokerSubView()
-    var darkAppearanceView = PokerSubView()
-    var autoAppearanceView = PokerSubView()
+    internal var lightAppearanceView = PokerSubView()
+    internal var darkAppearanceView = PokerSubView()
+    internal var autoAppearanceView = PokerSubView()
     
-    var lightTapped: PKAction = {
+    internal var lightTapped: PKAction = {
         if #available(iOS 13.0, *) {
             UserDefaults.standard.set(UIUserInterfaceStyle.light.rawValue, forKey: "userInterfaceStyle")
             currentWindow?.overrideUserInterfaceStyle = .light
         }
     }
-    var darkTapped: PKAction = {
+    internal var darkTapped: PKAction = {
         if #available(iOS 13.0, *) {
             UserDefaults.standard.set(UIUserInterfaceStyle.dark.rawValue, forKey: "userInterfaceStyle")
             currentWindow?.overrideUserInterfaceStyle = .dark
         }
     }
-    var autoTapped: PKAction = {
+    internal var autoTapped: PKAction = {
         if #available(iOS 13.0, *) {
             UserDefaults.standard.set(UIUserInterfaceStyle.unspecified.rawValue, forKey: "userInterfaceStyle")
             currentWindow?.overrideUserInterfaceStyle = .unspecified
@@ -70,13 +71,6 @@ public class PokerAppearanceView: PokerView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private lazy var layoutViews: Void = {
-        guard let superView = self.superview else {
-            preconditionFailure("cannot get superview")
-        }
-        frame.origin.y = superView.frame.midY - frame.size.height / 2
-    }()
     
     private func setupAppearanceSelectionView() {
         

@@ -26,7 +26,11 @@
 
 import UIKit
 
+/// `PokerCard` basic button.
 class PKButton: UIButton {
+    /// Create a button.
+    /// - Parameter title:      the button title.
+    /// - Parameter fontSize:   the button title font size.
     init(title: String, fontSize: CGFloat) {
         super.init(frame: CGRect.zero)
         
