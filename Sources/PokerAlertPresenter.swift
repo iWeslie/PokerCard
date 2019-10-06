@@ -1,0 +1,89 @@
+//
+//  PokerAlertPresenter.swift
+//  PokerCard
+//
+//  Created by Weslie on 2019/10/6.
+//  Copyright © 2019 Weslie (https://www.iweslie.com)
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+import UIKit
+
+/// Presenter for Poker View with alert style.
+public class PokerAlertPresenter {
+    
+    internal var keyWindow: UIWindow
+    internal var backgroundView: PokerPresenterView
+    
+    /// Create a `PokerAlertPresenter` instance.
+    init() {
+        guard let keyWindow = currentWindow else {
+            fatalError("cannot retrive current window")
+        }
+        let backgroundView = PokerPresenterView(frame: keyWindow.frame)
+        keyWindow.addSubview(backgroundView)
+        
+        self.keyWindow = keyWindow
+        self.backgroundView = backgroundView
+    }
+    
+    /// Create a `PokerAlertView` with title and detail decription.
+    ///
+    /// - Parameter title:  The alert title.
+    /// - Parameter detail: The alert detail description, `nil` by default.
+    ///
+    /// - Returns: The created `PokerAlertView` instance.
+    public func showAlert(title: String, detail: String?) -> PokerAlertView {
+        
+        let pokerView = PokerAlertView(title: title, detail: detail)
+        backgroundView.addSubview(pokerView)
+        backgroundView.pokerView = pokerView
+        
+        return pokerView
+    }
+    
+    /// Create a `PokerInputView` with title, detail, button style and input placeholder.
+    ///
+    /// - Parameter title:          The alert title.
+    /// - Parameter detail:         The alert detail description, `nil` by default.
+    /// - Parameter style:          The input style, `default` or `promotion`.
+    /// - Parameter placeholder:    The input placeholder.
+    ///
+    /// - Returns: The created `PokerInputView` instance.
+    public func showInput(
+        style: PokerInputView.Style,
+        title: String,
+        promotion: String? = nil,
+        detail: String?)
+        -> PokerInputView
+    {
+        
+        var pokerView = PokerInputView()
+        if style == .default {
+            pokerView = PokerInputView(title: title, detail: detail, style: .warn)
+        } else if style == .promotion {
+            pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
+        }
+        backgroundView.addSubview(pokerView)
+        backgroundView.pokerView = pokerView
+        
+        return pokerView
+    }
+}

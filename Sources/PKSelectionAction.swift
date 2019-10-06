@@ -1,8 +1,8 @@
 //
-//  PokerLanguagePresenter.swift
+//  PKSelectionAction.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/9/27.
+//  Created by Weslie on 2019/10/6.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,29 +26,26 @@
 
 import UIKit
 
-public class PokerLanguagePresenter {
-    
-    var pokerLanguageView: PokerLanguageView!
-    
-    public init() {
-        guard let keyWindow = currentWindow else { return }
-        let backgroundView = PokerPresenterView(frame: keyWindow.frame)
-        keyWindow.addSubview(backgroundView)
-        
-        let pokerView = PokerLanguageView()
-        backgroundView.addSubview(pokerView)
-        backgroundView.pokerView = pokerView
-        
-        // animations
-        pokerView.center = CGPoint(x: backgroundView.frame.width / 2, y: backgroundView.frame.height + 50)
-        pokerView.alpha = 0
-        UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 18, options: [], animations: {
-            pokerView.center = backgroundView.center
-        }, completion: nil)
-        
-        self.pokerLanguageView = pokerView
+extension PokerAppearanceView {
+    /// Passing style change actions by closure.
+    ///
+    /// - Parameter light:  The light style click action.
+    /// - Parameter dark:   The dark style click action.
+    /// - Parameter auto:   The auto style click action.
+    public func appearanceSelected(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) {
+        lightTapped = light
+        darkTapped = dark
+        autoTapped = auto
     }
-    
 }
 
+extension PokerContactView {
+    /// Configure contact options.
+    ///
+    /// - Parameter options:    The contact options array.
+    /// - Parameter target:     The target controller, use `self` as well.
+    public func config(with options: [PKContactOption], on target: UIViewController) {
+        contactOptions = options
+        targetController = target
+    }
+}

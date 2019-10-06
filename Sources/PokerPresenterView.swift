@@ -28,8 +28,6 @@ import UIKit
 
 class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
     
-    var presenter: PokerPresenter?
-    
     var pokerView: PokerView? {
         didSet {
             guard let pokerView = pokerView else { return }
@@ -37,15 +35,23 @@ class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
             // tap background to dismiss
             let tap = UITapGestureRecognizer(target: pokerView, action: #selector(pokerView.dismiss))
             tap.delegate = self
-            addGestureRecognizer(tap)
             
+            // move to center with animation
+            pokerView.center = CGPoint(x: frame.width / 2, y: frame.height + 50)
+            pokerView.alpha = 0
+            UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
+            UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 18, options: [], animations: {
+                pokerView.center = self.center
+            }) { _ in
+                self.addGestureRecognizer(tap)
+            }
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = PKColor.clear
     }
     
     required init?(coder: NSCoder) {

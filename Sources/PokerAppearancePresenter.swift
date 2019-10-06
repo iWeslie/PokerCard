@@ -50,15 +50,5 @@ public class PokerAppearancePresenter {
         self.pokerAppearanceView = pokerView
     }
     
-    /// Passing style change actions by closure.
-    ///
-    /// - Parameter light:  The light style click action.
-    /// - Parameter dark:   The dark style click action.
-    /// - Parameter auto:   The auto style click action.
-    public func appearanceSelected(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) {
-        pokerAppearanceView.lightTapped = light
-        pokerAppearanceView.darkTapped = dark
-        pokerAppearanceView.autoTapped = auto
-    }
 }
 

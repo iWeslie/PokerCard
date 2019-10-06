@@ -28,6 +28,14 @@ import UIKit
 
 public class PokerInputView: PokerAlertView {
     
+    public enum Style {
+        case `default`
+        case promotion
+    }
+    
+    var inputText: ((_ text: String) -> Void)!
+    var validation: ((_ text: String) -> Bool)?
+    
     public var inputTextField: UITextField! {
         didSet {
             inputTextField.addTarget(self, action: #selector(removeInputBorder), for: .editingChanged)

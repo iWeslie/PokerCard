@@ -157,4 +157,8 @@ extension PKColor {
     static var pink: UIColor {
         return UIColor.systemPink
     }
+    /// System clear color
+    static var clear: UIColor {
+        return UIColor.clear
+    }
 }

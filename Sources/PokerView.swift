@@ -46,7 +46,6 @@ public class PokerView: UIView {
         
         prepareInterface()
         
-//        cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
         // swipe up to dismiss
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
         swipeUp.direction = .up

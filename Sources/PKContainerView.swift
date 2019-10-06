@@ -32,7 +32,7 @@ class PKContainerView: UIView {
     init() {
         super.init(frame: CGRect.zero)
         
-        backgroundColor = UIColor.clear
+        backgroundColor = PKColor.clear
         translatesAutoresizingMaskIntoConstraints = false
     }
     

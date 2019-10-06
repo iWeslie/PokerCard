@@ -29,8 +29,6 @@ import UIKit
 /// Base Poker Alert View
 public class PokerAlertView: PokerView {
     
-    var presenter: PokerPresenter?
-    
     public var titleLabel: UILabel = PKLabel(fontSize: 22)
     public var detailLabel: UILabel?
     public var confirmButton: UIButton = PKButton(title: "Confirm", fontSize: 20)
@@ -55,6 +53,9 @@ public class PokerAlertView: PokerView {
         setupTitle(with: title)
         setupConfirmAndCancelButton()
         setupDetail(with: detail)
+        
+        // confirm to dismiss by default
+        confirmButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
     }
     
     public override func layoutSubviews() {

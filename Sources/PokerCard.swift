@@ -44,34 +44,39 @@ import Foundation
 ///
 /// - Returns: The created `PokerAlertView` instance.
 @discardableResult
-public func showAlert(title: String, detail: String? = nil) -> PokerPresenter {
-    return PokerPresenter(title: title, detail: detail)
+public func showAlert(title: String, detail: String? = nil) -> PokerAlertView {
+    return PokerAlertPresenter().showAlert(title: title, detail: detail)
 }
 
 /// Present a common `PokerInputView` with popup animation from bottom.
 ///
 /// This is default style of input view, you may call `showPromotion` for more options
 ///
-/// - Parameter title: The input alert title.
+/// - Parameter title:  The input alert title.
 /// - Parameter detail: The input alert detail description, `nil` by default.
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
-public func showInput(title: String, detail: String? = nil, placeholder: String? = nil) -> PokerInputPresenter {
-    return PokerInputPresenter(style: .default, title: title, detail: detail)
+public func showInput(title: String, detail: String? = nil, placeholder: String? = nil) -> PokerInputView {
+    return PokerAlertPresenter().showInput(style: .default,
+                                           title: title,
+                                           detail: detail)
 }
 
 /// Present a promotion `PokerInputView` with popup animation from bottom.
 ///
 /// This is promotion style of input view, you may call `showInput` for less options.
 ///
-/// - Parameter title: The input alert title.
+/// - Parameter title:  The input alert title.
 /// - Parameter detail: The input alert detail description, `nil` by default.
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
-public func showPromotion(title: String, promotion: String, secondaryTitle: String? = nil) -> PokerInputPresenter {
-    return PokerInputPresenter(style: .promotion, title: title, promotion: promotion, detail: secondaryTitle)
+public func showPromotion(title: String, promotion: String, secondaryTitle: String? = nil) -> PokerInputView {
+    return PokerAlertPresenter().showInput(style: .promotion,
+                                           title: title,
+                                           promotion: promotion,
+                                           detail: secondaryTitle)
 }
 
 /// Present a promotion `PokerAppearanceView` with popup animation from bottom.
@@ -81,14 +86,16 @@ public func showPromotion(title: String, promotion: String, secondaryTitle: Stri
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
-public func showAppearanceOptions() -> PokerAppearancePresenter {
-    return PokerAppearancePresenter()
+public func showAppearanceOptions() -> PokerAppearanceView {
+    return PokerAppearancePresenter().pokerAppearanceView
 }
 
-@discardableResult public func showContacts() -> PokerContactPresenter {
-    return PokerContactPresenter()
+@discardableResult
+public func showContacts() -> PokerContactView {
+    return PokerContactPresenter().pokerContactView
 }
 
-@discardableResult public func showLanguagePicker() -> PokerLanguagePresenter {
-    return PokerLanguagePresenter()
+@discardableResult
+public func showLanguagePicker() -> PokerLanguageView {
+    return PokerLanguagePresenter().pokerLanguageView
 }
