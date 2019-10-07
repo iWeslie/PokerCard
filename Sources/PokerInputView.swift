@@ -26,6 +26,7 @@
 
 import UIKit
 
+/// Base Poker Input View with several style
 public class PokerInputView: PokerAlertView {
     
     public enum Style {

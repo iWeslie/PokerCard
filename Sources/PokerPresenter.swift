@@ -1,8 +1,8 @@
 //
-//  PokerContactPresenter.swift
+//  PokerPresenter.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/9/25.
+//  Created by Weslie on 2019/10/7.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,28 +26,21 @@
 
 import UIKit
 
-public class PokerContactPresenter {
-    
-    var pokerContactView: PokerContactView!
-    
-    public init() {
-        guard let keyWindow = currentWindow else { return }
+/// Abstract class of a poker view presenter
+public class PokerPresenter {
+    /// current window for presenting a poker view
+    internal var keyWindow: UIWindow
+    /// poker view container background view
+    internal var backgroundView: PokerPresenterView
+    /// Create a `PokerPresenter` instance.
+    init() {
+        guard let keyWindow = currentWindow else {
+            fatalError("cannot retrive current window")
+        }
         let backgroundView = PokerPresenterView(frame: keyWindow.frame)
         keyWindow.addSubview(backgroundView)
         
-        let pokerView = PokerContactView()
-        backgroundView.addSubview(pokerView)
-        backgroundView.pokerView = pokerView
-        
-        // animations
-        pokerView.center = CGPoint(x: backgroundView.frame.width / 2, y: backgroundView.frame.height + 50)
-        pokerView.alpha = 0
-        UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 18, options: [], animations: {
-            pokerView.center = backgroundView.center
-        }, completion: nil)
-        
-        self.pokerContactView = pokerView
+        self.keyWindow = keyWindow
+        self.backgroundView = backgroundView
     }
-    
 }

@@ -28,6 +28,7 @@ import UIKit
 import MessageUI
 import SafariServices
 
+/// Contact options enum
 public enum PKContactOption {
     case email(_ address: String, _ symbol: UIImage? = nil)
     case message(_ icloud: String, _ symbol: UIImage? = nil)
@@ -36,10 +37,10 @@ public enum PKContactOption {
     case github(_ name: String, _ symbol: UIImage? = nil)
 }
 
+/// Poker View for contact options
 public class PokerContactView: PokerView {
     
     internal var targetController: UIViewController?
-    
     internal var contactOptions: [PKContactOption]? {
         didSet {
             let options = contactOptions

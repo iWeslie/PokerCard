@@ -92,7 +92,8 @@ public class PokerView: UIView {
     }
 }
 
-class PokerSubView: PKContainerView {
+/// Abstract Class for a container subview in Poker Bulletin View
+internal class PokerSubView: PKContainerView {
     override init() {
         super.init()
         prepareInterface()

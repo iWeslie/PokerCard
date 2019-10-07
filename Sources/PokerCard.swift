@@ -28,7 +28,7 @@ import Foundation
 
 /// Present a basic style of `PokerAlertView` with popup animation from bottom.
 ///
-/// The basic style of `PokerAlertView` contains a title label and detail label, you can customize confirmButton
+/// The basic style of `PokerAlertView` contains a title label and detail labelyou can customize confirmButton
 /// color by calling `confirm(title:style:)`.
 ///
 /// **Example:**
@@ -82,20 +82,29 @@ public func showPromotion(title: String, promotion: String, secondaryTitle: Stri
 /// Present a promotion `PokerAppearanceView` with popup animation from bottom.
 ///
 /// This will set `UserDefaults` integer value with key `userInterfaceStyle`.
-/// You can override global interface style in `AppDelegate` didFinishLaunching.
+///
+/// - Important:
+/// Appearance modification is available at iOS 13 and newer.
+///
+/// You should set global style in `AppDelegate`'s didFinishLaunchingWithOptions.
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
 public func showAppearanceOptions() -> PokerAppearanceView {
-    return PokerAppearancePresenter().pokerAppearanceView
+    return PokerSelectionPresenter().showAppearancePicker()
 }
 
+/// Present a promotion `PokerContactView` with popup animation from bottom.
+///
+/// You may add contact options by calling `config(with:on:)` method.
+///
+/// - Returns: The created `PokerInputView` instance.
 @discardableResult
 public func showContacts() -> PokerContactView {
-    return PokerContactPresenter().pokerContactView
+    return PokerSelectionPresenter().showContactPicker()
 }
 
 @discardableResult
 public func showLanguagePicker() -> PokerLanguageView {
-    return PokerLanguagePresenter().pokerLanguageView
+    return PokerSelectionPresenter().showLanguagePicker()
 }

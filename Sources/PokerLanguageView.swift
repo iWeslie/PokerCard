@@ -31,7 +31,7 @@ fileprivate enum LangType {
     case zh
     case auto
 }
- 
+
 fileprivate protocol PKLanguageSelectionDelegate: class {
     func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType)
 }

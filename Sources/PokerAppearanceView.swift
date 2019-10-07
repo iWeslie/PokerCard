@@ -26,14 +26,25 @@
 
 import UIKit
 
+/// Call this method in AppDelegate's `didFinishLaunchingWithOptions` to override global interface style.
+public func overrideUserInterfacrStyle() {
+    if #available(iOS 13.0, *) {
+        let interfaceStyle = UIUserInterfaceStyle(rawValue: UserDefaults.standard.integer(forKey: "userInterfaceStyle")) ?? .unspecified
+        currentWindow?.overrideUserInterfaceStyle = interfaceStyle
+    }
+}
+
+/// Poker Action handler
+public typealias PKAction = () -> Void
+
+/// Poker Appearance symbol image name enums.
 fileprivate enum AppearanceSymbol: String {
     case light = "sun.max"
     case dark = "moon.fill"
     case auto = "circle.righthalf.fill"
 }
 
-public typealias PKAction = () -> Void
-
+/// Poker View for appearance selection
 public class PokerAppearanceView: PokerView {
     
     internal var lightAppearanceView = PokerSubView()
@@ -73,7 +84,6 @@ public class PokerAppearanceView: PokerView {
     }
     
     private func setupAppearanceSelectionView() {
-        
         let titleLabel = PKLabel(fontSize: 20)
         titleLabel.text = "Appearance"
         addSubview(titleLabel)
@@ -107,7 +117,8 @@ public class PokerAppearanceView: PokerView {
         
     }
     
-    @objc func appearanceSelected(_ gesture: UITapGestureRecognizer) {
+    @objc
+    private func appearanceSelected(_ gesture: UITapGestureRecognizer) {
         guard let targetView = gesture.view else { return }
         if targetView === lightAppearanceView {
             print("light selected")

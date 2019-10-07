@@ -26,11 +26,14 @@
 
 import UIKit
 
-class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
+/// A background container view for presented PokerView.
+internal class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
     
     var pokerView: PokerView? {
         didSet {
             guard let pokerView = pokerView else { return }
+            
+            addSubview(pokerView)
             
             // tap background to dismiss
             let tap = UITapGestureRecognizer(target: pokerView, action: #selector(pokerView.dismiss))

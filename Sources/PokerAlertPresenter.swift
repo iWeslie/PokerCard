@@ -24,25 +24,8 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-
 /// Presenter for Poker View with alert style.
-public class PokerAlertPresenter {
-    
-    internal var keyWindow: UIWindow
-    internal var backgroundView: PokerPresenterView
-    
-    /// Create a `PokerAlertPresenter` instance.
-    init() {
-        guard let keyWindow = currentWindow else {
-            fatalError("cannot retrive current window")
-        }
-        let backgroundView = PokerPresenterView(frame: keyWindow.frame)
-        keyWindow.addSubview(backgroundView)
-        
-        self.keyWindow = keyWindow
-        self.backgroundView = backgroundView
-    }
+public class PokerAlertPresenter: PokerPresenter {
     
     /// Create a `PokerAlertView` with title and detail decription.
     ///
@@ -51,11 +34,8 @@ public class PokerAlertPresenter {
     ///
     /// - Returns: The created `PokerAlertView` instance.
     public func showAlert(title: String, detail: String?) -> PokerAlertView {
-        
         let pokerView = PokerAlertView(title: title, detail: detail)
-        backgroundView.addSubview(pokerView)
         backgroundView.pokerView = pokerView
-        
         return pokerView
     }
     
@@ -74,16 +54,14 @@ public class PokerAlertPresenter {
         detail: String?)
         -> PokerInputView
     {
-        
         var pokerView = PokerInputView()
         if style == .default {
             pokerView = PokerInputView(title: title, detail: detail, style: .warn)
         } else if style == .promotion {
             pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
         }
-        backgroundView.addSubview(pokerView)
         backgroundView.pokerView = pokerView
-        
         return pokerView
     }
+    
 }

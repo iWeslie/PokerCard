@@ -1,8 +1,8 @@
 //
-//  PokerLanguagePresenter.swift
+//  PokerSelectionPresenter.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/9/27.
+//  Created by Weslie on 2019/10/7.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,31 +24,28 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-
-public class PokerLanguagePresenter {
+/// Presenter for Poker View with selection style.
+class PokerSelectionPresenter: PokerPresenter {
     
-    var pokerLanguageView: PokerLanguageView!
-    
-    public init() {
-        guard let keyWindow = currentWindow else { return }
-        let backgroundView = PokerPresenterView(frame: keyWindow.frame)
-        keyWindow.addSubview(backgroundView)
-        
-        let pokerView = PokerLanguageView()
-        backgroundView.addSubview(pokerView)
+    /// Create a `PokerAppearanceView` for appearance selection.
+    public func showAppearancePicker() -> PokerAppearanceView {
+        let pokerView = PokerAppearanceView()
         backgroundView.pokerView = pokerView
-        
-        // animations
-        pokerView.center = CGPoint(x: backgroundView.frame.width / 2, y: backgroundView.frame.height + 50)
-        pokerView.alpha = 0
-        UIView.animate(withDuration: 0.25) { pokerView.alpha = 1 }
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 18, options: [], animations: {
-            pokerView.center = backgroundView.center
-        }, completion: nil)
-        
-        self.pokerLanguageView = pokerView
+        return pokerView
+    }
+    
+    /// Create a `PokerContactView` for contacts selection.
+    public func showContactPicker() -> PokerContactView {
+        let pokerView = PokerContactView()
+        backgroundView.pokerView = pokerView
+        return pokerView
+    }
+    
+    /// Create a `PokerLanguageView` for language selection.
+    public func showLanguagePicker() -> PokerLanguageView {
+        let pokerView = PokerLanguageView()
+        backgroundView.pokerView = pokerView
+        return pokerView
     }
     
 }
-

@@ -61,13 +61,6 @@ class ViewController: UIViewController {
     // MARK:- Show Appearance
     @IBAction func showAppearance(_ sender: Any) {
         PokerCard.showAppearanceOptions()
-            .appearanceSelected(light: {
-                print("light")
-            }, dark: {
-                print("dark")
-            }) {
-                print("auto")
-            }
     }
     
     // MARK:- Show Contacts
