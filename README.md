@@ -1,7 +1,7 @@
 A new generation of Alert View with fluid design
 
 # Preview
-![poker-alert-preview](http://photos.iweslie.com/github/pokercard/poker-alert-preview.png)
+![poker-alert-preview](https://photos.iweslie.com/github/pokercard/poker-alert-preview.png)
 
 ### Basic Usage
 
@@ -22,45 +22,94 @@ class ViewController: UIViewController {
 
 ## PokerAlertView
 
-![poker-alert](http://photos.iweslie.com/github/pokercard/poker-alert.png)
+![poker-alert](https://photos.iweslie.com/github/pokercard/poker-alert.png)
 
 ```swift
 PokerCard.showAlert(title: "Please notice", detail: "Here is some descripttion ...")
 ```
 
-![poker-laert-detail](http://photos.iweslie.com/github/pokercard/poker-laert-detail.png)
+![poker-laert-detail](https://photos.iweslie.com/github/pokercard/poker-laert-detail.png)
+
+Or if you want some customization on the `Confirm` button.
+```swift
+let detailInfo = "You may configure the alert it as following"
+PokerCard.showAlert(title: "The Alert Title", detail: detailInfo)
+    .confirm(title: "Done", style: .default, fill: false) {
+        // do something
+    }
+```
 
 ## PokerInputView
 
 ### Default
 
-![poker-input](http://photos.iweslie.com/github/pokercard/poker-input.png)
+![poker-input](https://photos.iweslie.com/github/pokercard/poker-input.png)
 
 ```swift
-PokerCard.showInput(title: "Please input your name").submit { inputText in 
-    print(inputText)
-}
+PokerCard.showInput(title: "Please input your name")
+    .confirm(title: "Done", style: .color(.systemPink)) { inputText in 
+        print("Hey, \(inputText)!")
+    }
 ```
 
 ### Promotion
 
-![pker-promotion](http://photos.iweslie.com/github/pokercard/poker-promotion.png)
+![pker-promotion](https://photos.iweslie.com/github/pokercard/poker-promotion.png)
 
 ```swift
-PokerCard.showPromotion(title: "Notice", promotion: "Detail description").submit { inputText in 
-    print(inputText)
-}
+let warningInfo = "Some long paragraph of text"
+PokerCard.showPromotion(title: "Notice", promotion: warningInfo)
+    // modify the promotion preference 
+    .appearance(promotionStyle: .color(.systemPink))
+    // validate the input string
+    .validate { $0.count == 11 }
+    // confirm handler 
+    .confirm { inputText in 
+        print(inputText)
+    }
 ```
 
 ## PokerAppearanceView
 
-![poker-appearance](http://photos.iweslie.com/github/pokercard/poker-appearance.png)
+![poker-appearance](https://photos.iweslie.com/github/pokercard/poker-appearance.png)
 
-## PokerLanguageView
-
-![poker-lang](http://photos.iweslie.com/github/pokercard/poker-lang.png)
+```swift
+PokerCard.showAppearanceOptions()
+    .config(light: {
+        print("light selected")
+    }, dark: {
+        print("dark selected")
+    }) {
+        print("auto selected")
+    }
+```
 
 ## PokerContactView
 
-![poker-contact](http://photos.iweslie.com/github/pokercard/poker-contact.png)
+![poker-contact](https://photos.iweslie.com/github/pokercard/poker-contact.png)
 
+```swift
+PokerCard.showContacts()
+    .config(with: [
+        .email("mail"),
+        .message("your icloud email"),
+        .wechat("your wechat id", wechatLogoImage),
+        .weibo(weiboURL, weiboImage),
+        .github("github address", githubImage)
+    ], on: self)
+```
+
+## PokerLanguageView
+
+![poker-lang](https://photos.iweslie.com/github/pokercard/poker-lang.png)
+
+```swift
+PokerCard.showLanguagePicker()
+    .config(en: {
+        print("en selected")
+    }, zh: {
+        print("zh selected")
+    }) {
+        print("auto selected")
+    }
+```

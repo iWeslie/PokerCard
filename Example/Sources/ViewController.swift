@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         let detail = "Optianal detail, leave it or not🤪You may see your name in the consle when clicking confirm"
         
         PokerCard.showInput(title: "Please input your name", detail: detail, placeholder: "Nick name")
-        .confirm(title: "Done", style: .warn) { name in
+            .confirm(title: "Done", style: .warn) { name in
             print("Hey, \(name)!")
         }
     }
@@ -79,11 +79,12 @@ class ViewController: UIViewController {
         let githubImage = #imageLiteral(resourceName: "github")
         
         PokerCard.showContacts()
-            .config(with: [.email("mail"),
-                           .message("message"),
-                           .wechat("id", wechatImage),
-                           .weibo(weiboURL, weiboImage),
-                           .github("github", githubImage)
+            .config(with: [
+                .email("mail"),
+                .message("message"),
+                .wechat("id", wechatImage),
+                .weibo(weiboURL, weiboImage),
+                .github("github", githubImage)
             ], on: self)
     }
     
