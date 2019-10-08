@@ -32,6 +32,7 @@
 		D3924FEF234A29B70009420E /* PKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FEE234A29B70009420E /* PKAlertAction.swift */; };
 		D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF0234A2CF00009420E /* PKSelectionAction.swift */; };
 		D3924FF3234A35B90009420E /* PokerAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */; };
+		D3C87EB6234C344E004E65FE /* Misc+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */; };
 		D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE5EBC23336CBC001D901E /* PokerStyle.swift */; };
 		D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8B882233AFCE800D008D2 /* PokerContactView.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		D3924FEE234A29B70009420E /* PKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKAlertAction.swift; sourceTree = "<group>"; };
 		D3924FF0234A2CF00009420E /* PKSelectionAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKSelectionAction.swift; sourceTree = "<group>"; };
 		D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertPresenter.swift; sourceTree = "<group>"; };
+		D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+Compatibility.swift"; sourceTree = "<group>"; };
 		D3DE5EBC23336CBC001D901E /* PokerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerStyle.swift; sourceTree = "<group>"; };
 		D3F8B882233AFCE800D008D2 /* PokerContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerContactView.swift; sourceTree = "<group>"; };
 		D3FC49302333E20900D4DBFB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				D38001D02328FCF400980988 /* UIView+KeyWindow.swift */,
+				D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
 				D3330DB3234B6A3100569207 /* PokerSelectionPresenter.swift in Sources */,
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
+				D3C87EB6234C344E004E65FE /* Misc+Compatibility.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
 				D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */,
 				D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */,

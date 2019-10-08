@@ -26,13 +26,16 @@
 
 import UIKit
 
+/// Poker Action handler
+public typealias PKAction = () -> Void
+
 extension PokerAppearanceView {
     /// Passing style change actions by closure.
     ///
     /// - Parameter light:  The light style click action.
     /// - Parameter dark:   The dark style click action.
     /// - Parameter auto:   The auto style click action.
-    public func appearanceSelected(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) {
+    public func config(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) {
         lightTapped = light
         darkTapped = dark
         autoTapped = auto
@@ -47,5 +50,18 @@ extension PokerContactView {
     public func config(with options: [PKContactOption], on target: UIViewController) {
         contactOptions = options
         targetController = target
+    }
+}
+
+extension PokerLanguageView {
+    /// Passing language change actions by closure.
+    ///
+    /// - Parameter en: 	English selected.
+    /// - Parameter zh:     Simplified Chinses selected.
+    /// - Parameter auto:   Auto type language selected.
+    public func config(en: @escaping PKAction, zh: @escaping PKAction, auto: @escaping PKAction) {
+        enTapped = en
+        zhTapped = zh
+        autoTapped = auto
     }
 }

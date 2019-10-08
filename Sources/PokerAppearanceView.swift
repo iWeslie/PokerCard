@@ -34,9 +34,6 @@ public func overrideUserInterfacrStyle() {
     }
 }
 
-/// Poker Action handler
-public typealias PKAction = () -> Void
-
 /// Poker Appearance symbol image name enums.
 fileprivate enum AppearanceSymbol: String {
     case light = "sun.max"
@@ -51,24 +48,9 @@ public class PokerAppearanceView: PokerView {
     internal var darkAppearanceView = PokerSubView()
     internal var autoAppearanceView = PokerSubView()
     
-    internal var lightTapped: PKAction = {
-        if #available(iOS 13.0, *) {
-            UserDefaults.standard.set(UIUserInterfaceStyle.light.rawValue, forKey: "userInterfaceStyle")
-            currentWindow?.overrideUserInterfaceStyle = .light
-        }
-    }
-    internal var darkTapped: PKAction = {
-        if #available(iOS 13.0, *) {
-            UserDefaults.standard.set(UIUserInterfaceStyle.dark.rawValue, forKey: "userInterfaceStyle")
-            currentWindow?.overrideUserInterfaceStyle = .dark
-        }
-    }
-    internal var autoTapped: PKAction = {
-        if #available(iOS 13.0, *) {
-            UserDefaults.standard.set(UIUserInterfaceStyle.unspecified.rawValue, forKey: "userInterfaceStyle")
-            currentWindow?.overrideUserInterfaceStyle = .unspecified
-        }
-    }
+    internal var lightTapped: PKAction?
+    internal var darkTapped: PKAction?
+    internal var autoTapped: PKAction?
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -120,23 +102,24 @@ public class PokerAppearanceView: PokerView {
     @objc
     private func appearanceSelected(_ gesture: UITapGestureRecognizer) {
         guard let targetView = gesture.view else { return }
+        triggerSelectionChangedHapticFeedback()
         if targetView === lightAppearanceView {
-            print("light selected")
-            lightTapped()
-            if #available(iOS 10.0, *) {
-                UISelectionFeedbackGenerator().selectionChanged()
+            lightTapped?()
+            if #available(iOS 13.0, *) {
+                UserDefaults.standard.set(UIUserInterfaceStyle.light.rawValue, forKey: "userInterfaceStyle")
+                currentWindow?.overrideUserInterfaceStyle = .light
             }
         } else if targetView === darkAppearanceView {
-            print("dark selected")
-            darkTapped()
-            if #available(iOS 10.0, *) {
-                UISelectionFeedbackGenerator().selectionChanged()
+            darkTapped?()
+            if #available(iOS 13.0, *) {
+                UserDefaults.standard.set(UIUserInterfaceStyle.dark.rawValue, forKey: "userInterfaceStyle")
+                currentWindow?.overrideUserInterfaceStyle = .dark
             }
         } else if targetView === autoAppearanceView {
-            print("auto selected")
-            autoTapped()
-            if #available(iOS 10.0, *) {
-                UISelectionFeedbackGenerator().selectionChanged()
+            autoTapped?()
+            if #available(iOS 13.0, *) {
+                UserDefaults.standard.set(UIUserInterfaceStyle.unspecified.rawValue, forKey: "userInterfaceStyle")
+                currentWindow?.overrideUserInterfaceStyle = .unspecified
             }
         }
     }

@@ -61,6 +61,13 @@ class ViewController: UIViewController {
     // MARK:- Show Appearance
     @IBAction func showAppearance(_ sender: Any) {
         PokerCard.showAppearanceOptions()
+            .config(light: {
+                print("light selected")
+            }, dark: {
+                print("dark selected")
+            }) {
+                print("auto selected")
+            }
     }
     
     // MARK:- Show Contacts
@@ -83,6 +90,13 @@ class ViewController: UIViewController {
     // MARK:- Show Language Picker
     @IBAction func showLanguagePicker(_ sender: Any) {
         PokerCard.showLanguagePicker()
+            .config(en: {
+                print("en selected")
+            }, zh: {
+                print("zh selected")
+            }) {
+                print("auto selected")
+            }
     }
     
     func validatePassword(_ password: String) -> Bool {

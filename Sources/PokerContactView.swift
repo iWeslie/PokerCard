@@ -187,11 +187,7 @@ public class PokerContactView: PokerView {
     @objc
     private func jumpToWeChat() {
         let url = URL(string: "weixin://")!
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(url)
-        }
+        open(url)
     }
     
     @objc
@@ -199,17 +195,9 @@ public class PokerContactView: PokerView {
         let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
         let weiboIURL = URL(string: "weibointernational://userinfo?uid=6425782290")!
         if UIApplication.shared.canOpenURL(weiboURL) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(weiboURL, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(weiboURL)
-            }
+            open(weiboURL)
         } else if UIApplication.shared.canOpenURL(weiboIURL) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(weiboIURL, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(weiboIURL)
-            }
+            open(weiboIURL)
         } else {
             debugPrint("Weibo not installed.")
         }

@@ -25,18 +25,20 @@
 //
 
 import UIKit
- 
-fileprivate enum LangType {
-    case en
-    case zh
+
+let appleLanguageKey = "AppleLanguages"
+
+internal enum LangType: String {
+    case en = "en"
+    case zh = "zh-Hans"
     case auto
 }
 
-fileprivate protocol PKLanguageSelectionDelegate: class {
+internal protocol PKLanguageSelectionDelegate: class {
     func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType)
 }
 
-fileprivate class PokerLanguageOptionView: PokerSubView {
+internal class PokerLanguageOptionView: PokerSubView {
     
     var languageType: LangType = .auto
     
@@ -110,9 +112,15 @@ fileprivate class PokerLanguageOptionView: PokerSubView {
 
 public class PokerLanguageView: PokerView {
     
-    fileprivate var enLangView = PokerLanguageOptionView(type: .en)
-    fileprivate var zhLangView = PokerLanguageOptionView(type: .zh)
-    fileprivate var autoLangView = PokerLanguageOptionView(type: .auto)
+    static var isAutoLanguageType = true
+    
+    var enTapped: PKAction?
+    var zhTapped: PKAction?
+    var autoTapped: PKAction?
+    
+    internal var enLangView = PokerLanguageOptionView(type: .en)
+    internal var zhLangView = PokerLanguageOptionView(type: .zh)
+    internal var autoLangView = PokerLanguageOptionView(type: .auto)
     
     init() {
         super.init(frame: CGRect.zero)
@@ -126,11 +134,25 @@ public class PokerLanguageView: PokerView {
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
+        var langType: LangType = .auto
+        if let langArray = UserDefaults.standard.array(forKey: appleLanguageKey) as? [String],
+            !PokerLanguageView.isAutoLanguageType,
+            langArray.count == 1,
+            let type = LangType(rawValue: langArray.first!)
+        {
+            langType = type
+        }
+        
         [enLangView, zhLangView, autoLangView].forEach { langView in
             addSubview(langView)
             langView.delegate = self
             langView.heightAnchor.constraint(equalToConstant: 52).isActive = true
             langView.constraint(withLeadingTrailing: 20)
+            
+            langView.checkmarkImageView.isHidden = true
+            if langView.languageType == langType {
+                langView.checkmarkImageView.isHidden = false
+            }
         }
         
         enLangView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
@@ -146,14 +168,29 @@ public class PokerLanguageView: PokerView {
 }
 
 extension PokerLanguageView: PKLanguageSelectionDelegate {
-    fileprivate func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType) {
-        switch language {
-        case .en:
-            print("en")
-        case .zh:
-            print("zh")
-        case .auto:
-            print("auto")
+    internal func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType) {
+        
+        triggerSelectionChangedHapticFeedback()
+        
+        [enLangView, zhLangView, autoLangView].forEach { langView in
+            langView.checkmarkImageView.isHidden = true
         }
+        languageOptionView.checkmarkImageView.isHidden = false
+        
+        switch language {
+        case .en: enTapped?()
+        case .zh: zhTapped?()
+        case .auto: autoTapped?()
+        }
+        
+        if language == .auto {
+            UserDefaults.standard.set(nil, forKey: appleLanguageKey)
+            PokerLanguageView.isAutoLanguageType = true
+        } else {
+            UserDefaults.standard.set([language.rawValue], forKey: appleLanguageKey)
+            PokerLanguageView.isAutoLanguageType = false
+        }
+        UserDefaults.standard.synchronize()
+        print("done")
     }
 }

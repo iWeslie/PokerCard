@@ -104,6 +104,11 @@ public func showContacts() -> PokerContactView {
     return PokerSelectionPresenter().showContactPicker()
 }
 
+/// Present a promotion `PokerLanguageView` with popup animation from bottom.
+///
+/// You may add other config options by calling `config` method.
+///
+/// - Returns: The created `PokerLanguageView` instance.
 @discardableResult
 public func showLanguagePicker() -> PokerLanguageView {
     return PokerSelectionPresenter().showLanguagePicker()
