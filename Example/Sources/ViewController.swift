@@ -67,7 +67,10 @@ class ViewController: UIViewController {
                 print("dark selected")
             }) {
                 print("auto selected")
-            }
+        }
+        .addOption(with: "aaa") { (trigger) in
+            print(trigger)
+        }
     }
     
     // MARK:- Show Contacts

@@ -29,16 +29,26 @@ import UIKit
 /// Poker Action handler
 public typealias PKAction = () -> Void
 
+public typealias PKTrigger = (Bool) -> Void
+
 extension PokerAppearanceView {
     /// Passing style change actions by closure.
     ///
     /// - Parameter light:  The light style click action.
     /// - Parameter dark:   The dark style click action.
     /// - Parameter auto:   The auto style click action.
-    public func config(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) {
+    @discardableResult
+    public func config(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) -> PokerAppearanceView {
         lightTapped = light
         darkTapped = dark
         autoTapped = auto
+        
+        return self
+    }
+    
+    public func addOption(with title: String, trigger: @escaping PKTrigger) {
+        optionTitle = title
+        optionTrigger = trigger
     }
 }
 

@@ -52,6 +52,47 @@ public class PokerAppearanceView: PokerView {
     internal var darkTapped: PKAction?
     internal var autoTapped: PKAction?
     
+    var optionTitle: String? {
+        didSet {
+            let optionView = PKContainerView()
+            frame.size.height += 40
+            addSubview(optionView)
+            optionView.constraint(withLeadingTrailing: 0)
+            optionView.heightAnchor.constraint(equalToConstant: 26).isActive = true
+            optionView.topAnchor.constraint(equalTo: darkAppearanceView.bottomAnchor, constant: 20).isActive = true
+            
+            let titleLabel = PKLabel(fontSize: 19)
+            titleLabel.text = optionTitle
+            optionView.addSubview(titleLabel)
+            titleLabel.centerYAnchor.constraint(equalTo: optionView.centerYAnchor).isActive = true
+            titleLabel.leadingAnchor.constraint(equalTo: optionView.leadingAnchor, constant: 16).isActive = true
+            
+            let triggerButton = UIButton()
+            triggerButton.translatesAutoresizingMaskIntoConstraints = false
+            optionView.addSubview(triggerButton)
+            triggerButton.constraint(withTopBottom: 0)
+            triggerButton.trailingAnchor.constraint(equalTo: optionView.trailingAnchor, constant: -16).isActive = true
+            triggerButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            triggerButton.backgroundColor = UIColor.systemBlue
+            
+            triggerButton.addTarget(self, action: #selector(triggered(_:)), for: .touchUpInside)
+            
+        }
+    }
+    var optionTrigger: PKTrigger?
+    
+    @objc func triggered(_ sender: UIButton) {
+        optionTrigger?(sender.isSelected)
+        
+        sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected {
+            sender.backgroundColor = UIColor.systemPink
+        } else {
+            sender.backgroundColor = UIColor.systemBlue
+        }
+    }
+    
     public init() {
         super.init(frame: CGRect.zero)
         
