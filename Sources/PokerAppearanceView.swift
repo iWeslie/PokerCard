@@ -41,6 +41,77 @@ fileprivate enum AppearanceSymbol: String {
     case auto = "circle.righthalf.fill"
 }
 
+class PokerAppearanceOptionView: PKContainerView {
+    
+    var titleLabel = PKLabel(fontSize: 19)
+    
+    var circleImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(pointSize: 25, name: "circle"))
+        imageView.tintColor = PKColor.label
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    lazy var checkmarkButton: UIButton = {
+        let button = UIButton()
+        button.adjustsImageWhenHighlighted = false
+        button.tintColor = PKColor.label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(button)
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
+            let image = UIImage(systemName: "checkmark", withConfiguration: configuration)
+            button.setImage(image, for: .normal)
+        }
+        return button
+    }()
+
+    var optionTrigger: PKTrigger?
+    
+    init(title: String?, isChecked: Bool) {
+        super.init()
+        titleLabel.text = title
+        setupConstraints()
+        
+        checkmarkButton.addTarget(self, action: #selector(triggered(_:)), for: .touchUpInside)
+        checkmarkButton.imageView?.tintColor = isChecked ? PKColor.label : PKColor.clear
+    }
+    
+    private func setupConstraints() {
+        addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        titleLabel.constraint(withTopBottom: 2)
+        
+        insertSubview(circleImage, belowSubview: checkmarkButton)
+        circleImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        circleImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        checkmarkButton.centerXAnchor.constraint(equalTo: circleImage.centerXAnchor).isActive = true
+        checkmarkButton.centerYAnchor.constraint(equalTo: circleImage.centerYAnchor, constant: 1).isActive = true
+    }
+    
+    @objc func triggered(_ sender: UIButton) {
+        optionTrigger?(sender.isChecked)
+        sender.isChecked = !sender.isChecked
+        
+        triggerSelectionChangedHapticFeedback()
+        if sender.isChecked {
+            UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                sender.imageView?.tintColor = PKColor.clear
+                sender.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 5))
+            }, completion: nil)
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction, .curveEaseIn], animations: {
+                sender.imageView?.tintColor = PKColor.label
+                sender.transform = CGAffineTransform(rotationAngle: 0)
+            }, completion: nil)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 /// Poker View for appearance selection
 public class PokerAppearanceView: PokerView {
     
@@ -52,44 +123,21 @@ public class PokerAppearanceView: PokerView {
     internal var darkTapped: PKAction?
     internal var autoTapped: PKAction?
     
+    internal var optionView: PokerAppearanceOptionView?
+    
+    var optionTrigger: PKTrigger?
+    var isChecked = false
     var optionTitle: String? {
         didSet {
-            let optionView = PKContainerView()
+            let optionView = PokerAppearanceOptionView(title: optionTitle, isChecked: isChecked)
+            optionView.optionTrigger = optionTrigger
+            
             frame.size.height += 40
             addSubview(optionView)
-            optionView.constraint(withLeadingTrailing: 0)
-            optionView.heightAnchor.constraint(equalToConstant: 26).isActive = true
+            optionView.constraint(withLeadingTrailing: 16)
             optionView.topAnchor.constraint(equalTo: darkAppearanceView.bottomAnchor, constant: 20).isActive = true
             
-            let titleLabel = PKLabel(fontSize: 19)
-            titleLabel.text = optionTitle
-            optionView.addSubview(titleLabel)
-            titleLabel.centerYAnchor.constraint(equalTo: optionView.centerYAnchor).isActive = true
-            titleLabel.leadingAnchor.constraint(equalTo: optionView.leadingAnchor, constant: 16).isActive = true
-            
-            let triggerButton = UIButton()
-            triggerButton.translatesAutoresizingMaskIntoConstraints = false
-            optionView.addSubview(triggerButton)
-            triggerButton.constraint(withTopBottom: 0)
-            triggerButton.trailingAnchor.constraint(equalTo: optionView.trailingAnchor, constant: -16).isActive = true
-            triggerButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            triggerButton.backgroundColor = UIColor.systemBlue
-            
-            triggerButton.addTarget(self, action: #selector(triggered(_:)), for: .touchUpInside)
-            
-        }
-    }
-    var optionTrigger: PKTrigger?
-    
-    @objc func triggered(_ sender: UIButton) {
-        optionTrigger?(sender.isSelected)
-        
-        sender.isSelected = !sender.isSelected
-        
-        if sender.isSelected {
-            sender.backgroundColor = UIColor.systemPink
-        } else {
-            sender.backgroundColor = UIColor.systemBlue
+            self.optionView = optionView
         }
     }
     

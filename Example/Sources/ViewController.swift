@@ -68,7 +68,7 @@ class ViewController: UIViewController {
             }) {
                 print("auto selected")
         }
-        .addOption(with: "aaa") { (trigger) in
+        .addOption(title: "Show Theme", isChecked: true) { trigger in
             print(trigger)
         }
     }

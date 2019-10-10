@@ -64,4 +64,10 @@ extension UIView {
         self.constraint(equalWidthHeight: toView)
         self.centerXAnchor.constraint(equalTo: toView.centerXAnchor).isActive = true
     }
+    
+    /// Set equal width and height with center vertical
+    internal func constraint(alignCenter toView: UIView) {
+        self.centerXAnchor.constraint(equalTo: toView.centerXAnchor).isActive = true
+        self.centerYAnchor.constraint(equalTo: toView.centerYAnchor).isActive = true
+    }
 }

@@ -84,6 +84,7 @@ public class PokerInputView: PokerAlertView {
     
     fileprivate func setupInputView() {
         inputContainerViewHeight = 36
+        inputContainerView.layer.cornerRadius = 8
         insertSubview(inputContainerView, at: 0)
         
         inputContainerView.translatesAutoresizingMaskIntoConstraints = false

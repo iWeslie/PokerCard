@@ -38,15 +38,29 @@ extension UIButton {
     /// define associated keys
     private struct AssociateKeys {
         static var eventClosure: AssociatedClass?
+        static var buttonCheckStatus = "com.weslie.PokerCard.buttonCheck"
     }
     
     /// define click event closure
     private var eventClosureObj: AssociatedClass {
         set(closure) {
-            objc_setAssociatedObject(self, &AssociateKeys.eventClosure, closure, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociateKeys.eventClosure, closure, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
             return objc_getAssociatedObject(self, &AssociateKeys.eventClosure) as! AssociatedClass
+        }
+    }
+    
+    internal var isChecked: Bool {
+        set(value) {
+            objc_setAssociatedObject(self, &AssociateKeys.buttonCheckStatus, value, .OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            if let value = objc_getAssociatedObject(self, &AssociateKeys.buttonCheckStatus) as? Bool {
+                return value
+            } else {
+                return false
+            }
         }
     }
     

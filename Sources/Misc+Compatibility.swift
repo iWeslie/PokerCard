@@ -51,3 +51,14 @@ func open(_ url: URL) {
         UIApplication.shared.openURL(url)
     }
 }
+
+extension UIImage {
+    convenience init?(pointSize: CGFloat, name: String) {
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .light)
+            self.init(systemName: name, withConfiguration: configuration)
+        } else {
+            self.init()
+        }
+    }
+}

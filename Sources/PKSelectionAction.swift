@@ -28,7 +28,7 @@ import UIKit
 
 /// Poker Action handler
 public typealias PKAction = () -> Void
-
+/// Poker Binary Option trigger handler
 public typealias PKTrigger = (Bool) -> Void
 
 extension PokerAppearanceView {
@@ -37,6 +37,8 @@ extension PokerAppearanceView {
     /// - Parameter light:  The light style click action.
     /// - Parameter dark:   The dark style click action.
     /// - Parameter auto:   The auto style click action.
+    ///
+    /// - Returns: The `PokerAppearanceView` instance.
     @discardableResult
     public func config(light: @escaping PKAction, dark: @escaping PKAction, auto: @escaping PKAction) -> PokerAppearanceView {
         lightTapped = light
@@ -46,9 +48,21 @@ extension PokerAppearanceView {
         return self
     }
     
-    public func addOption(with title: String, trigger: @escaping PKTrigger) {
-        optionTitle = title
+    /// Add theme options for `PokerAppearanceView`
+    ///
+    /// - Parameter title:      The Option title.
+    /// - Parameter isChecked:  The option default check status.
+    /// - Parameter trigger:    The trigger for option with a handler.
+    ///
+    /// - Returns: The `PokerAppearanceView` instance.
+    @discardableResult
+    public func addOption(title: String, isChecked: Bool, trigger: @escaping PKTrigger) -> PokerAppearanceView {
+        #warning("should support multiple action")
+        self.isChecked = isChecked
         optionTrigger = trigger
+        optionTitle = title
+        
+        return self
     }
 }
 
