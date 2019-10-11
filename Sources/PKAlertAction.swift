@@ -24,6 +24,8 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
+
 extension PokerAlertView {
     /// Modify confirm button title and background style.
     ///
