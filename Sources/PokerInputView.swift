@@ -66,6 +66,8 @@ public class PokerInputView: PokerAlertView {
                      style: PokerStyle? = .primary) {
         self.init(title: title, detail: detail)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
         setupInputView()
     }
     

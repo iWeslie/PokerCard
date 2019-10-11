@@ -52,8 +52,9 @@ public func showAlert(title: String, detail: String? = nil) -> PokerAlertView {
 ///
 /// This is default style of input view, you may call `showPromotion` for more options
 ///
-/// - Parameter title:  The input alert title.
-/// - Parameter detail: The input alert detail description, `nil` by default.
+/// - Parameter title:          The input alert title.
+/// - Parameter detail:         The input alert detail description, `nil` by default.
+/// - Parameter placeholder:    The input placeholder, `nil` by default.
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
@@ -67,8 +68,10 @@ public func showInput(title: String, detail: String? = nil, placeholder: String?
 ///
 /// This is promotion style of input view, you may call `showInput` for less options.
 ///
-/// - Parameter title:  The input alert title.
-/// - Parameter detail: The input alert detail description, `nil` by default.
+/// - Parameter title:          The input alert title.
+/// - Parameter detail:         The input alert detail description, `nil` by default.
+/// - Parameter promotion:      The promotion text.
+/// - Parameter secondaryTitle: The secondary title between promotion and input.
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult

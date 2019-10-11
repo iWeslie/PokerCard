@@ -45,6 +45,7 @@ public class PokerAlertPresenter: PokerPresenter {
     /// - Parameter detail:         The alert detail description, `nil` by default.
     /// - Parameter style:          The input style, `default` or `promotion`.
     /// - Parameter placeholder:    The input placeholder.
+    /// - Parameter promotion:      The input promotion.
     ///
     /// - Returns: The created `PokerInputView` instance.
     public func showInput(

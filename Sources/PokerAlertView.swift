@@ -29,10 +29,13 @@ import UIKit
 /// Base Poker Alert View
 public class PokerAlertView: PokerView {
     
+    /// Title label for an alertView
     public var titleLabel: UILabel = PKLabel(fontSize: 22)
+    /// Detail label for an alertView
     public var detailLabel: UILabel?
+    /// Confirm button for an alertView
     public var confirmButton: UIButton = PKButton(title: "Confirm", fontSize: 20)
-    internal var cancelButton: UIButton = PKButton(title: "CANCEL", fontSize: 14)
+    internal var cancelButton = PKButton(title: "CANCEL", fontSize: 14)
     
     internal var titleHorizontalInset: CGFloat = 24
     internal var titleVerticalInset: CGFloat = 18
