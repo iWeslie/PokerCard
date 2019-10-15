@@ -34,8 +34,8 @@ public class PokerAlertView: PokerView {
     /// Detail label for an alertView
     public var detailLabel: UILabel?
     /// Confirm button for an alertView
-    public var confirmButton: UIButton = PKButton(title: "Confirm", fontSize: 20)
-    internal var cancelButton = PKButton(title: "CANCEL", fontSize: 14)
+    public var confirmButton: UIButton = PKButton(title: "", fontSize: 20)
+    internal var cancelButton = PKButton(title: "", fontSize: 14)
     
     internal var titleHorizontalInset: CGFloat = 24
     internal var titleVerticalInset: CGFloat = 18
@@ -54,7 +54,7 @@ public class PokerAlertView: PokerView {
         frame.size.height = 134
         
         setupTitle(with: title)
-        setupConfirmAndCancelButton()
+        setupConfirmButton()
         setupDetail(with: detail)
         
         // confirm to dismiss by default
@@ -107,7 +107,7 @@ public class PokerAlertView: PokerView {
         titleBConfirmTCons.isActive = false
     }
     
-    private func setupConfirmAndCancelButton() {
+    private func setupConfirmButton() {
         confirmButton.backgroundColor = PKColor.blue
         addSubview(confirmButton)
         titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
@@ -116,7 +116,14 @@ public class PokerAlertView: PokerView {
         
         confirmButton.constraint(withLeadingTrailing: buttonHorizontalInset)
         confirmButton.heightAnchor.constraint(equalToConstant: 38).isActive = true
-        
+    }
+    
+    func setupCancelButton(with title: String?) {
+        guard let cancelTitle = title, !cancelTitle.isEmpty else {
+            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+            return
+        }
+        cancelButton.setTitle(cancelTitle, for: .normal)
         cancelButton.setTitleColor(PKColor.cancel, for: .normal)
         addSubview(cancelButton)
         cancelButton.topAnchor.constraint(equalTo: confirmButton.bottomAnchor).isActive = true

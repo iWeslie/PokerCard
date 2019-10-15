@@ -48,6 +48,16 @@ extension PokerAppearanceView {
         return self
     }
     
+    @discardableResult
+    public func setTitles(title: String, light: String, dark: String, auto: String) -> PokerAppearanceView {
+        
+        titleLabel.text = title
+        lightAppearanceView.titleLabel.text = light
+        darkAppearanceView.titleLabel.text = light
+        autoAppearanceView.titleLabel.text = light
+        return self
+    }
+    
     /// Add theme options for `PokerAppearanceView`
     ///
     /// - Parameter title:      The Option title.
@@ -57,7 +67,7 @@ extension PokerAppearanceView {
     /// - Returns: The `PokerAppearanceView` instance.
     @discardableResult
     public func addOption(title: String, isChecked: Bool, trigger: @escaping PKTrigger) -> PokerAppearanceView {
-        #warning("should support multiple action")
+        // TODO: - should support multiple action
         self.isChecked = isChecked
         optionTrigger = trigger
         optionTitle = title
@@ -71,9 +81,17 @@ extension PokerContactView {
     ///
     /// - Parameter options:    The contact options array.
     /// - Parameter target:     The target controller, use `self` as well.
-    public func config(with options: [PKContactOption], on target: UIViewController) {
+    @discardableResult
+    public func config(with options: [PKContactOption], on target: UIViewController) -> PokerContactView {
         contactOptions = options
         targetController = target
+        return self
+    }
+    
+    @discardableResult
+    public func setTitle(_ title: String) -> PokerContactView {
+        titleLabel.text = title
+        return self
     }
 }
 
@@ -83,9 +101,17 @@ extension PokerLanguageView {
     /// - Parameter en: 	English selected.
     /// - Parameter zh:     Simplified Chinses selected.
     /// - Parameter auto:   Auto type language selected.
-    public func config(en: @escaping PKAction, zh: @escaping PKAction, auto: @escaping PKAction) {
+    @discardableResult
+    public func config(en: @escaping PKAction, zh: @escaping PKAction, auto: @escaping PKAction) -> PokerLanguageView {
         enTapped = en
         zhTapped = zh
         autoTapped = auto
+        return self
+    }
+    
+    @discardableResult
+    public func setTitle(_ title: String) -> PokerLanguageView {
+        titleLabel.text = title
+        return self
     }
 }

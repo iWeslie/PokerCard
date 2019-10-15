@@ -35,10 +35,59 @@ public func overrideUserInterfacrStyle() {
 }
 
 /// Poker Appearance symbol image name enums.
-fileprivate enum AppearanceSymbol: String {
+internal enum AppearanceSymbol: String {
     case light = "sun.max"
     case dark = "moon.fill"
     case auto = "circle.righthalf.fill"
+}
+
+internal class PokerAppearanceSelectionView: PokerSubView {
+    var titleLabel: PKLabel
+    var symbolImage: UIImageView?
+    
+    init(type: AppearanceSymbol) {
+        let titleLabel = PKLabel(fontSize: 20)
+        switch type {
+        case .light: titleLabel.text = "Light"
+        case .dark: titleLabel.text = "Dark"
+        case .auto: titleLabel.text = "Auto"
+        }
+        self.titleLabel = titleLabel
+        super.init()
+        
+        addSubview(titleLabel)
+        
+        let imageView = UIImageView(image: UIImage(pointSize: 30, name: type.rawValue))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imageView)
+        self.symbolImage = imageView
+        
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        switch type {
+        case .light:
+            imageView.tintColor = UIColor.black
+            titleLabel.textColor = UIColor.black
+            backgroundColor = PKColor.Appearance.light
+        case .dark:
+            imageView.tintColor = UIColor.white
+            titleLabel.textColor = UIColor.white
+            backgroundColor = PKColor.Appearance.dark
+            
+        case .auto:
+            imageView.tintColor = PKColor.label
+            titleLabel.textColor = PKColor.label
+            backgroundColor = PKColor.Appearance.auto
+        }
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 class PokerAppearanceOptionView: PKContainerView {
@@ -115,9 +164,10 @@ class PokerAppearanceOptionView: PKContainerView {
 /// Poker View for appearance selection
 public class PokerAppearanceView: PokerView {
     
-    internal var lightAppearanceView = PokerSubView()
-    internal var darkAppearanceView = PokerSubView()
-    internal var autoAppearanceView = PokerSubView()
+    internal var titleLabel = PKLabel(fontSize: 20)
+    internal var lightAppearanceView = PokerAppearanceSelectionView(type: .light)
+    internal var darkAppearanceView = PokerAppearanceSelectionView(type: .dark)
+    internal var autoAppearanceView = PokerAppearanceSelectionView(type: .auto)
     
     internal var lightTapped: PKAction?
     internal var darkTapped: PKAction?
@@ -155,15 +205,13 @@ public class PokerAppearanceView: PokerView {
     }
     
     private func setupAppearanceSelectionView() {
-        let titleLabel = PKLabel(fontSize: 20)
         titleLabel.text = "Appearance"
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        addSubview(lightAppearanceView)
-        addSubview(darkAppearanceView)
-        addSubview(autoAppearanceView)
+        let selectionViews = [lightAppearanceView, darkAppearanceView, autoAppearanceView]
+        selectionViews.forEach(addSubview(_:))
         
         darkAppearanceView.heightAnchor.constraint(equalToConstant: 88).isActive = true
         darkAppearanceView.widthAnchor.constraint(equalToConstant: 72).isActive = true
@@ -174,10 +222,6 @@ public class PokerAppearanceView: PokerView {
         lightAppearanceView.trailingAnchor.constraint(equalTo: darkAppearanceView.leadingAnchor, constant: -15).isActive = true
         autoAppearanceView.constraint(horizontalStack: darkAppearanceView)
         autoAppearanceView.leadingAnchor.constraint(equalTo: darkAppearanceView.trailingAnchor, constant: 15).isActive = true
-        
-        lightAppearanceView.addElements(imgae: .light)
-        darkAppearanceView.addElements(imgae: .dark)
-        autoAppearanceView.addElements(imgae: .auto)
         
         let tapLight = UITapGestureRecognizer(target: self, action: #selector(appearanceSelected(_:)))
         let tapDark = UITapGestureRecognizer(target: self, action: #selector(appearanceSelected(_:)))
@@ -215,68 +259,68 @@ public class PokerAppearanceView: PokerView {
     
 }
 
-extension UIView {
-    fileprivate func addElements(imgae symbolType: AppearanceSymbol) {
-        var title = "Dark"
-        switch symbolType {
-        case .light: title = "Light"
-        case .dark: title = "Dark"
-        case .auto: title = "Auto"
-        }
-        
-        if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
-            let image = UIImage(systemName: symbolType.rawValue, withConfiguration: config)
-            let imageView = UIImageView(image: image)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(imageView)
-            
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            
-            let label = UILabel()
-            label.text = title
-            label.font = UIFont.systemFont(ofSize: 20, weight: .light)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(label)
-            
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
-            label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            
-            switch symbolType {
-            case .light:
-                imageView.tintColor = UIColor.black
-                label.textColor = UIColor.black
-                backgroundColor = PKColor.Appearance.light
-            case .dark:
-                imageView.tintColor = UIColor.white
-                label.textColor = UIColor.white
-                backgroundColor = PKColor.Appearance.dark
-                
-            case .auto:
-                imageView.tintColor = PKColor.label
-                label.textColor = PKColor.label
-                backgroundColor = PKColor.Appearance.auto
-            }
-            
-        } else {
-            // Fallback on earlier versions
-            let label = UILabel()
-            label.text = title
-            addSubview(label)
-            label.center = center
-            
-            switch symbolType {
-            case .light:
-                label.textColor = UIColor.black
-                backgroundColor = PKColor.Appearance.light
-            case .dark:
-                label.textColor = UIColor.white
-                backgroundColor = PKColor.Appearance.dark
-            case .auto:
-                label.textColor = PKColor.label
-                backgroundColor = PKColor.Appearance.auto
-            }
-        }
-    }
-}
+//extension UIView {
+//    fileprivate func addElements(imgae symbolType: AppearanceSymbol) {
+//        var title = "Dark"
+//        switch symbolType {
+//        case .light: title = "Light"
+//        case .dark: title = "Dark"
+//        case .auto: title = "Auto"
+//        }
+//
+//        if #available(iOS 13.0, *) {
+//            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+//            let image = UIImage(systemName: symbolType.rawValue, withConfiguration: config)
+//            let imageView = UIImageView(image: image)
+//            imageView.translatesAutoresizingMaskIntoConstraints = false
+//            addSubview(imageView)
+//
+//            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+//            imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//
+//            let label = UILabel()
+//            label.text = title
+//            label.font = UIFont.systemFont(ofSize: 20, weight: .light)
+//            label.translatesAutoresizingMaskIntoConstraints = false
+//            addSubview(label)
+//
+//            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
+//            label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//
+//            switch symbolType {
+//            case .light:
+//                imageView.tintColor = UIColor.black
+//                label.textColor = UIColor.black
+//                backgroundColor = PKColor.Appearance.light
+//            case .dark:
+//                imageView.tintColor = UIColor.white
+//                label.textColor = UIColor.white
+//                backgroundColor = PKColor.Appearance.dark
+//
+//            case .auto:
+//                imageView.tintColor = PKColor.label
+//                label.textColor = PKColor.label
+//                backgroundColor = PKColor.Appearance.auto
+//            }
+//
+//        } else {
+//            // Fallback on earlier versions
+//            let label = UILabel()
+//            label.text = title
+//            addSubview(label)
+//            label.center = center
+//
+//            switch symbolType {
+//            case .light:
+//                label.textColor = UIColor.black
+//                backgroundColor = PKColor.Appearance.light
+//            case .dark:
+//                label.textColor = UIColor.white
+//                backgroundColor = PKColor.Appearance.dark
+//            case .auto:
+//                label.textColor = PKColor.label
+//                backgroundColor = PKColor.Appearance.auto
+//            }
+//        }
+//    }
+//}

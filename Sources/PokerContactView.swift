@@ -50,7 +50,7 @@ public class PokerContactView: PokerView {
         }
     }
     
-    private let titleLabel = PKLabel(fontSize: 20)
+    internal let titleLabel = PKLabel(fontSize: 20)
     private var lastContact: PokerSubView?
     private let contactViewHeight: CGFloat = 52
     private let contactViewWidth: CGFloat = 225

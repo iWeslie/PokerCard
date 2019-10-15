@@ -118,6 +118,7 @@ public class PokerLanguageView: PokerView {
     var zhTapped: PKAction?
     var autoTapped: PKAction?
     
+    internal let titleLabel = PKLabel(fontSize: 20)
     internal var enLangView = PokerLanguageOptionView(type: .en)
     internal var zhLangView = PokerLanguageOptionView(type: .zh)
     internal var autoLangView = PokerLanguageOptionView(type: .auto)
@@ -128,7 +129,6 @@ public class PokerLanguageView: PokerView {
         frame.size.height = 250
         frame.size.width = 265
         
-        let titleLabel = PKLabel(fontSize: 20)
         titleLabel.text = "Language"
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true

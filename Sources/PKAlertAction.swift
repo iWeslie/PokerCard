@@ -34,10 +34,11 @@ extension PokerAlertView {
     ///
     /// - Returns: The `PokerAlertView` instance.
     @discardableResult
-    public func confirm(title: String, style: PokerStyle = .default, fill: Bool = true) -> PokerAlertView {
+    public func confirm(title: String, style: PokerStyle = .default, fill: Bool = true, cancelTitle: String? = nil) -> PokerAlertView {
         
         confirmButton.setTitle(title, for: .normal)
         confirmButton.backgroundColor = PKColor.fromAlertView(style)
+        setupCancelButton(with: cancelTitle)
         
         if !fill {
             confirmButton.backgroundColor = PKColor.clear
@@ -75,10 +76,11 @@ extension PokerAlertView {
         title: String,
         style: PokerStyle = .default,
         fill: Bool = true,
+        cancelTitle: String? = nil,
         handler: @escaping () -> Void)
         -> PokerAlertView
     {
-        confirm(title: title, style: style, fill: fill)
+        confirm(title: title, style: style, fill: fill, cancelTitle: cancelTitle)
         confirm(handler)
         
         return self

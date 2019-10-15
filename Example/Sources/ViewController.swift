@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     
     // MARK:- Show Alert
     @IBAction func showAlert(_ sender: Any) {
-        PokerCard.showAlert(title: "The Alert Title", detail: "Here is some detail information, you may configure the alert view as following...").confirm(title: "Confirm", style: .danger)
+        PokerCard.showAlert(title: "The Alert Title", detail: "Here is some detail information, you may configure the alert view as following...").confirm(title: "Confirm", style: .danger, cancelTitle: nil)
     }
     
     // MARK:- Show Input
@@ -68,6 +68,7 @@ class ViewController: UIViewController {
             }) {
                 print("auto selected")
         }
+        .setTitles(title: "选择外观", light: "浅色", dark: "深色", auto: "自动")
         .addOption(title: "Show Theme", isChecked: true) { trigger in
             print(trigger)
         }
@@ -89,6 +90,7 @@ class ViewController: UIViewController {
                 .weibo(weiboURL, weiboImage),
                 .github("github", githubImage)
             ], on: self)
+            .setTitle("联系我们")
     }
     
     // MARK:- Show Language Picker
@@ -101,6 +103,7 @@ class ViewController: UIViewController {
             }) {
                 print("auto selected")
             }
+        .setTitle("选择语言")
     }
     
     func validatePassword(_ password: String) -> Bool {
