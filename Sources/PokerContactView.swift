@@ -38,7 +38,7 @@ public enum PKContactOption {
 }
 
 /// Poker View for contact options
-public class PokerContactView: PokerView {
+public class PokerContactView: PokerView, PokerTitleRepresentable {
     
     internal var targetController: UIViewController?
     internal var contactOptions: [PKContactOption]? {
@@ -50,7 +50,7 @@ public class PokerContactView: PokerView {
         }
     }
     
-    internal let titleLabel = PKLabel(fontSize: 20)
+    internal var titleLabel = PKLabel(fontSize: 20)
     private var lastContact: PokerSubView?
     private let contactViewHeight: CGFloat = 52
     private let contactViewWidth: CGFloat = 225
@@ -59,9 +59,9 @@ public class PokerContactView: PokerView {
         super.init(frame: CGRect.zero)
         
         frame.size.width = 265
-        frame.size.height = 52
+        frame.size.height = 60
         
-        setupTitle()
+        titleLabel = setupTitleLabel(for: self, with: "Contact Us")
     }
     
     required init?(coder: NSCoder) {
@@ -80,13 +80,6 @@ public class PokerContactView: PokerView {
         }
         frame.origin.y = superView.frame.midY - frame.size.height / 2
     }()
-    
-    private func setupTitle() {
-        titleLabel.text = "Contact Us"
-        addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    }
     
     private func addContactOption(_ contact: PKContactOption) {
         let contactView = PokerSubView()

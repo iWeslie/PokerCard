@@ -58,10 +58,8 @@ public func showAlert(title: String, detail: String? = nil) -> PokerAlertView {
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
-public func showInput(title: String, detail: String? = nil, placeholder: String? = nil) -> PokerInputView {
-    return PokerAlertPresenter().showInput(style: .default,
-                                           title: title,
-                                           detail: detail)
+public func showInput(title: String, detail: String? = nil) -> PokerInputView {
+    return PokerAlertPresenter().showInput(title: title, detail: detail)
 }
 
 /// Present a promotion `PokerInputView` with popup animation from bottom.
@@ -75,11 +73,8 @@ public func showInput(title: String, detail: String? = nil, placeholder: String?
 ///
 /// - Returns: The created `PokerInputView` instance.
 @discardableResult
-public func showPromotion(title: String, promotion: String, secondaryTitle: String? = nil) -> PokerInputView {
-    return PokerAlertPresenter().showInput(style: .promotion,
-                                           title: title,
-                                           promotion: promotion,
-                                           detail: secondaryTitle)
+public func showPromotion(title: String, promotion: String, secondaryTitle: String?) -> PokerInputView {
+    return PokerAlertPresenter().showPromotion(title: title, promotion: promotion, detail: secondaryTitle)
 }
 
 /// Present a promotion `PokerAppearanceView` with popup animation from bottom.

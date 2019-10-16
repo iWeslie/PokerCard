@@ -134,10 +134,11 @@ extension PokerInputView {
         title: String,
         style: PokerStyle = .default,
         fill: Bool = true,
+        cancelTitle: String?,
         handler: @escaping (_ text: String) -> Void)
         -> PokerInputView
     {
-        confirm(title: title, style: style, fill: fill)
+        confirm(title: title, style: style, fill: fill, cancelTitle: cancelTitle)
         confirm(handler)
         
         return self

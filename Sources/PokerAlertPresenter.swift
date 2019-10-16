@@ -48,19 +48,14 @@ public class PokerAlertPresenter: PokerPresenter {
     /// - Parameter promotion:      The input promotion.
     ///
     /// - Returns: The created `PokerInputView` instance.
-    public func showInput(
-        style: PokerInputView.Style,
-        title: String,
-        promotion: String? = nil,
-        detail: String?)
-        -> PokerInputView
-    {
-        var pokerView = PokerInputView()
-        if style == .default {
-            pokerView = PokerInputView(title: title, detail: detail, style: .warn)
-        } else if style == .promotion {
-            pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
-        }
+    public func showInput(title: String, detail: String? = nil) -> PokerInputView {
+        let pokerView = PokerInputView(title: title, detail: detail, style: .warn)
+        backgroundView.pokerView = pokerView
+        return pokerView
+    }
+    
+    public func showPromotion(title: String, promotion: String?, detail: String?) -> PokerInputView {
+        let pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
         backgroundView.pokerView = pokerView
         return pokerView
     }

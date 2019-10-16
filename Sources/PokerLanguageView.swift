@@ -110,7 +110,7 @@ internal class PokerLanguageOptionView: PokerSubView {
     }
 }
 
-public class PokerLanguageView: PokerView {
+public class PokerLanguageView: PokerView, PokerTitleRepresentable {
     
     static var isAutoLanguageType = true
     
@@ -118,7 +118,7 @@ public class PokerLanguageView: PokerView {
     var zhTapped: PKAction?
     var autoTapped: PKAction?
     
-    internal let titleLabel = PKLabel(fontSize: 20)
+    internal var titleLabel = PKLabel(fontSize: 20)
     internal var enLangView = PokerLanguageOptionView(type: .en)
     internal var zhLangView = PokerLanguageOptionView(type: .zh)
     internal var autoLangView = PokerLanguageOptionView(type: .auto)
@@ -126,13 +126,10 @@ public class PokerLanguageView: PokerView {
     init() {
         super.init(frame: CGRect.zero)
         
-        frame.size.height = 250
         frame.size.width = 265
+        frame.size.height = 258
         
-        titleLabel.text = "Language"
-        addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        titleLabel = setupTitleLabel(for: self, with: "Language")
         
         var langType: LangType = .auto
         if let langArray = UserDefaults.standard.array(forKey: appleLanguageKey) as? [String],

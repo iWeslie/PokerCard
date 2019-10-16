@@ -27,7 +27,7 @@
 import UIKit
 
 /// Base Poker Alert View
-public class PokerAlertView: PokerView {
+public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRepresentable {
     
     /// Title label for an alertView
     public var titleLabel: UILabel = PKLabel(fontSize: 22)
@@ -40,7 +40,6 @@ public class PokerAlertView: PokerView {
     internal var titleHorizontalInset: CGFloat = 24
     internal var titleVerticalInset: CGFloat = 18
     internal var detailHorizontalInset: CGFloat = 15
-    internal var buttonHorizontalInset: CGFloat = 40
     internal var lineSpacing: CGFloat = 8
     
     internal var titleBDetailTCons: NSLayoutConstraint?
@@ -53,15 +52,17 @@ public class PokerAlertView: PokerView {
         frame.size.width = 265
         frame.size.height = 134
         
-        setupTitle(with: title)
-        setupConfirmButton()
-        setupDetail(with: detail)
+        titleLabel = setupTitleLabel(for: self, with: title)
+        confirmButton = setupConfirmButton(for: self, with: "Confirm")
+        titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
+        titleBConfirmTCons.priority = .defaultHigh
+        titleBConfirmTCons.isActive = true
         
-        // confirm to dismiss by default
-        confirmButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        setupDetail(with: detail)
     }
     
     public override func layoutSubviews() {
+        // TODO: - fix bug, do not use this 
         super.layoutSubviews()
         _ = layoutViews
     }
@@ -80,42 +81,25 @@ public class PokerAlertView: PokerView {
         }
     }()
     
-    private func setupTitle(with title: String) {
-        titleLabel.text = title
-        addSubview(titleLabel)
-        
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true
-        titleLabel.constraint(withLeadingTrailing: titleHorizontalInset)
-    }
-    
     private func setupDetail(with detail: String?) {
         guard let detail = detail, !detail.isEmpty else { return }
         
-        detailLabel = PKLabel(fontSize: 14)
-        detailLabel?.text = detail
-        detailLabel?.textAlignment = detailLabel?.numberOfLines == 1 ? .center : .left
-        addSubview(detailLabel!)
+        let label = PKLabel(fontSize: 14)
         
-        titleBDetailTCons = detailLabel?.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
+        label.text = detail
+        label.textAlignment = label.numberOfLines == 1 ? .center : .left
+        addSubview(label)
+        detailLabel = label
+        
+        titleBDetailTCons = label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
         titleBDetailTCons?.isActive = true
-        detailLabel?.constraint(withLeadingTrailing: detailHorizontalInset)
+        label.constraint(withLeadingTrailing: detailHorizontalInset)
         
-        detailBConfirmTCons = detailLabel?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
+        detailBConfirmTCons = label.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
         detailBConfirmTCons?.priority = .defaultHigh
         detailBConfirmTCons?.isActive = true
         
         titleBConfirmTCons.isActive = false
-    }
-    
-    private func setupConfirmButton() {
-        confirmButton.backgroundColor = PKColor.blue
-        addSubview(confirmButton)
-        titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
-        titleBConfirmTCons.priority = .defaultHigh
-        titleBConfirmTCons.isActive = true
-        
-        confirmButton.constraint(withLeadingTrailing: buttonHorizontalInset)
-        confirmButton.heightAnchor.constraint(equalToConstant: 38).isActive = true
     }
     
     func setupCancelButton(with title: String?) {

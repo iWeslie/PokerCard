@@ -38,8 +38,8 @@ class ViewController: UIViewController {
     @IBAction func showInput(_ sender: Any) {
         let detail = "Optianal detail, leave it or not🤪You may see your name in the consle when clicking confirm"
         
-        PokerCard.showInput(title: "Please input your name", detail: detail, placeholder: "Nick name")
-            .confirm(title: "Done", style: .warn) { name in
+        PokerCard.showInput(title: "Please input your name", detail: detail)
+            .confirm(title: "Done", style: .warn, cancelTitle: "取消") { name in
             print("Hey, \(name)!")
         }
     }
@@ -50,11 +50,11 @@ class ViewController: UIViewController {
         Warning: The unauthorized reproduction or distribution of this copyrighted work is illegal. Criminal copyright infringement, including infringement without monetary gain, is investigated by the FBI and is punishable by up to five years in federal prison and a fine of $250,000.
         """
         
-        PokerCard.showPromotion(title: "FBI WARNING", promotion: warning, secondaryTitle: "Enter Password")
+        PokerCard.showPromotion(title: "FBI WARNING", promotion: warning, secondaryTitle: "Enter Password Password Password Password Password Password Password Password")
             .appearance(promotionStyle: .color(.systemPink), placeholder: "******")
             .validate(validatePassword(_:))
-            .confirm(title: "Enter", style: .primary, fill: false) { _ in
-                print("Hello Agent!")
+            .confirm(title: "Enter", style: .primary, fill: false, cancelTitle: "Quit") { _ in
+            print("Hello Agent!")
         }
     }
     

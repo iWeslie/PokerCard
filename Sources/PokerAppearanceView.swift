@@ -162,7 +162,7 @@ class PokerAppearanceOptionView: PKContainerView {
 }
 
 /// Poker View for appearance selection
-public class PokerAppearanceView: PokerView {
+public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     
     internal var titleLabel = PKLabel(fontSize: 20)
     internal var lightAppearanceView = PokerAppearanceSelectionView(type: .light)
@@ -195,7 +195,7 @@ public class PokerAppearanceView: PokerView {
         super.init(frame: CGRect.zero)
         
         frame.size.width = 280
-        frame.size.height = 162
+        frame.size.height = 170
         
         setupAppearanceSelectionView()
     }
@@ -205,10 +205,7 @@ public class PokerAppearanceView: PokerView {
     }
     
     private func setupAppearanceSelectionView() {
-        titleLabel.text = "Appearance"
-        addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        titleLabel = setupTitleLabel(for: self, with: "Appearance")
         
         let selectionViews = [lightAppearanceView, darkAppearanceView, autoAppearanceView]
         selectionViews.forEach(addSubview(_:))
