@@ -49,38 +49,20 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
     public convenience init(title: String, detail: String? = nil) {
         self.init()
         
-        frame.size.width = 265
-        frame.size.height = 134
-        
         titleLabel = setupTitleLabel(for: self, with: title)
         confirmButton = setupConfirmButton(for: self, with: "Confirm")
+        
         titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
         titleBConfirmTCons.priority = .defaultHigh
         titleBConfirmTCons.isActive = true
         
         setupDetail(with: detail)
-    }
-    
-    public override func layoutSubviews() {
-        // TODO: - fix bug, do not use this 
-        super.layoutSubviews()
-        _ = layoutViews
-    }
-    
-    private lazy var layoutViews: Void = {
-        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
         
-        // resize title label
-        // offset = estimated - original
-        //
-        // height = height - original + estimated
-        // height -= original - estimated
-        frame.size.height -= titleLabel.frame.height - titleLabel.estimatedHeight(for: titleHorizontalInset)
-        if let detailLabel = detailLabel {
-            frame.size.height -= detailLabel.frame.height - detailLabel.estimatedHeight(for: detailHorizontalInset)
-        }
-    }()
-    
+        widthAnchor.constraint(equalToConstant: 265).isActive = true
+        layoutIfNeeded()
+        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
+    }
+
     private func setupDetail(with detail: String?) {
         guard let detail = detail, !detail.isEmpty else { return }
         

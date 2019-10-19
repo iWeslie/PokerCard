@@ -35,12 +35,12 @@ internal class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
             
             addSubview(pokerView)
             
+            pokerView.constraint(alignCenter: self)
+            
             // tap background to dismiss
             let tap = UITapGestureRecognizer(target: pokerView, action: #selector(pokerView.dismiss))
             tap.delegate = self
             
-            // observe frame change
-            pokerView.addObserver(self, forKeyPath: #keyPath(frame), options: [.new, .old], context: nil)
             // move to center with animation
             pokerView.center = CGPoint(x: frame.width / 2, y: frame.height + 50)
             pokerView.alpha = 0
@@ -49,7 +49,6 @@ internal class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
                 pokerView.center = self.center
             }) { _ in
                 self.addGestureRecognizer(tap)
-                pokerView.removeObserver(self, forKeyPath: #keyPath(frame))
             }
         }
     }
@@ -58,12 +57,6 @@ internal class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
         super.init(frame: frame)
         
         self.backgroundColor = PKColor.clear
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let pokerView = object as? PokerView {
-            pokerView.center = center
-        }
     }
     
     required init?(coder: NSCoder) {

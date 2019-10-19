@@ -126,8 +126,7 @@ public class PokerLanguageView: PokerView, PokerTitleRepresentable {
     init() {
         super.init(frame: CGRect.zero)
         
-        frame.size.width = 265
-        frame.size.height = 258
+        widthAnchor.constraint(equalToConstant: 265).isActive = true
         
         titleLabel = setupTitleLabel(for: self, with: "Language")
         
@@ -156,6 +155,7 @@ public class PokerLanguageView: PokerView, PokerTitleRepresentable {
         zhLangView.topAnchor.constraint(equalTo: enLangView.bottomAnchor, constant: 12).isActive = true
         autoLangView.topAnchor.constraint(equalTo: zhLangView.bottomAnchor, constant: 12).isActive = true
         
+        autoLangView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
     }
     
     required init?(coder: NSCoder) {

@@ -182,10 +182,10 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
             let optionView = PokerAppearanceOptionView(title: optionTitle, isChecked: isChecked)
             optionView.optionTrigger = optionTrigger
             
-            frame.size.height += 40
             addSubview(optionView)
             optionView.constraint(withLeadingTrailing: 16)
             optionView.topAnchor.constraint(equalTo: darkAppearanceView.bottomAnchor, constant: 20).isActive = true
+            optionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
             
             self.optionView = optionView
         }
@@ -194,8 +194,7 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     public init() {
         super.init(frame: CGRect.zero)
         
-        frame.size.width = 280
-        frame.size.height = 170
+        widthAnchor.constraint(equalToConstant: 280).isActive = true
         
         setupAppearanceSelectionView()
     }
@@ -214,6 +213,10 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
         darkAppearanceView.widthAnchor.constraint(equalToConstant: 72).isActive = true
         darkAppearanceView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
         darkAppearanceView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        let darkAppearanceViewBCons = darkAppearanceView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        darkAppearanceViewBCons.isActive = true
+        darkAppearanceViewBCons.priority = .defaultHigh
         
         lightAppearanceView.constraint(horizontalStack: darkAppearanceView)
         lightAppearanceView.trailingAnchor.constraint(equalTo: darkAppearanceView.leadingAnchor, constant: -15).isActive = true

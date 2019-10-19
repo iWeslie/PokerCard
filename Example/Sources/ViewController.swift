@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         Warning: The unauthorized reproduction or distribution of this copyrighted work is illegal. Criminal copyright infringement, including infringement without monetary gain, is investigated by the FBI and is punishable by up to five years in federal prison and a fine of $250,000.
         """
         
-        PokerCard.showPromotion(title: "FBI WARNING", promotion: warning, secondaryTitle: "Enter Password Password Password Password Password Password Password Password")
+        PokerCard.showPromotion(title: "FBI WARNING", promotion: warning, secondaryTitle: "Enter Password")
             .appearance(promotionStyle: .color(.systemPink), placeholder: "******")
             .validate(validatePassword(_:))
             .confirm(title: "Enter", style: .primary, fill: false, cancelTitle: "Quit") { _ in

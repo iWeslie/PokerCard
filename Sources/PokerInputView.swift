@@ -95,8 +95,6 @@ public class PokerInputView: PokerAlertView {
         inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -lineSpacing).isActive = true
         inputContainerView.heightAnchor.constraint(equalToConstant: inputContainerViewHeight).isActive = true
         
-        frame.size.height += inputContainerViewHeight + lineSpacing * 2
-        
         let lineView = UIView()
         lineView.backgroundColor = PKColor.seperator
         lineView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,8 +122,6 @@ public class PokerInputView: PokerAlertView {
         inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -titleVerticalInset).isActive = true
         inputContainerView.heightAnchor.constraint(equalToConstant: inputContainerViewHeight).isActive = true
         
-        frame.size.height += inputContainerViewHeight + lineSpacing * 2
-        
         inputTextField = PKTextField(fontSize: 25)
         inputContainerView.addSubview(inputTextField)
         inputTextField.constraint(withLeadingTrailing: 0)
@@ -148,9 +144,7 @@ public class PokerInputView: PokerAlertView {
         promotionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
         promotionLabel.bottomAnchor.constraint(equalTo: (detailLabel ?? inputContainerView).topAnchor, constant: -12).isActive = true
         promotionLabel.constraint(withLeadingTrailing: 20)
-        
-        frame.size.height += promotionLabel.estimatedHeight(for: 20) + 28 // 16 + 12
-        
+                
         promotionContainerView.backgroundColor = PKColor.pink.withAlphaComponent(0.1)
         promotionContainerView.topAnchor.constraint(equalTo: promotionLabel.topAnchor, constant: -4).isActive = true
         promotionContainerView.bottomAnchor.constraint(equalTo: promotionLabel.bottomAnchor, constant: 4).isActive = true

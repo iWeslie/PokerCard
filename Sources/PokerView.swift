@@ -44,6 +44,8 @@ public class PokerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
         prepareInterface()
         
         // swipe up to dismiss

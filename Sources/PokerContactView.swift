@@ -47,6 +47,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
             options?.forEach { option in
                 addContactOption(option)
             }
+            lastContact?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
         }
     }
     
@@ -58,34 +59,17 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
     public init() {
         super.init(frame: CGRect.zero)
         
-        frame.size.width = 265
-        frame.size.height = 60
-        
         titleLabel = setupTitleLabel(for: self, with: "Contact Us")
+        widthAnchor.constraint(equalToConstant: 265).isActive = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        _ = layoutViews
-    }
-    
-    private lazy var layoutViews: Void = {
-        guard let superView = self.superview else {
-            preconditionFailure("cannot get superview")
-        }
-        frame.origin.y = superView.frame.midY - frame.size.height / 2
-    }()
-    
     private func addContactOption(_ contact: PKContactOption) {
         let contactView = PokerSubView()
         addSubview(contactView)
-        
-        frame.size.height += 52 + 12
         
         contactView.heightAnchor.constraint(equalToConstant: contactViewHeight).isActive = true
         contactView.constraint(withLeadingTrailing: 20)
