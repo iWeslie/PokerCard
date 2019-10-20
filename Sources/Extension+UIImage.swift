@@ -1,8 +1,8 @@
 //
-//  Misc+Compatibility.swift
+//  Extension+UIImage.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/10/8.
+//  Created by Weslie Chen on 2019/10/20.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,32 +25,6 @@
 //
 
 import UIKit
-
-func triggerSelectionChangedHapticFeedback() {
-    if #available(iOS 10.0, *) {
-        UISelectionFeedbackGenerator().selectionChanged()
-    }
-}
-
-enum NotificationFeedbackType: Int {
-    case success = 0
-    case warning
-    case error
-}
-func triggerNotificationHapticFeedback(_ type: NotificationFeedbackType) {
-    if #available(iOS 10.0, *) {
-        let feedbackType = UINotificationFeedbackGenerator.FeedbackType(rawValue: type.rawValue) ?? .warning
-        UINotificationFeedbackGenerator().notificationOccurred(feedbackType)
-    }
-}
-
-func open(_ url: URL) {
-    if #available(iOS 10.0, *) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    } else {
-        UIApplication.shared.openURL(url)
-    }
-}
 
 extension UIImage {
     convenience init?(pointSize: CGFloat, name: String) {

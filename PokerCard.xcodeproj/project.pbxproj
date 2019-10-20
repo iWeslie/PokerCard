@@ -31,10 +31,10 @@
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
 		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
 		D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C3570233DA54C0083F737 /* PokerLanguageView.swift */; };
+		D38D5E35235CAE5600DF7279 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */; };
 		D3924FEF234A29B70009420E /* PKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FEE234A29B70009420E /* PKAlertAction.swift */; };
 		D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF0234A2CF00009420E /* PKSelectionAction.swift */; };
 		D3924FF3234A35B90009420E /* PokerAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */; };
-		D3C87EB6234C344E004E65FE /* Misc+Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */; };
 		D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE5EBC23336CBC001D901E /* PokerStyle.swift */; };
 		D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8B882233AFCE800D008D2 /* PokerContactView.swift */; };
 /* End PBXBuildFile section */
@@ -79,10 +79,10 @@
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
 		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
 		D38C3570233DA54C0083F737 /* PokerLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerLanguageView.swift; sourceTree = "<group>"; };
+		D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		D3924FEE234A29B70009420E /* PKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKAlertAction.swift; sourceTree = "<group>"; };
 		D3924FF0234A2CF00009420E /* PKSelectionAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKSelectionAction.swift; sourceTree = "<group>"; };
 		D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertPresenter.swift; sourceTree = "<group>"; };
-		D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+Compatibility.swift"; sourceTree = "<group>"; };
 		D3DE5EBC23336CBC001D901E /* PokerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerStyle.swift; sourceTree = "<group>"; };
 		D3F8B882233AFCE800D008D2 /* PokerContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerContactView.swift; sourceTree = "<group>"; };
 		D3FC49302333E20900D4DBFB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -158,6 +158,7 @@
 				D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */,
 				D330802B23433EFA009E7CC4 /* Extension+UIView.swift */,
 				D330802D23433F28009E7CC4 /* Extension+UILabel.swift */,
+				D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -202,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				D38001D02328FCF400980988 /* UIView+KeyWindow.swift */,
-				D3C87EB5234C344E004E65FE /* Misc+Compatibility.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -376,7 +376,6 @@
 				D36B3FD02328CC5E00E0B4D8 /* PokerCard.swift in Sources */,
 				D3330DB3234B6A3100569207 /* PokerSelectionPresenter.swift in Sources */,
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
-				D3C87EB6234C344E004E65FE /* Misc+Compatibility.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
 				D33892CB2356E01200EEE611 /* PokerConfirmRepresentable.swift in Sources */,
 				D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */,
@@ -387,6 +386,7 @@
 				D323830E23463AB600232AF4 /* PKButton.swift in Sources */,
 				D348B8F02347696100888583 /* PKTextField.swift in Sources */,
 				D323831023463E8700232AF4 /* PKContainerView.swift in Sources */,
+				D38D5E35235CAE5600DF7279 /* Extension+UIImage.swift in Sources */,
 				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,
 				D323830C2346378B00232AF4 /* PKLabel.swift in Sources */,
 			);
@@ -462,13 +462,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -519,12 +520,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -541,7 +543,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,7 +568,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

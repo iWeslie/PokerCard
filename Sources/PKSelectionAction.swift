@@ -58,6 +58,14 @@ extension PokerAppearanceView {
         return self
     }
     
+    @discardableResult
+    public func setImages(light: UIImage, dark: UIImage, auto: UIImage) -> PokerAppearanceView {
+        lightAppearanceView.symbolImage?.image = light
+        darkAppearanceView.symbolImage?.image = dark
+        autoAppearanceView.symbolImage?.image = auto
+        return self
+    }
+    
     /// Add theme options for `PokerAppearanceView`
     ///
     /// - Parameter title:      The Option title.

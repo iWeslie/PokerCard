@@ -30,11 +30,11 @@ import SafariServices
 
 /// Contact options enum
 public enum PKContactOption {
-    case email(_ address: String, _ symbol: UIImage? = nil)
-    case message(_ icloud: String, _ symbol: UIImage? = nil)
-    case wechat(_ id: String, _ symbol: UIImage? = nil)
-    case weibo(_ name: URL, _ symbol: UIImage? = nil)
-    case github(_ name: String, _ symbol: UIImage? = nil)
+    case email(_ address: String, _ image: UIImage?)
+    case message(_ icloud: String, _ image: UIImage?)
+    case wechat(_ id: String, _ image: UIImage?)
+    case weibo(_ name: URL, _ image: UIImage?)
+    case github(_ name: String, _ image: UIImage?)
 }
 
 /// Poker View for contact options
@@ -108,6 +108,10 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         } else {
             imageView.constraint(withWidthHeight: 32)
             imageView.contentMode = .scaleAspectFill
+            switch contact {
+            case .email(_, let image), .github(_, let image), .message(_, let image), .wechat(_, let image), .weibo(_, let image):
+                imageView.image = image
+            }
         }
         
         var tap = UITapGestureRecognizer()
@@ -164,7 +168,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
     @objc
     private func jumpToWeChat() {
         let url = URL(string: "weixin://")!
-        open(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @objc
@@ -172,9 +176,9 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
         let weiboIURL = URL(string: "weibointernational://userinfo?uid=6425782290")!
         if UIApplication.shared.canOpenURL(weiboURL) {
-            open(weiboURL)
+            UIApplication.shared.open(weiboURL, options: [:], completionHandler: nil)
         } else if UIApplication.shared.canOpenURL(weiboIURL) {
-            open(weiboIURL)
+            UIApplication.shared.open(weiboIURL, options: [:], completionHandler: nil)
         } else {
             debugPrint("Weibo not installed.")
         }

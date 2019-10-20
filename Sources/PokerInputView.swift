@@ -166,7 +166,7 @@ public class PokerInputView: PokerAlertView {
         shake.isAdditive = true
         inputContainerView.layer.add(shake, forKey: nil)
         
-        triggerNotificationHapticFeedback(.error)
+        UINotificationFeedbackGenerator().notificationOccurred(.error)
     }
     
     @objc internal func removeInputBorder() {

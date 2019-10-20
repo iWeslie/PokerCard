@@ -43,7 +43,20 @@ internal enum AppearanceSymbol: String {
 
 internal class PokerAppearanceSelectionView: PokerSubView {
     var titleLabel: PKLabel
-    var symbolImage: UIImageView?
+    var symbolImage: UIImageView? {
+        didSet {
+            guard let image = symbolImage?.image, let superView = superview else { return }
+            if #available(iOS 13.0, *), image.isSymbolImage {
+                // nothing
+            } else {
+                // not symbol, make constraints
+                symbolImage?.constraint(widthHeightEqualToConstant: 36)
+                symbolImage?.topAnchor.constraint(equalTo: superView.topAnchor, constant: 10).isActive = true
+                symbolImage?.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
+                symbolImage?.contentMode = .scaleAspectFill
+            }
+        }
+    }
     
     init(type: AppearanceSymbol) {
         let titleLabel = PKLabel(fontSize: 20)
@@ -142,7 +155,7 @@ class PokerAppearanceOptionView: PKContainerView {
         optionTrigger?(sender.isChecked)
         sender.isChecked = !sender.isChecked
         
-        triggerSelectionChangedHapticFeedback()
+        UISelectionFeedbackGenerator().selectionChanged()
         if sender.isChecked {
             UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction, .curveEaseOut], animations: {
                 sender.imageView?.tintColor = PKColor.clear
@@ -235,7 +248,7 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     @objc
     private func appearanceSelected(_ gesture: UITapGestureRecognizer) {
         guard let targetView = gesture.view else { return }
-        triggerSelectionChangedHapticFeedback()
+        UISelectionFeedbackGenerator().selectionChanged()
         if targetView === lightAppearanceView {
             lightTapped?()
             if #available(iOS 13.0, *) {

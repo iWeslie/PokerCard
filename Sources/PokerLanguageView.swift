@@ -167,7 +167,7 @@ public class PokerLanguageView: PokerView, PokerTitleRepresentable {
 extension PokerLanguageView: PKLanguageSelectionDelegate {
     internal func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType) {
         
-        triggerSelectionChangedHapticFeedback()
+        UISelectionFeedbackGenerator().selectionChanged()
         
         [enLangView, zhLangView, autoLangView].forEach { langView in
             langView.checkmarkImageView.isHidden = true

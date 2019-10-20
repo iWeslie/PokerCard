@@ -72,20 +72,24 @@ class ViewController: UIViewController {
         .addOption(title: "Show Theme", isChecked: true) { trigger in
             print(trigger)
         }
+    .setImages(light: UIImage(named: "sun")!, dark: UIImage(named: "moon")!, auto: UIImage(named: "auto")!)
     }
     
     // MARK:- Show Contacts
     @IBAction func showContacts(_ sender: Any) {
         let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
         
+        let emailImage = #imageLiteral(resourceName: "mail")
+        let messageImage = #imageLiteral(resourceName: "message")
+        //
         let weiboImage = #imageLiteral(resourceName: "weibo")
         let wechatImage = #imageLiteral(resourceName: "wechat")
         let githubImage = #imageLiteral(resourceName: "github")
         
         PokerCard.showContacts()
             .config(with: [
-                .email("mail"),
-                .message("message"),
+                .email("mail", emailImage),
+                .message("message", messageImage),
                 .wechat("id", wechatImage),
                 .weibo(weiboURL, weiboImage),
                 .github("github", githubImage)

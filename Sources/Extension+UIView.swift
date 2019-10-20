@@ -53,6 +53,12 @@ extension UIView {
         self.widthAnchor.constraint(equalTo: toView.widthAnchor).isActive = true
     }
     
+    /// Set width and height constant
+    internal func constraint(widthHeightEqualToConstant constant: CGFloat) {
+        self.heightAnchor.constraint(equalToConstant: constant).isActive = true
+        self.widthAnchor.constraint(equalToConstant: constant).isActive = true
+    }
+    
     /// Set equal width and height with center baseline
     internal func constraint(horizontalStack toView: UIView) {
         self.constraint(equalWidthHeight: toView)
