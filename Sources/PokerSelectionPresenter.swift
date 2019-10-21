@@ -28,6 +28,7 @@
 class PokerSelectionPresenter: PokerPresenter {
     
     /// Create a `PokerAppearanceView` for appearance selection.
+    @available(iOS 13.0, *)
     public func showAppearancePicker() -> PokerAppearanceView {
         let pokerView = PokerAppearanceView()
         backgroundView.pokerView = pokerView

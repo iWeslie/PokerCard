@@ -43,20 +43,7 @@ internal enum AppearanceSymbol: String {
 
 internal class PokerAppearanceSelectionView: PokerSubView {
     var titleLabel: PKLabel
-    var symbolImage: UIImageView? {
-        didSet {
-            guard let image = symbolImage?.image, let superView = superview else { return }
-            if #available(iOS 13.0, *), image.isSymbolImage {
-                // nothing
-            } else {
-                // not symbol, make constraints
-                symbolImage?.constraint(widthHeightEqualToConstant: 36)
-                symbolImage?.topAnchor.constraint(equalTo: superView.topAnchor, constant: 10).isActive = true
-                symbolImage?.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
-                symbolImage?.contentMode = .scaleAspectFill
-            }
-        }
-    }
+    var symbolImage: UIImageView?
     
     init(type: AppearanceSymbol) {
         let titleLabel = PKLabel(fontSize: 20)
@@ -103,6 +90,7 @@ internal class PokerAppearanceSelectionView: PokerSubView {
     }
 }
 
+@available (iOS 13.0, *)
 class PokerAppearanceOptionView: PKContainerView {
     
     var titleLabel = PKLabel(fontSize: 19)
@@ -119,11 +107,9 @@ class PokerAppearanceOptionView: PKContainerView {
         button.tintColor = PKColor.label
         button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
-        if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
-            let image = UIImage(systemName: "checkmark", withConfiguration: configuration)
-            button.setImage(image, for: .normal)
-        }
+        let configuration = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
+        let image = UIImage(systemName: "checkmark", withConfiguration: configuration)
+        button.setImage(image, for: .normal)
         return button
     }()
 
@@ -175,6 +161,7 @@ class PokerAppearanceOptionView: PKContainerView {
 }
 
 /// Poker View for appearance selection
+@available (iOS 13.0, *)
 public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     
     internal var titleLabel = PKLabel(fontSize: 20)
@@ -251,89 +238,17 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
         UISelectionFeedbackGenerator().selectionChanged()
         if targetView === lightAppearanceView {
             lightTapped?()
-            if #available(iOS 13.0, *) {
-                UserDefaults.standard.set(UIUserInterfaceStyle.light.rawValue, forKey: "userInterfaceStyle")
-                currentWindow?.overrideUserInterfaceStyle = .light
-            }
+            UserDefaults.standard.set(UIUserInterfaceStyle.light.rawValue, forKey: "userInterfaceStyle")
+            currentWindow?.overrideUserInterfaceStyle = .light
         } else if targetView === darkAppearanceView {
             darkTapped?()
-            if #available(iOS 13.0, *) {
-                UserDefaults.standard.set(UIUserInterfaceStyle.dark.rawValue, forKey: "userInterfaceStyle")
-                currentWindow?.overrideUserInterfaceStyle = .dark
-            }
+            UserDefaults.standard.set(UIUserInterfaceStyle.dark.rawValue, forKey: "userInterfaceStyle")
+            currentWindow?.overrideUserInterfaceStyle = .dark
         } else if targetView === autoAppearanceView {
             autoTapped?()
-            if #available(iOS 13.0, *) {
-                UserDefaults.standard.set(UIUserInterfaceStyle.unspecified.rawValue, forKey: "userInterfaceStyle")
-                currentWindow?.overrideUserInterfaceStyle = .unspecified
-            }
+            UserDefaults.standard.set(UIUserInterfaceStyle.unspecified.rawValue, forKey: "userInterfaceStyle")
+            currentWindow?.overrideUserInterfaceStyle = .unspecified
         }
     }
     
 }
-
-//extension UIView {
-//    fileprivate func addElements(imgae symbolType: AppearanceSymbol) {
-//        var title = "Dark"
-//        switch symbolType {
-//        case .light: title = "Light"
-//        case .dark: title = "Dark"
-//        case .auto: title = "Auto"
-//        }
-//
-//        if #available(iOS 13.0, *) {
-//            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
-//            let image = UIImage(systemName: symbolType.rawValue, withConfiguration: config)
-//            let imageView = UIImageView(image: image)
-//            imageView.translatesAutoresizingMaskIntoConstraints = false
-//            addSubview(imageView)
-//
-//            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-//            imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//
-//            let label = UILabel()
-//            label.text = title
-//            label.font = UIFont.systemFont(ofSize: 20, weight: .light)
-//            label.translatesAutoresizingMaskIntoConstraints = false
-//            addSubview(label)
-//
-//            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
-//            label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//
-//            switch symbolType {
-//            case .light:
-//                imageView.tintColor = UIColor.black
-//                label.textColor = UIColor.black
-//                backgroundColor = PKColor.Appearance.light
-//            case .dark:
-//                imageView.tintColor = UIColor.white
-//                label.textColor = UIColor.white
-//                backgroundColor = PKColor.Appearance.dark
-//
-//            case .auto:
-//                imageView.tintColor = PKColor.label
-//                label.textColor = PKColor.label
-//                backgroundColor = PKColor.Appearance.auto
-//            }
-//
-//        } else {
-//            // Fallback on earlier versions
-//            let label = UILabel()
-//            label.text = title
-//            addSubview(label)
-//            label.center = center
-//
-//            switch symbolType {
-//            case .light:
-//                label.textColor = UIColor.black
-//                backgroundColor = PKColor.Appearance.light
-//            case .dark:
-//                label.textColor = UIColor.white
-//                backgroundColor = PKColor.Appearance.dark
-//            case .auto:
-//                label.textColor = PKColor.label
-//                backgroundColor = PKColor.Appearance.auto
-//            }
-//        }
-//    }
-//}

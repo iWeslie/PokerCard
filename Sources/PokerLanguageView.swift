@@ -45,8 +45,8 @@ internal class PokerLanguageOptionView: PokerSubView {
     weak var delegate: PKLanguageSelectionDelegate?
     
     fileprivate var infoLabel = PKLabel(fontSize: 20)
-    fileprivate var symbolImageView = UIImageView()
-    fileprivate var checkmarkImageView = UIImageView()
+    internal var symbolImageView = UIImageView()
+    internal var checkmarkImageView = UIImageView()
     
     init(type: LangType) {
         super.init()
@@ -56,9 +56,7 @@ internal class PokerLanguageOptionView: PokerSubView {
         checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
         checkmarkImageView.isHidden = false
         
-        addSubview(infoLabel)
-        addSubview(symbolImageView)
-        addSubview(checkmarkImageView)
+        [infoLabel, symbolImageView, checkmarkImageView].forEach(addSubview(_:))
         
         switch type {
         case .en: infoLabel.text = "English"
@@ -67,7 +65,7 @@ internal class PokerLanguageOptionView: PokerSubView {
         }
         
         if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .thin)
+            let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .thin)
             var symbolName = "arrow.2.circlepath"
             switch type {
             case .en: symbolName = "textformat"
@@ -77,15 +75,17 @@ internal class PokerLanguageOptionView: PokerSubView {
             symbolImageView.image = UIImage(systemName: symbolName, withConfiguration: config)
             symbolImageView.tintColor = PKColor.label
             
-            checkmarkImageView.image = UIImage(systemName: "checkmark", withConfiguration: config)
+            let checkmarkConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .thin)
+            checkmarkImageView.image = UIImage(systemName: "checkmark", withConfiguration: checkmarkConfig)
             checkmarkImageView.tintColor = PKColor.label
             
         } else {
-            
+            symbolImageView.constraint(withWidthHeight: 30)
+            symbolImageView.contentMode = .scaleAspectFit
         }
         
         symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        symbolImageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 64 / 2).isActive = true
+        symbolImageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
         infoLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 64).isActive = true
         checkmarkImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true

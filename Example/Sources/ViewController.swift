@@ -59,6 +59,7 @@ class ViewController: UIViewController {
     }
     
     // MARK:- Show Appearance
+    @available(iOS 13.0, *)
     @IBAction func showAppearance(_ sender: Any) {
         PokerCard.showAppearanceOptions()
             .config(light: {
@@ -88,11 +89,11 @@ class ViewController: UIViewController {
         
         PokerCard.showContacts()
             .config(with: [
-                .email("mail", emailImage),
-                .message("message", messageImage),
-                .wechat("id", wechatImage),
-                .weibo(weiboURL, weiboImage),
-                .github("github", githubImage)
+                .email("Email", "mail", emailImage),
+                .message("信息", "message", messageImage),
+                .wechat("微信", "id", wechatImage),
+                .weibo("微博", weiboURL, weiboImage),
+                .github("GitHub", "github", githubImage)
             ], on: self)
             .setTitle("联系我们")
     }
@@ -108,6 +109,7 @@ class ViewController: UIViewController {
                 print("auto selected")
             }
         .setTitle("选择语言")
+        .setImages(en: UIImage(named: "enLang")!, zh: UIImage(named: "zhLang")!, auto: UIImage(named: "autoLang")!, checkmark: UIImage(named: "checkmark")!)
     }
     
     func validatePassword(_ password: String) -> Bool {

@@ -87,6 +87,7 @@ public func showPromotion(title: String, promotion: String, secondaryTitle: Stri
 /// You should set global style in `AppDelegate`'s didFinishLaunchingWithOptions.
 ///
 /// - Returns: The created `PokerInputView` instance.
+@available(iOS 13.0, *)
 @discardableResult
 public func showAppearanceOptions() -> PokerAppearanceView {
     return PokerSelectionPresenter().showAppearancePicker()

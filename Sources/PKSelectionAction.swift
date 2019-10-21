@@ -31,6 +31,7 @@ public typealias PKAction = () -> Void
 /// Poker Binary Option trigger handler
 public typealias PKTrigger = (Bool) -> Void
 
+@available(iOS 13.0, *)
 extension PokerAppearanceView {
     /// Passing style change actions by closure.
     ///
@@ -120,6 +121,19 @@ extension PokerLanguageView {
     @discardableResult
     public func setTitle(_ title: String) -> PokerLanguageView {
         titleLabel.text = title
+        return self
+    }
+    
+    @discardableResult
+    public func setImages(en: UIImage, zh: UIImage, auto: UIImage, checkmark: UIImage) -> PokerLanguageView {
+        
+        enLangView.symbolImageView.image = en
+        enLangView.checkmarkImageView.image = checkmark
+        zhLangView.symbolImageView.image = zh
+        zhLangView.checkmarkImageView.image = checkmark
+        autoLangView.symbolImageView.image = auto
+        autoLangView.checkmarkImageView.image = checkmark
+        
         return self
     }
 }

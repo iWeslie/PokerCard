@@ -30,11 +30,37 @@ import SafariServices
 
 /// Contact options enum
 public enum PKContactOption {
-    case email(_ address: String, _ image: UIImage?)
-    case message(_ icloud: String, _ image: UIImage?)
-    case wechat(_ id: String, _ image: UIImage?)
-    case weibo(_ name: URL, _ image: UIImage?)
-    case github(_ name: String, _ image: UIImage?)
+    case email(_ text: String, _ address: String, _ image: UIImage?)
+    case message(_ text: String, _ icloud: String, _ image: UIImage?)
+    case wechat(_ text: String, _ id: String, _ image: UIImage?)
+    case weibo(_ text: String, _ name: URL, _ image: UIImage?)
+    case github(_ text: String, _ name: String, _ image: UIImage?)
+    
+    var text: String {
+        get {
+            switch self {
+            case .email(let text, _, _),
+                 .github(let text, _, _),
+                 .message(let text, _, _),
+                 .wechat(let text, _, _),
+                 .weibo(let text, _, _):
+                return text
+            }
+        }
+    }
+    
+    var image: UIImage? {
+        get {
+            switch self {
+            case .email(_, _, let image),
+                 .github(_, _, let image),
+                 .message(_, _, let image),
+                 .wechat(_, _, let image),
+                 .weibo(_, _, let image):
+                return image
+            }
+        }
+    }
 }
 
 /// Poker View for contact options
@@ -80,6 +106,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contactView.addSubview(imageView)
         let detailLabel = PKLabel(fontSize: 20)
+        detailLabel.text = contact.text
         contactView.addSubview(detailLabel)
         
         var isSymbolImage = false
@@ -93,49 +120,36 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
             case .message:
                 isSymbolImage = true
                 imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
-            case .github(_, let image), .wechat(_, let image), .weibo(_, let image):
+            case .github(_, _, let image), .wechat(_, _, let image), .weibo(_, _, let image):
                 isSymbolImage = false
                 imageView.image = image
             }
-            
             imageView.tintColor = PKColor.label
-            imageView.leadingAnchor.constraint(equalTo: contactView.leadingAnchor, constant: isSymbolImage ? 16 : 22).isActive = true
-            imageView.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
             if !isSymbolImage {
                 imageView.constraint(withWidthHeight: 32)
                 imageView.contentMode = .scaleAspectFill
             }
         } else {
             imageView.constraint(withWidthHeight: 32)
-            imageView.contentMode = .scaleAspectFill
-            switch contact {
-            case .email(_, let image), .github(_, let image), .message(_, let image), .wechat(_, let image), .weibo(_, let image):
-                imageView.image = image
-            }
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = contact.image
         }
+        
+        imageView.centerXAnchor.constraint(equalTo: contactView.leadingAnchor, constant: 36).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16).isActive = true
+        detailLabel.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
         
         var tap = UITapGestureRecognizer()
         switch contact {
-        case .email:
-            detailLabel.text = "Email"
-            tap = UITapGestureRecognizer(target: self, action: #selector(presentEmail))
-        case .github:
-            detailLabel.text = "GitHub"
-            tap = UITapGestureRecognizer(target: self, action: #selector(showGitHub))
-        case .message:
-            detailLabel.text = "iMessage"
-            tap = UITapGestureRecognizer(target: self, action: #selector(presentMessage))
-        case .wechat:
-            detailLabel.text = "WeChat"
-            tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeChat))
-        case .weibo:
-            detailLabel.text = "Weibo"
-            tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeibo))
+        case .email: tap = UITapGestureRecognizer(target: self, action: #selector(presentEmail))
+        case .github: tap = UITapGestureRecognizer(target: self, action: #selector(showGitHub))
+        case .message: tap = UITapGestureRecognizer(target: self, action: #selector(presentMessage))
+        case .wechat: tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeChat))
+        case .weibo: tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeibo))
         }
         contactView.addGestureRecognizer(tap)
         
-        detailLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16).isActive = true
-        detailLabel.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
     }
     
     @objc
