@@ -73,28 +73,22 @@ class ViewController: UIViewController {
         .addOption(title: "Show Theme", isChecked: true) { trigger in
             print(trigger)
         }
-    .setImages(light: UIImage(named: "sun")!, dark: UIImage(named: "moon")!, auto: UIImage(named: "auto")!)
     }
     
     // MARK:- Show Contacts
     @IBAction func showContacts(_ sender: Any) {
-        let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
-        
-        let emailImage = #imageLiteral(resourceName: "mail")
-        let messageImage = #imageLiteral(resourceName: "message")
-        //
-        let weiboImage = #imageLiteral(resourceName: "weibo")
-        let wechatImage = #imageLiteral(resourceName: "wechat")
-        let githubImage = #imageLiteral(resourceName: "github")
+        let emailOption = PKContactOption(type: .email(["feedback@iweslie.com"]), image: UIImage(named: "mail"), title: "邮件")
+        let messageOption = PKContactOption(type: .message(["iweslie@icloud.com"]), image: UIImage(named: "message"), title: "信息")
+        let weiboOption = PKContactOption(type: .weibo("6425782290"), image: UIImage(named: "weibo"), title: "微博")
+        let wechatOption = PKContactOption(type: .wechat("weslie-chen"), image: UIImage(named: "wechat"), title: "微信")
+        wechatOption.delay = 1.5
+        wechatOption.completion = {
+            print("something")
+        }
+        let githubOption = PKContactOption(type: .github("iWeslie"), image: UIImage(named: "github"), title: "GitHub")
         
         PokerCard.showContacts()
-            .config(with: [
-                .email("Email", "mail", emailImage),
-                .message("信息", "message", messageImage),
-                .wechat("微信", "id", wechatImage),
-                .weibo("微博", weiboURL, weiboImage),
-                .github("GitHub", "github", githubImage)
-            ], on: self)
+            .addOptions([emailOption, messageOption, weiboOption, wechatOption, githubOption], on: self)
             .setTitle("联系我们")
     }
     

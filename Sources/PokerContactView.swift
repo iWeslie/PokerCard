@@ -28,38 +28,94 @@ import UIKit
 import MessageUI
 import SafariServices
 
+public enum PKContactType {
+    case email(_ recipients: [String])
+    case message(_ recipients: [String])
+    case wechat(_ id: String)
+    case weibo(_ weiboUID: String)
+    case github(_ name: String)
+    case other(_ url: URL)
+}
+
 /// Contact options enum
-public enum PKContactOption {
-    case email(_ text: String, _ address: String, _ image: UIImage?)
-    case message(_ text: String, _ icloud: String, _ image: UIImage?)
-    case wechat(_ text: String, _ id: String, _ image: UIImage?)
-    case weibo(_ text: String, _ name: URL, _ image: UIImage?)
-    case github(_ text: String, _ name: String, _ image: UIImage?)
+public class PKContactOption {
     
-    var text: String {
-        get {
-            switch self {
-            case .email(let text, _, _),
-                 .github(let text, _, _),
-                 .message(let text, _, _),
-                 .wechat(let text, _, _),
-                 .weibo(let text, _, _):
-                return text
-            }
+    fileprivate var contactKey: String?
+    fileprivate var image: UIImage?
+    fileprivate var title: String
+    
+    public var delay: TimeInterval = 0
+    public var completion: PKAction?
+    
+    fileprivate var type: PKContactType
+    fileprivate var recipients: [String]?
+    
+    public init(type: PKContactType, image: UIImage?, title: String) {
+        switch type {
+        case .email(let recipients): self.recipients = recipients
+        case .github(let name): self.contactKey = name
+        case .message(let recipients): self.recipients = recipients
+        case .wechat(let id): self.contactKey = id
+        case .weibo(let weiboURL): self.contactKey = weiboURL
+        default: break
         }
+        self.image = image
+        self.title = title
+        self.type = type
     }
     
-    var image: UIImage? {
-        get {
-            switch self {
-            case .email(_, _, let image),
-                 .github(_, _, let image),
-                 .message(_, _, let image),
-                 .wechat(_, _, let image),
-                 .weibo(_, _, let image):
-                return image
+}
+
+fileprivate class PokerContactOptionView: PokerSubView {
+    
+    var option: PKContactOption
+    fileprivate var isSymbolImage = false
+    fileprivate var imageView = UIImageView()
+    fileprivate var detailLabel = PKLabel(fontSize: 20)
+    
+    init(option: PKContactOption) {
+        self.option = option
+        super.init()
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imageView)
+        addSubview(detailLabel)
+        
+        detailLabel.text = option.title
+        
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .thin)
+            switch option.type {
+            case .email:
+                isSymbolImage = true
+                imageView.image = UIImage(systemName: "envelope", withConfiguration: config)
+            case .message:
+                isSymbolImage = true
+                imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
+            default:
+                isSymbolImage = false
+                imageView.image = option.image
             }
+            imageView.tintColor = PKColor.label
+            if !isSymbolImage {
+                imageView.constraint(withWidthHeight: 32)
+                imageView.contentMode = .scaleAspectFill
+            }
+        } else {
+            imageView.constraint(withWidthHeight: 32)
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = option.image
         }
+        
+        imageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
+        detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -86,6 +142,10 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         super.init(frame: CGRect.zero)
         
         titleLabel = setupTitleLabel(for: self, with: "Contact Us")
+        
+        let titleBCons = titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        titleBCons.priority = .defaultLow
+        titleBCons.isActive = true
         widthAnchor.constraint(equalToConstant: 265).isActive = true
     }
     
@@ -93,8 +153,8 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addContactOption(_ contact: PKContactOption) {
-        let contactView = PokerSubView()
+    private func addContactOption(_ contactOption: PKContactOption) {
+        let contactView = PokerContactOptionView(option: contactOption)
         addSubview(contactView)
         
         contactView.heightAnchor.constraint(equalToConstant: contactViewHeight).isActive = true
@@ -102,109 +162,93 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         contactView.topAnchor.constraint(equalTo: (lastContact ?? titleLabel).bottomAnchor, constant: 12).isActive = true
         lastContact = contactView
         
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        contactView.addSubview(imageView)
-        let detailLabel = PKLabel(fontSize: 20)
-        detailLabel.text = contact.text
-        contactView.addSubview(detailLabel)
-        
-        var isSymbolImage = false
-        
-        if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .thin)
-            switch contact {
-            case .email:
-                isSymbolImage = true
-                imageView.image = UIImage(systemName: "envelope", withConfiguration: config)
-            case .message:
-                isSymbolImage = true
-                imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
-            case .github(_, _, let image), .wechat(_, _, let image), .weibo(_, _, let image):
-                isSymbolImage = false
-                imageView.image = image
-            }
-            imageView.tintColor = PKColor.label
-            if !isSymbolImage {
-                imageView.constraint(withWidthHeight: 32)
-                imageView.contentMode = .scaleAspectFill
-            }
-        } else {
-            imageView.constraint(withWidthHeight: 32)
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = contact.image
-        }
-        
-        imageView.centerXAnchor.constraint(equalTo: contactView.leadingAnchor, constant: 36).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16).isActive = true
-        detailLabel.centerYAnchor.constraint(equalTo: contactView.centerYAnchor).isActive = true
-        
-        var tap = UITapGestureRecognizer()
-        switch contact {
-        case .email: tap = UITapGestureRecognizer(target: self, action: #selector(presentEmail))
-        case .github: tap = UITapGestureRecognizer(target: self, action: #selector(showGitHub))
-        case .message: tap = UITapGestureRecognizer(target: self, action: #selector(presentMessage))
-        case .wechat: tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeChat))
-        case .weibo: tap = UITapGestureRecognizer(target: self, action: #selector(jumpToWeibo))
-        }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(contactViewTapped))
         contactView.addGestureRecognizer(tap)
         
     }
     
     @objc
-    private func presentEmail() {
+    func contactViewTapped(_ gesture: UITapGestureRecognizer) {
+        guard let contactOptionView = gesture.view as? PokerContactOptionView else { return }
+        let delay = contactOptionView.option.delay
+        let completion = contactOptionView.option.completion
+        
+        switch contactOptionView.option.type {
+        case .email(let recipients): composeMail(to: recipients, afterDelay: delay, completion: completion)
+        case .message(let recipients): composeMessage(to: recipients, afterDelay: delay, completion: completion)
+        case .github(let name): presentGitHubWebPage(with: name, afterDelay: delay, completion: completion)
+        case .wechat(let id): jumpToWeChat(withID: id, afterDelay: delay, completion: completion)
+        case .weibo(let weiboUID): jumpToWeibo(withID: weiboUID, afterDelay: delay, completion: completion)
+        case .other: break
+        }
+        UISelectionFeedbackGenerator().selectionChanged()
+    }
+    
+    private func composeMail(to recipients: [String], afterDelay interval: TimeInterval, completion: PKAction?) {
         guard MFMailComposeViewController.canSendMail() else {
             debugPrint("You can not sent email on simulator. Please do it on a device.")
             return
         }
         let mailViewController = MFMailComposeViewController()
         mailViewController.mailComposeDelegate = self
+        mailViewController.setToRecipients(recipients)
         
-        targetController?.present(mailViewController, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            self.targetController?.present(mailViewController, animated: true, completion: completion)
+        }
     }
     
-    @objc
-    private func presentMessage() {
+    private func composeMessage(to recipients: [String], afterDelay interval: TimeInterval, completion: PKAction?) {
         guard MFMessageComposeViewController.canSendText() else {
             debugPrint("You can not sent message on simulator. Please do it on a device.")
             return
         }
-        
         let messageViewController = MFMessageComposeViewController()
         messageViewController.messageComposeDelegate = self
-        messageViewController.subject = "Message Subject"
-        messageViewController.recipients = ["recipients"]
+        messageViewController.recipients = recipients
         
-        targetController?.present(messageViewController, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            self.targetController?.present(messageViewController, animated: true, completion: completion)
+        }
     }
     
-    @objc
-    private func jumpToWeChat() {
-        let url = URL(string: "weixin://")!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    private func jumpToWeChat(withID wechatID: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+        let url = URL(string: "weixin://\(wechatID)")!
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            UIApplication.shared.open(url, options: [:]) { _ in
+                completion?()
+            }
+        }
     }
     
-    @objc
-    private func jumpToWeibo() {
-        let weiboURL = URL(string: "sinaweibo://userinfo?uid=6425782290")!
-        let weiboIURL = URL(string: "weibointernational://userinfo?uid=6425782290")!
+    private func jumpToWeibo(withID weiboUID: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+        let weiboURL = URL(string: "sinaweibo://userinfo?uid=\(weiboUID)")!
+        let weiboIURL = URL(string: "weibointernational://userinfo?uid=\(weiboUID)")!
+        
         if UIApplication.shared.canOpenURL(weiboURL) {
-            UIApplication.shared.open(weiboURL, options: [:], completionHandler: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+                UIApplication.shared.open(weiboURL, options: [:]) { _ in
+                    completion?()
+                }
+            }
         } else if UIApplication.shared.canOpenURL(weiboIURL) {
-            UIApplication.shared.open(weiboIURL, options: [:], completionHandler: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+                UIApplication.shared.open(weiboIURL, options: [:]) { _ in
+                    completion?()
+                }
+            }
         } else {
             debugPrint("Weibo not installed.")
         }
     }
     
-    @objc
-    private func showGitHub() {
-        let safariController = SFSafariViewController(url: URL(string: "https://github.com/iWeslie")!)
+    private func presentGitHubWebPage(with name: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+        let safariController = SFSafariViewController(url: URL(string: "https://github.com/\(name)")!)
         safariController.modalPresentationStyle = .popover
         targetController?.present(safariController, animated: true, completion: nil)
-        
     }
+    
 }
 
 // MARK:- MFMailComposeViewControllerDelegate

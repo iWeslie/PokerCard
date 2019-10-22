@@ -35,12 +35,14 @@ public func overrideUserInterfacrStyle() {
 }
 
 /// Poker Appearance symbol image name enums.
+@available (iOS 13.0, *)
 internal enum AppearanceSymbol: String {
     case light = "sun.max"
     case dark = "moon.fill"
     case auto = "circle.righthalf.fill"
 }
 
+@available (iOS 13.0, *)
 internal class PokerAppearanceSelectionView: PokerSubView {
     var titleLabel: PKLabel
     var symbolImage: UIImageView?
