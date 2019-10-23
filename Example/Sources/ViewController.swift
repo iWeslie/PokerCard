@@ -8,6 +8,7 @@
 
 import UIKit
 import PokerCard
+import MessageUI
 
 class ViewController: UIViewController {
     
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
             .validate(validatePassword(_:))
             .confirm(title: "Enter", style: .primary, fill: false, cancelTitle: "Quit") { _ in
             print("Hello Agent!")
-        }
+        }.shouldBecomeFirstResponder()
     }
     
     // MARK:- Show Appearance
@@ -114,4 +115,14 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+extension ViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true) {
+            if result == .cancelled {
+                print("cancel")
+            }
+        }
+    }
 }

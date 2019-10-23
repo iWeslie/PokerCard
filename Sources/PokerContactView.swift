@@ -190,7 +190,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
             return
         }
         let mailViewController = MFMailComposeViewController()
-        mailViewController.mailComposeDelegate = self
+        mailViewController.mailComposeDelegate = targetController as? MFMailComposeViewControllerDelegate
         mailViewController.setToRecipients(recipients)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
@@ -204,7 +204,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
             return
         }
         let messageViewController = MFMessageComposeViewController()
-        messageViewController.messageComposeDelegate = self
+        messageViewController.messageComposeDelegate = targetController as? MFMessageComposeViewControllerDelegate
         messageViewController.recipients = recipients
         
         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
@@ -249,30 +249,4 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         targetController?.present(safariController, animated: true, completion: nil)
     }
     
-}
-
-// MARK:- MFMailComposeViewControllerDelegate
-extension PokerContactView: MFMailComposeViewControllerDelegate {
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true) {
-            if result == .sent {
-                print("sent")
-            } else if result == .cancelled {
-                print("cancelled")
-            }
-        }
-    }
-}
-
-// MARK:- MFMessageComposeViewControllerDelegate
-extension PokerContactView: MFMessageComposeViewControllerDelegate {
-    public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        controller.dismiss(animated: true) {
-            if result == .sent {
-                print("sent")
-            } else if result == .cancelled {
-                print("cancelled")
-            }
-        }
-    }
 }

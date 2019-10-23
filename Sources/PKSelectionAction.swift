@@ -54,8 +54,8 @@ extension PokerAppearanceView {
         
         titleLabel.text = title
         lightAppearanceView.titleLabel.text = light
-        darkAppearanceView.titleLabel.text = light
-        autoAppearanceView.titleLabel.text = light
+        darkAppearanceView.titleLabel.text = dark
+        autoAppearanceView.titleLabel.text = auto
         return self
     }
     

@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension PokerAlertView {
     /// Modify confirm button title and background style.
@@ -56,7 +57,7 @@ extension PokerAlertView {
     ///
     /// - Returns: The `PokerPresenter` instance.
     @discardableResult
-    public func confirm(_ handler: @escaping () -> Void) -> PokerAlertView {
+    fileprivate func confirm(_ handler: @escaping () -> Void) -> PokerAlertView {
         // remove default dismiss action
         confirmButton.removeTarget(self, action: #selector(dismiss), for: .touchUpInside)
         confirmButton.touchUpInside(action: handler)
@@ -167,6 +168,14 @@ extension PokerInputView {
         promotionLeftMarginView.backgroundColor = PKColor.fromAlertView(promotionStyle)
         
         inputTextField.placeholder = placeholder
+        return self
+    }
+    
+    @discardableResult
+    public func shouldBecomeFirstResponder() -> PokerInputView {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            self.inputTextField.becomeFirstResponder()
+        }
         return self
     }
 }
