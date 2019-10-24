@@ -140,21 +140,23 @@ class PokerAppearanceOptionView: PKContainerView {
     }
     
     @objc func triggered(_ sender: UIButton) {
-        optionTrigger?(sender.isChecked)
-        sender.isChecked = !sender.isChecked
-        
         UISelectionFeedbackGenerator().selectionChanged()
         if sender.isChecked {
+            // uncheck
             UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction, .curveEaseOut], animations: {
                 sender.imageView?.tintColor = PKColor.clear
                 sender.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 5))
             }, completion: nil)
         } else {
+            // check
             UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction, .curveEaseIn], animations: {
                 sender.imageView?.tintColor = PKColor.label
                 sender.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: nil)
         }
+        
+        sender.isChecked = !sender.isChecked
+        optionTrigger?(sender.isChecked)
     }
     
     required init?(coder: NSCoder) {

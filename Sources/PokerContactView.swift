@@ -162,7 +162,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         contactView.topAnchor.constraint(equalTo: (lastContact ?? titleLabel).bottomAnchor, constant: 12).isActive = true
         lastContact = contactView
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(contactViewTapped))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(contactViewTapped(_:)))
         contactView.addGestureRecognizer(tap)
         
     }

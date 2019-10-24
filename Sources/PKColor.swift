@@ -32,7 +32,9 @@ public enum PKColor {
     static var background: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.init { (trait) -> UIColor in
-                return trait.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.white
+                return trait.userInterfaceStyle == .dark
+                    ? UIColor.secondarySystemBackground
+                    : UIColor.white
             }
         } else {
             return UIColor.white
@@ -42,7 +44,9 @@ public enum PKColor {
     static var secondary: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.init { (trait) -> UIColor in
-                return trait.userInterfaceStyle == .dark ? UIColor.tertiarySystemBackground : UIColor.white
+                return trait.userInterfaceStyle == .dark
+                    ? UIColor.tertiarySystemBackground
+                    : UIColor.white
             }
         } else {
             return UIColor.white
@@ -68,7 +72,15 @@ public enum PKColor {
     
     /// Seperator line color 
     static var seperator: UIColor {
-        return UIColor(white: 0.4, alpha: 0.15)
+        if #available(iOS 13.0, *) {
+            return UIColor.init { (trait) -> UIColor in
+                return trait.userInterfaceStyle == .dark
+                    ? UIColor(white: 0.4, alpha: 0.35)
+                    : UIColor(white: 0.4, alpha: 0.15)
+            }
+        } else {
+            return UIColor(white: 0.4, alpha: 0.15)
+        }
     }
     
     /// Generate color from Alert Style
@@ -94,7 +106,9 @@ public enum PKColor {
         static var light: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in
-                    return trait.userInterfaceStyle == .dark ? UIColor(white: 0.88, alpha: 1) : UIColor.white
+                    return trait.userInterfaceStyle == .dark
+                        ? UIColor(white: 0.88, alpha: 1)
+                        : UIColor.white
                 }
             } else {
                 return UIColor.white
@@ -104,7 +118,9 @@ public enum PKColor {
         static var dark: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in
-                    return trait.userInterfaceStyle == .dark ? UIColor.black : UIColor(white: 0.18, alpha: 1)
+                    return trait.userInterfaceStyle == .dark
+                        ? UIColor.black
+                        : UIColor(white: 0.18, alpha: 1)
                 }
             } else {
                 return UIColor(white: 0.18, alpha: 1)
@@ -114,7 +130,9 @@ public enum PKColor {
         static var auto: UIColor {
             if #available(iOS 13.0, *) {
                 return UIColor.init { (trait) -> UIColor in
-                    return trait.userInterfaceStyle == .dark ? UIColor(white: 0.18, alpha: 1) : UIColor(white: 0.92, alpha: 1)
+                    return trait.userInterfaceStyle == .dark
+                        ? UIColor(white: 0.18, alpha: 1)
+                        : UIColor(white: 0.92, alpha: 1)
                 }
             } else {
                 return UIColor(white: 0.92, alpha: 1)
@@ -126,39 +144,29 @@ public enum PKColor {
 // MARK:- System Color Preset
 extension PKColor {
     /// System red color
-    static var red: UIColor {
-        return UIColor.systemRed
-    }
+    static let red = UIColor.systemRed
+    
     /// System orange color
-    static var orange: UIColor {
-        return UIColor.systemOrange
-    }
+    static var orange = UIColor.systemOrange
+        
     /// System yellow color
-    static var yellow: UIColor {
-        return UIColor.systemYellow
-    }
+    static var yellow = UIColor.systemYellow
+
     /// System green color
-    static var green: UIColor {
-        return UIColor.systemGreen
-    }
+    static var green = UIColor.systemGreen
+        
     /// System blue color
-    static var blue: UIColor {
-        return UIColor.systemBlue
-    }
+    static var blue = UIColor.systemBlue
+        
     /// System teal color
-    static var teal: UIColor {
-        return UIColor.systemTeal
-    }
+    static var teal = UIColor.systemTeal
+
     /// System purple color
-    static var purple: UIColor {
-        return UIColor.systemPurple
-    }
+    static var purple = UIColor.systemPurple
+        
     /// System pink color
-    static var pink: UIColor {
-        return UIColor.systemPink
-    }
+    static var pink = UIColor.systemPink
+        
     /// System clear color
-    static var clear: UIColor {
-        return UIColor.clear
-    }
+    static var clear = UIColor.clear
 }

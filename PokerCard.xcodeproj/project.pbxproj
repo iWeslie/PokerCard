@@ -31,6 +31,7 @@
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
 		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
 		D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C3570233DA54C0083F737 /* PokerLanguageView.swift */; };
+		D38C79F82361C87600F903AA /* PKSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C79F72361C87600F903AA /* PKSymbol.swift */; };
 		D38D5E35235CAE5600DF7279 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */; };
 		D3924FEF234A29B70009420E /* PKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FEE234A29B70009420E /* PKAlertAction.swift */; };
 		D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF0234A2CF00009420E /* PKSelectionAction.swift */; };
@@ -79,6 +80,7 @@
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
 		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
 		D38C3570233DA54C0083F737 /* PokerLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerLanguageView.swift; sourceTree = "<group>"; };
+		D38C79F72361C87600F903AA /* PKSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKSymbol.swift; sourceTree = "<group>"; };
 		D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		D3924FEE234A29B70009420E /* PKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKAlertAction.swift; sourceTree = "<group>"; };
 		D3924FF0234A2CF00009420E /* PKSelectionAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKSelectionAction.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				D38001D62328FF2000980988 /* PKColor.swift */,
+				D38C79F72361C87600F903AA /* PKSymbol.swift */,
 				D323830B2346378B00232AF4 /* PKLabel.swift */,
 				D323830D23463AB600232AF4 /* PKButton.swift */,
 				D348B8EF2347696100888583 /* PKTextField.swift */,
@@ -381,6 +384,7 @@
 				D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */,
 				D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */,
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
+				D38C79F82361C87600F903AA /* PKSymbol.swift in Sources */,
 				D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */,
 				D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */,
 				D323830E23463AB600232AF4 /* PKButton.swift in Sources */,

@@ -117,7 +117,7 @@ extension PokerLanguageView {
     }
     
     @discardableResult
-    public func setImages(en: UIImage, zh: UIImage, auto: UIImage, checkmark: UIImage) -> PokerLanguageView {
+    public func setImages(en: UIImage?, zh: UIImage?, auto: UIImage?, checkmark: UIImage?) -> PokerLanguageView {
         
         enLangView.symbolImageView.image = en
         enLangView.checkmarkImageView.image = checkmark

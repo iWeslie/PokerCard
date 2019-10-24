@@ -71,7 +71,7 @@ class ViewController: UIViewController {
                 print("auto selected")
         }
         .setTitles(title: "选择外观", light: "浅色", dark: "深色", auto: "自动")
-        .addOption(title: "Show Theme", isChecked: true) { trigger in
+        .addOption(title: "Show Theme", isChecked: false) { trigger in
             print(trigger)
         }
     }
