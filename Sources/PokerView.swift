@@ -60,7 +60,11 @@ public class PokerView: UIView {
     
     /// Call this method to dismiss Poker View with animation 
     @objc
-    public func dismiss() {
+    public func dismiss(_ sender: UIButton) {
+        if let button = sender as? PKButton, button.isConfirmButton {
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
+        
         endEditing(true)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.frame.origin.y = -2 * self.frame.height

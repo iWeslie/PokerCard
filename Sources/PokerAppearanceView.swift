@@ -122,6 +122,7 @@ class PokerAppearanceOptionView: PKContainerView {
         titleLabel.text = title
         setupConstraints()
         
+        checkmarkButton.isChecked = isChecked
         checkmarkButton.addTarget(self, action: #selector(triggered(_:)), for: .touchUpInside)
         checkmarkButton.imageView?.tintColor = isChecked ? PKColor.label : PKColor.clear
     }
@@ -154,7 +155,7 @@ class PokerAppearanceOptionView: PKContainerView {
                 sender.transform = CGAffineTransform(rotationAngle: 0)
             }, completion: nil)
         }
-        
+        print(sender.isChecked)
         sender.isChecked = !sender.isChecked
         optionTrigger?(sender.isChecked)
     }

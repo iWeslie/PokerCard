@@ -84,6 +84,10 @@ extension UIButton {
             preconditionFailure("Cannot get superview")
         }
         
+        if let button = self as? PKButton, button.isConfirmButton {
+            UISelectionFeedbackGenerator().selectionChanged()
+        }
+        
         if let inputView = alertView as? PokerInputView {
             eventClosureObj.submit?(inputView.inputTextField.text ?? "")
         } else {
@@ -91,6 +95,6 @@ extension UIButton {
             eventClosureObj.common?()
         }
 
-        alertView.dismiss()
+        alertView.dismiss(sender)
     }
 }

@@ -69,6 +69,8 @@ extension PokerAppearanceView {
     @discardableResult
     public func addOption(title: String, isChecked: Bool, trigger: @escaping PKTrigger) -> PokerAppearanceView {
         // TODO: - should support multiple action
+        assert(self.optionTrigger == nil, "Multiple options will be supported in future version")
+        
         self.isChecked = isChecked
         optionTrigger = trigger
         optionTitle = title

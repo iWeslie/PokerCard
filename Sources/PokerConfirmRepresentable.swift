@@ -37,6 +37,7 @@ extension PokerConfirmRepresentable {
     
     func setupConfirmButton(for pokerView: PokerView, with title: String) -> PKButton {
         let button = PKButton(title: "Confirm", fontSize: 20)
+        button.isConfirmButton = true
         button.addTarget(pokerView, action: #selector(pokerView.dismiss), for: .touchUpInside)
         button.backgroundColor = PKColor.blue
         pokerView.addSubview(button)

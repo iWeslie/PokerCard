@@ -28,6 +28,9 @@ import UIKit
 
 /// `PokerCard` basic button.
 class PKButton: UIButton {
+    
+    var isConfirmButton: Bool = false
+    
     /// Create a button.
     /// - Parameter title:      the button title.
     /// - Parameter fontSize:   the button title font size.

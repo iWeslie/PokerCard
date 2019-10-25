@@ -113,13 +113,13 @@ extension PokerInputView {
         if let validation = validation {
             if validation(text) {
                 inputText(text)
-                inputView.dismiss()
+                inputView.dismiss(sender)
             } else {
                 inputView.shakeInputView()
             }
         } else {
             inputText(text)
-            inputView.dismiss()
+            inputView.dismiss(sender)
         }
     }
     
