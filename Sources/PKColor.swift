@@ -57,7 +57,7 @@ public enum PKColor {
         if #available(iOS 13.0, *) {
             return UIColor.label
         } else {
-            return UIColor.white
+            return UIColor.black
         }
     }
     

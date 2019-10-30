@@ -49,7 +49,6 @@ public class PokerInputView: PokerAlertView {
     // promotion style
     lazy var promotionContainerView: UIView = {
         let containerView = PKContainerView()
-        addSubview(containerView)
         return containerView
     }()
     lazy var promotionLeftMarginView: UIView = {
@@ -144,7 +143,8 @@ public class PokerInputView: PokerAlertView {
         promotionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
         promotionLabel.bottomAnchor.constraint(equalTo: (detailLabel ?? inputContainerView).topAnchor, constant: -12).isActive = true
         promotionLabel.constraint(withLeadingTrailing: 20)
-                
+        
+        insertSubview(promotionContainerView, belowSubview: promotionLabel)
         promotionContainerView.backgroundColor = PKColor.pink.withAlphaComponent(0.1)
         promotionContainerView.topAnchor.constraint(equalTo: promotionLabel.topAnchor, constant: -4).isActive = true
         promotionContainerView.bottomAnchor.constraint(equalTo: promotionLabel.bottomAnchor, constant: 4).isActive = true

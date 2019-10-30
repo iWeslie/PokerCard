@@ -51,19 +51,27 @@ public class PKContactOption {
     fileprivate var recipients: [String]?
     
     public init(type: PKContactType, image: UIImage?, title: String) {
+        self.image = image
+        self.title = title
+        self.type = type
+        
         switch type {
-        case .email(let recipients): self.recipients = recipients
+        case .email(let recipients):
+            self.recipients = recipients
+            if #available(iOS 13.0, *) {
+                self.image = UIImage(systemName: "envelope", withConfiguration: pokerConfiguration)
+            }
+        case .message(let recipients):
+            self.recipients = recipients
+            if #available(iOS 13.0, *) {
+                self.image = UIImage(systemName: "captions.bubble", withConfiguration: pokerConfiguration)
+            }
         case .github(let name): self.contactKey = name
-        case .message(let recipients): self.recipients = recipients
         case .wechat(let id): self.contactKey = id
         case .weibo(let weiboURL): self.contactKey = weiboURL
         default: break
         }
-        self.image = image
-        self.title = title
-        self.type = type
     }
-    
 }
 
 fileprivate class PokerContactOptionView: PokerSubView {
