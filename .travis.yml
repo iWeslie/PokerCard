@@ -16,8 +16,7 @@ script:
 - pod lib lint
 
 before_deploy:
-- xcodebuild -scheme "$SCHEME" -workspace "$WORKSPACE" build
-- carthage archive $SCHEME
+- carthage build --archive
 deploy:
   provider: releases
   file: PokerCard.framework.zip
