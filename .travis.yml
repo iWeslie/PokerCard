@@ -21,7 +21,7 @@ deploy:
   provider: releases
   file: PokerCard.framework.zip
   skip_cleanup: true
-  github-token: $GITHUB_TOKEN
+  api_key: $GITHUB_TOKEN
   on:
     repo: iWeslie/PokerCard
     tags: true
