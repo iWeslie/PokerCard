@@ -42,12 +42,13 @@ internal enum AppearanceSymbol: String {
     case auto = "circle.righthalf.fill"
 }
 
+/// Poker Appearance selection view.
 @available (iOS 13.0, *)
 internal class PokerAppearanceSelectionView: PokerSubView {
-    var titleLabel: PKLabel
-    var symbolImage: UIImageView?
+    internal var titleLabel: PKLabel
+    internal var symbolImage: UIImageView?
     
-    init(type: AppearanceSymbol) {
+    fileprivate init(type: AppearanceSymbol) {
         let titleLabel = PKLabel(fontSize: 20)
         switch type {
         case .light: titleLabel.text = "Light"
@@ -56,14 +57,12 @@ internal class PokerAppearanceSelectionView: PokerSubView {
         }
         self.titleLabel = titleLabel
         super.init()
-        
         addSubview(titleLabel)
         
         let imageView = UIImageView(image: UIImage(pointSize: 30, name: type.rawValue))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         self.symbolImage = imageView
-        
         imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
@@ -78,13 +77,11 @@ internal class PokerAppearanceSelectionView: PokerSubView {
             imageView.tintColor = UIColor.white
             titleLabel.textColor = UIColor.white
             backgroundColor = PKColor.Appearance.dark
-            
         case .auto:
             imageView.tintColor = PKColor.label
             titleLabel.textColor = PKColor.label
             backgroundColor = PKColor.Appearance.auto
         }
-        
     }
     
     required init?(coder: NSCoder) {
@@ -92,39 +89,41 @@ internal class PokerAppearanceSelectionView: PokerSubView {
     }
 }
 
+/// Poker Appearance single option view.
 @available (iOS 13.0, *)
 class PokerAppearanceOptionView: PKContainerView {
     
-    var titleLabel = PKLabel(fontSize: 19)
+    internal var titleLabel = PKLabel(fontSize: 19)
+    internal var optionTrigger: PKTrigger?
     
-    var circleImage: UIImageView = {
+    private var circleImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(pointSize: 25, name: "circle"))
         imageView.tintColor = PKColor.label
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    lazy var checkmarkButton: UIButton = {
+    private var checkmarkButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
         button.tintColor = PKColor.label
         button.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(button)
         let configuration = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
         let image = UIImage(systemName: "checkmark", withConfiguration: configuration)
         button.setImage(image, for: .normal)
         return button
     }()
 
-    var optionTrigger: PKTrigger?
-    
     init(title: String?, isChecked: Bool) {
         super.init()
+        addSubview(checkmarkButton)
         titleLabel.text = title
         setupConstraints()
-        
         checkmarkButton.isChecked = isChecked
         checkmarkButton.addTarget(self, action: #selector(triggered(_:)), for: .touchUpInside)
         checkmarkButton.imageView?.tintColor = isChecked ? PKColor.label : PKColor.clear
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupConstraints() {
@@ -135,12 +134,12 @@ class PokerAppearanceOptionView: PKContainerView {
         insertSubview(circleImage, belowSubview: checkmarkButton)
         circleImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         circleImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
         checkmarkButton.centerXAnchor.constraint(equalTo: circleImage.centerXAnchor).isActive = true
         checkmarkButton.centerYAnchor.constraint(equalTo: circleImage.centerYAnchor, constant: 1).isActive = true
     }
     
-    @objc func triggered(_ sender: UIButton) {
+    @objc
+    private func triggered(_ sender: UIButton) {
         UISelectionFeedbackGenerator().selectionChanged()
         if sender.isChecked {
             // uncheck
@@ -159,10 +158,6 @@ class PokerAppearanceOptionView: PKContainerView {
         sender.isChecked = !sender.isChecked
         optionTrigger?(sender.isChecked)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 /// Poker View for appearance selection
@@ -178,7 +173,7 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     internal var darkTapped: PKAction?
     internal var autoTapped: PKAction?
     
-    internal var optionView: PokerAppearanceOptionView?
+    private var optionView: PokerAppearanceOptionView?
     
     var optionTrigger: PKTrigger?
     var isChecked = false
@@ -188,9 +183,9 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
             optionView.optionTrigger = optionTrigger
             
             addSubview(optionView)
-            optionView.constraint(withLeadingTrailing: 16)
+            optionView.constraint(withLeadingTrailing: titleSpacing)
             optionView.topAnchor.constraint(equalTo: darkAppearanceView.bottomAnchor, constant: 20).isActive = true
-            optionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+            optionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
             
             self.optionView = optionView
         }
@@ -198,9 +193,7 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
     
     public init() {
         super.init(frame: CGRect.zero)
-        
         widthAnchor.constraint(equalToConstant: 280).isActive = true
-        
         setupAppearanceSelectionView()
     }
     
@@ -216,17 +209,17 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
         
         darkAppearanceView.heightAnchor.constraint(equalToConstant: 88).isActive = true
         darkAppearanceView.widthAnchor.constraint(equalToConstant: 72).isActive = true
-        darkAppearanceView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        darkAppearanceView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleSpacing).isActive = true
         darkAppearanceView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        let darkAppearanceViewBCons = darkAppearanceView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        let darkAppearanceViewBCons = darkAppearanceView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing)
         darkAppearanceViewBCons.isActive = true
         darkAppearanceViewBCons.priority = .defaultHigh
         
         lightAppearanceView.constraint(horizontalStack: darkAppearanceView)
-        lightAppearanceView.trailingAnchor.constraint(equalTo: darkAppearanceView.leadingAnchor, constant: -15).isActive = true
+        lightAppearanceView.trailingAnchor.constraint(equalTo: darkAppearanceView.leadingAnchor, constant: -titleSpacing).isActive = true
         autoAppearanceView.constraint(horizontalStack: darkAppearanceView)
-        autoAppearanceView.leadingAnchor.constraint(equalTo: darkAppearanceView.trailingAnchor, constant: 15).isActive = true
+        autoAppearanceView.leadingAnchor.constraint(equalTo: darkAppearanceView.trailingAnchor, constant: titleSpacing).isActive = true
         
         let tapLight = UITapGestureRecognizer(target: self, action: #selector(appearanceSelected(_:)))
         let tapDark = UITapGestureRecognizer(target: self, action: #selector(appearanceSelected(_:)))
@@ -234,7 +227,6 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
         lightAppearanceView.addGestureRecognizer(tapLight)
         darkAppearanceView.addGestureRecognizer(tapDark)
         autoAppearanceView.addGestureRecognizer(tapAuto)
-        
     }
     
     @objc
@@ -255,5 +247,4 @@ public class PokerAppearanceView: PokerView, PokerTitleRepresentable {
             currentWindow?.overrideUserInterfaceStyle = .unspecified
         }
     }
-    
 }

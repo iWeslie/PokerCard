@@ -28,6 +28,7 @@ import UIKit
 
 /// Poker Action handler
 public typealias PKAction = () -> Void
+
 /// Poker Binary Option trigger handler
 public typealias PKTrigger = (Bool) -> Void
 
@@ -49,13 +50,21 @@ extension PokerAppearanceView {
         return self
     }
     
+    /// Set the appearance option titles.
+    ///
+    /// - Parameter title:  The PokerView title.
+    /// - Parameter light:  The title for light style.
+    /// - Parameter dark:   The title for dark style.
+    /// - Parameter auto:   The title for auto style.
+    ///
+    /// - Returns: The `PokerAppearanceView` instance.
     @discardableResult
     public func setTitles(title: String, light: String, dark: String, auto: String) -> PokerAppearanceView {
-        
         titleLabel.text = title
         lightAppearanceView.titleLabel.text = light
         darkAppearanceView.titleLabel.text = dark
         autoAppearanceView.titleLabel.text = auto
+        
         return self
     }
     
@@ -84,16 +93,20 @@ extension PokerContactView {
     ///
     /// - Parameter options:    The contact options array.
     /// - Parameter target:     The target controller, use `self` as well.
+    ///
+    /// - Returns: The `PokerContactView` instance.
     @discardableResult
     public func addOptions(_ options: [PKContactOption], on target: UIViewController) -> PokerContactView {
         contactOptions = options
         targetController = target
+        
         return self
     }
     
     @discardableResult
     public func setTitle(_ title: String) -> PokerContactView {
         titleLabel.text = title
+        
         return self
     }
 }
@@ -101,26 +114,42 @@ extension PokerContactView {
 extension PokerLanguageView {
     /// Passing language change actions by closure.
     ///
-    /// - Parameter en: 	English selected.
+    /// - Parameter en:     English selected.
     /// - Parameter zh:     Simplified Chinses selected.
     /// - Parameter auto:   Auto type language selected.
+    ///
+    /// - Returns: The `PokerContactView` instance.
     @discardableResult
     public func config(en: @escaping PKAction, zh: @escaping PKAction, auto: @escaping PKAction) -> PokerLanguageView {
         enTapped = en
         zhTapped = zh
         autoTapped = auto
+        
         return self
     }
     
+    /// Set the title for the created `PokerLanguageView` instance.
+    ///
+    /// - Parameter title: The PokerView title.
+    ///
+    /// - Returns: The `PokerLanguageView` instance.
     @discardableResult
     public func setTitle(_ title: String) -> PokerLanguageView {
         titleLabel.text = title
+        
         return self
     }
     
+    /// Set the images for the created `PokerLanguageView` instance.
+    ///
+    /// - Parameter en: The English language option image.
+    /// - Parameter zh: The Chinese language option image.
+    /// - Parameter auto: The Auto language option image.
+    /// - Parameter checkmark: The checkmark image.
+    ///
+    /// - Returns: The `PokerLanguageView` instance.
     @discardableResult
     public func setImages(en: UIImage?, zh: UIImage?, auto: UIImage?, checkmark: UIImage?) -> PokerLanguageView {
-        
         enLangView.symbolImageView.image = en
         enLangView.checkmarkImageView.image = checkmark
         zhLangView.symbolImageView.image = zh

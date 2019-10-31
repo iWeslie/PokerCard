@@ -26,8 +26,6 @@
 
 import UIKit
 
-internal let buttonHorizontalInset: CGFloat = 40
-
 protocol PokerConfirmRepresentable {
     func setupCancelButton(with title: String?)
 }
@@ -41,7 +39,7 @@ extension PokerConfirmRepresentable {
         button.addTarget(pokerView, action: #selector(pokerView.dismiss), for: .touchUpInside)
         button.backgroundColor = PKColor.blue
         pokerView.addSubview(button)
-        button.constraint(withLeadingTrailing: buttonHorizontalInset)
+        button.constraint(withLeadingTrailing: 40)
         button.heightAnchor.constraint(equalToConstant: 38).isActive = true
         
         return button

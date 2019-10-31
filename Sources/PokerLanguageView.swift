@@ -55,7 +55,6 @@ internal class PokerLanguageOptionView: PokerSubView {
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
         checkmarkImageView.isHidden = false
-        
         [infoLabel, symbolImageView, checkmarkImageView].forEach(addSubview(_:))
         
         switch type {
@@ -78,7 +77,6 @@ internal class PokerLanguageOptionView: PokerSubView {
             let checkmarkConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .thin)
             checkmarkImageView.image = UIImage(systemName: "checkmark", withConfiguration: checkmarkConfig)
             checkmarkImageView.tintColor = PKColor.label
-            
         } else {
             symbolImageView.constraint(withWidthHeight: 30)
             symbolImageView.contentMode = .scaleAspectFit
@@ -93,7 +91,6 @@ internal class PokerLanguageOptionView: PokerSubView {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(languageSelected(_:)))
         addGestureRecognizer(tap)
-        
     }
     
     @objc
@@ -126,8 +123,7 @@ public class PokerLanguageView: PokerView, PokerTitleRepresentable {
     init() {
         super.init(frame: CGRect.zero)
         
-        widthAnchor.constraint(equalToConstant: 265).isActive = true
-        
+        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
         titleLabel = setupTitleLabel(for: self, with: "Language")
         
         var langType: LangType = .auto
@@ -151,24 +147,21 @@ public class PokerLanguageView: PokerView, PokerTitleRepresentable {
             }
         }
         
-        enLangView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
-        zhLangView.topAnchor.constraint(equalTo: enLangView.bottomAnchor, constant: 12).isActive = true
-        autoLangView.topAnchor.constraint(equalTo: zhLangView.bottomAnchor, constant: 12).isActive = true
-        
-        autoLangView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+        enLangView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleSpacing).isActive = true
+        zhLangView.topAnchor.constraint(equalTo: enLangView.bottomAnchor, constant: internalSpacing).isActive = true
+        autoLangView.topAnchor.constraint(equalTo: zhLangView.bottomAnchor, constant: internalSpacing).isActive = true
+        autoLangView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension PokerLanguageView: PKLanguageSelectionDelegate {
     internal func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType) {
         
         UISelectionFeedbackGenerator().selectionChanged()
-        
         [enLangView, zhLangView, autoLangView].forEach { langView in
             langView.checkmarkImageView.isHidden = true
         }
@@ -179,7 +172,6 @@ extension PokerLanguageView: PKLanguageSelectionDelegate {
         case .zh: zhTapped?()
         case .auto: autoTapped?()
         }
-        
         if language == .auto {
             UserDefaults.standard.set(nil, forKey: appleLanguageKey)
             PokerLanguageView.isAutoLanguageType = true
@@ -188,6 +180,5 @@ extension PokerLanguageView: PKLanguageSelectionDelegate {
             PokerLanguageView.isAutoLanguageType = false
         }
         UserDefaults.standard.synchronize()
-        print("done")
     }
 }

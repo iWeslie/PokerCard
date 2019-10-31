@@ -60,19 +60,22 @@ class ViewController: UIViewController {
     }
     
     // MARK:- Show Appearance
-    @available(iOS 13.0, *)
     @IBAction func showAppearance(_ sender: Any) {
-        PokerCard.showAppearanceOptions()
-            .config(light: {
-                print("light selected")
-            }, dark: {
-                print("dark selected")
-            }) {
-                print("auto selected")
-        }
-        .setTitles(title: "选择外观", light: "浅色", dark: "深色", auto: "自动")
-        .addOption(title: "Show Theme", isChecked: false) { trigger in
-            print(trigger)
+        if #available(iOS 13.0, *) {
+            PokerCard.showAppearanceOptions()
+                .config(light: {
+                    print("light selected")
+                }, dark: {
+                    print("dark selected")
+                }) {
+                    print("auto selected")
+            }
+            .setTitles(title: "选择外观", light: "浅色", dark: "深色", auto: "自动")
+            .addOption(title: "Show Theme", isChecked: false) { trigger in
+                print(trigger)
+            }
+        } else {
+            print("Appearance is available on iOS 13 and later.")
         }
     }
     

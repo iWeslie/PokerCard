@@ -40,16 +40,22 @@ public enum PKContactType {
 /// Contact options enum
 public class PKContactOption {
     
-    fileprivate var contactKey: String?
-    fileprivate var image: UIImage?
-    fileprivate var title: String
-    
+    /// Delay time for an action.
     public var delay: TimeInterval = 0
+    /// Completion handler for a action.
     public var completion: PKAction?
     
     fileprivate var type: PKContactType
     fileprivate var recipients: [String]?
+    fileprivate var contactKey: String?
+    fileprivate var image: UIImage?
+    fileprivate var title: String
     
+    /// Create a `PKContactOption` instance.
+    ///
+    /// - Parameter type:   The contact type.
+    /// - Parameter image:  The contact logo imge, you can pass `nil` for email and message in iOS13+.
+    /// - Parameter title:  The contact title.
     public init(type: PKContactType, image: UIImage?, title: String) {
         self.image = image
         self.title = title
@@ -76,7 +82,7 @@ public class PKContactOption {
 
 fileprivate class PokerContactOptionView: PokerSubView {
     
-    var option: PKContactOption
+    fileprivate let option: PKContactOption
     fileprivate var isSymbolImage = false
     fileprivate var imageView = UIImageView()
     fileprivate var detailLabel = PKLabel(fontSize: 20)
@@ -137,7 +143,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
             options?.forEach { option in
                 addContactOption(option)
             }
-            lastContact?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+            lastContact?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
         }
     }
     
@@ -151,10 +157,10 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         
         titleLabel = setupTitleLabel(for: self, with: "Contact Us")
         
-        let titleBCons = titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        let titleBCons = titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing)
         titleBCons.priority = .defaultLow
         titleBCons.isActive = true
-        widthAnchor.constraint(equalToConstant: 265).isActive = true
+        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -167,7 +173,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         
         contactView.heightAnchor.constraint(equalToConstant: contactViewHeight).isActive = true
         contactView.constraint(withLeadingTrailing: 20)
-        contactView.topAnchor.constraint(equalTo: (lastContact ?? titleLabel).bottomAnchor, constant: 12).isActive = true
+        contactView.topAnchor.constraint(equalTo: (lastContact ?? titleLabel).bottomAnchor, constant: internalSpacing).isActive = true
         lastContact = contactView
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(contactViewTapped(_:)))

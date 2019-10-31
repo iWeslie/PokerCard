@@ -29,7 +29,7 @@ import UIKit
 /// A background container view for presented PokerView.
 internal class PokerPresenterView: UIView, UIGestureRecognizerDelegate {
     
-    var pokerView: PokerView? {
+    internal var pokerView: PokerView? {
         didSet {
             guard let pokerView = pokerView else { return }
             

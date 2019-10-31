@@ -26,7 +26,6 @@
 
 /// Presenter for Poker View with alert style.
 public class PokerAlertPresenter: PokerPresenter {
-    
     /// Create a `PokerAlertView` with title and detail decription.
     ///
     /// - Parameter title:  The alert title.
@@ -39,13 +38,10 @@ public class PokerAlertPresenter: PokerPresenter {
         return pokerView
     }
     
-    /// Create a `PokerInputView` with title, detail, button style and input placeholder.
+    /// Create a `PokerInputView` with title and detail.
     ///
-    /// - Parameter title:          The alert title.
-    /// - Parameter detail:         The alert detail description, `nil` by default.
-    /// - Parameter style:          The input style, `default` or `promotion`.
-    /// - Parameter placeholder:    The input placeholder.
-    /// - Parameter promotion:      The input promotion.
+    /// - Parameter title:  The alert title.
+    /// - Parameter detail: The alert detail description, `nil` by default.
     ///
     /// - Returns: The created `PokerInputView` instance.
     public func showInput(title: String, detail: String? = nil) -> PokerInputView {
@@ -54,10 +50,14 @@ public class PokerAlertPresenter: PokerPresenter {
         return pokerView
     }
     
-    public func showPromotion(title: String, promotion: String?, detail: String?) -> PokerInputView {
+    /// Create a `PokerInputView` with title, promotion and detail.
+    ///
+    /// - Parameter title:      The alert title.
+    /// - Parameter promotion:  The promotion text.
+    /// - Parameter detail:     The alert detail description, `nil` by default.
+    public func showPromotion(title: String, promotion: String?, detail: String? = nil) -> PokerInputView {
         let pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
         backgroundView.pokerView = pokerView
         return pokerView
     }
-    
 }

@@ -35,12 +35,8 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
     public var detailLabel: UILabel?
     /// Confirm button for an alertView
     public var confirmButton: UIButton = PKButton(title: "", fontSize: 20)
-    internal var cancelButton = PKButton(title: "", fontSize: 14)
     
-    internal var titleHorizontalInset: CGFloat = 24
-    internal var titleVerticalInset: CGFloat = 18
-    internal var detailHorizontalInset: CGFloat = 15
-    internal var lineSpacing: CGFloat = 8
+    internal var cancelButton = PKButton(title: "", fontSize: 14)
     
     internal var titleBDetailTCons: NSLayoutConstraint?
     internal var titleBConfirmTCons: NSLayoutConstraint!
@@ -52,13 +48,13 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
         titleLabel = setupTitleLabel(for: self, with: title)
         confirmButton = setupConfirmButton(for: self, with: "Confirm")
         
-        titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleVerticalInset)
+        titleBConfirmTCons = confirmButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: titleSpacing)
         titleBConfirmTCons.priority = .defaultHigh
         titleBConfirmTCons.isActive = true
         
         setupDetail(with: detail)
         
-        widthAnchor.constraint(equalToConstant: 265).isActive = true
+        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
         layoutIfNeeded()
         confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
     }
@@ -73,11 +69,11 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
         addSubview(label)
         detailLabel = label
         
-        titleBDetailTCons = label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
+        titleBDetailTCons = label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: lineSpacing)
         titleBDetailTCons?.isActive = true
-        label.constraint(withLeadingTrailing: detailHorizontalInset)
+        label.constraint(withLeadingTrailing: titleSpacing)
         
-        detailBConfirmTCons = label.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -12)
+        detailBConfirmTCons = label.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -internalSpacing)
         detailBConfirmTCons?.priority = .defaultHigh
         detailBConfirmTCons?.isActive = true
         
@@ -86,7 +82,7 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
     
     func setupCancelButton(with title: String?) {
         guard let cancelTitle = title, !cancelTitle.isEmpty else {
-            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
             return
         }
         cancelButton.setTitle(cancelTitle, for: .normal)

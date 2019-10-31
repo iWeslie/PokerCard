@@ -34,17 +34,20 @@ public class PokerInputView: PokerAlertView {
         case promotion
     }
     
-    var inputText: ((_ text: String) -> Void)!
-    var validation: ((_ text: String) -> Bool)?
+    /// input text closure
+    internal var inputText: ((_ text: String) -> Void)!
+    /// input validation closure
+    internal var validation: ((_ text: String) -> Bool)?
     
+    /// input Text Field on the `PokerInputView`
     public var inputTextField: UITextField! {
         didSet {
             inputTextField.addTarget(self, action: #selector(removeInputBorder), for: .editingChanged)
         }
     }
     
-    var inputContainerViewHeight: CGFloat = 36
-    var inputContainerView = PKContainerView()
+    internal var inputContainerViewHeight: CGFloat = 36
+    internal var inputContainerView = PKContainerView()
     
     // promotion style
     lazy var promotionContainerView: UIView = {
@@ -58,7 +61,7 @@ public class PokerInputView: PokerAlertView {
         return leftMargin
     }()
     
-    var promotionLabel: UILabel?
+    internal var promotionLabel: UILabel?
     
     convenience init(title: String,
                      detail: String? = nil,
@@ -83,14 +86,14 @@ public class PokerInputView: PokerAlertView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    fileprivate func setupInputView() {
+    private func setupInputView() {
         inputContainerViewHeight = 36
         inputContainerView.layer.cornerRadius = 8
         insertSubview(inputContainerView, at: 0)
         
         inputContainerView.translatesAutoresizingMaskIntoConstraints = false
         inputContainerView.topAnchor.constraint(equalTo: (detailLabel ?? promotionLabel ?? titleLabel).bottomAnchor, constant: lineSpacing).isActive = true
-        inputContainerView.constraint(withLeadingTrailing: detailHorizontalInset)
+        inputContainerView.constraint(withLeadingTrailing: titleSpacing)
         inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -lineSpacing).isActive = true
         inputContainerView.heightAnchor.constraint(equalToConstant: inputContainerViewHeight).isActive = true
         
@@ -109,16 +112,16 @@ public class PokerInputView: PokerAlertView {
         inputTextField.bottomAnchor.constraint(equalTo: lineView.topAnchor).isActive = true
     }
     
-    fileprivate func setupPromotionInputView() {
+    private func setupPromotionInputView() {
         inputContainerViewHeight = 48
         
         inputContainerView = PokerSubView()
         addSubview(inputContainerView)
         
-        let spacing = detailLabel == nil ? titleVerticalInset : lineSpacing
+        let spacing = detailLabel == nil ? titleSpacing : lineSpacing
         inputContainerView.topAnchor.constraint(equalTo: (detailLabel ?? promotionLabel ?? titleLabel).bottomAnchor, constant: spacing).isActive = true
-        inputContainerView.constraint(withLeadingTrailing: detailHorizontalInset)
-        inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -titleVerticalInset).isActive = true
+        inputContainerView.constraint(withLeadingTrailing: titleSpacing)
+        inputContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -titleSpacing).isActive = true
         inputContainerView.heightAnchor.constraint(equalToConstant: inputContainerViewHeight).isActive = true
         
         inputTextField = PKTextField(fontSize: 25)
@@ -127,7 +130,7 @@ public class PokerInputView: PokerAlertView {
         inputTextField.constraint(withTopBottom: 0)
     }
     
-    fileprivate func setupPromotion(with promotionText: String?, style: PokerStyle) {
+    private func setupPromotion(with promotionText: String?, style: PokerStyle) {
         guard let promotion = promotionText else { return }
         
         titleBDetailTCons?.isActive = false
@@ -175,7 +178,7 @@ public class PokerInputView: PokerAlertView {
     }
     
     @objc
-    fileprivate func onKeyboardShow(_ notification: Notification) {
+    private func onKeyboardShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,

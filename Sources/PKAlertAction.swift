@@ -30,13 +30,14 @@ import UIKit
 extension PokerAlertView {
     /// Modify confirm button title and background style.
     ///
-    /// - Parameter title: The button title.
-    /// - Parameter style: The button color style, **blue** by default, see `PKColor` for more detail.
+    /// - Parameter title:          The button title.
+    /// - Parameter style:          The button color style, **blue** by default, see `PKColor` for more detail.
+    /// - Parameter fill:           The button fill style, default is `true`.
+    /// - Parameter cancelTitle:    The cancel button title, `nil` by default.
     ///
     /// - Returns: The `PokerAlertView` instance.
     @discardableResult
     public func confirm(title: String, style: PokerStyle = .default, fill: Bool = true, cancelTitle: String? = nil) -> PokerAlertView {
-        
         confirmButton.setTitle(title, for: .normal)
         confirmButton.backgroundColor = PKColor.fromAlertView(style)
         setupCancelButton(with: cancelTitle)
@@ -55,7 +56,7 @@ extension PokerAlertView {
     ///
     /// - Parameter handler: The button click action.
     ///
-    /// - Returns: The `PokerPresenter` instance.
+    /// - Returns: The `PokerAlertView` instance.
     @discardableResult
     fileprivate func confirm(_ handler: @escaping () -> Void) -> PokerAlertView {
         // remove default dismiss action
@@ -67,11 +68,13 @@ extension PokerAlertView {
     
     /// Modify confirm button style and add action to it.
     ///
-    /// - Parameter title:      The button title.
-    /// - Parameter style:      The button color style, **blue** by default, see `PKColor` for more detail.
-    /// - Parameter handler:    The button click action.
+    /// - Parameter title:          The button title.
+    /// - Parameter style:          The button color style, **blue** by default, see `PKColor` for more detail.
+    /// - Parameter handler:        The button click action.
+    /// - Parameter fill:           The button fill style, default is `true`
+    /// - Parameter cancelTitle:    The cancel button title, `nil` by default.
     ///
-    /// - Returns: The `PokerPresenter` instance.
+    /// - Returns: The `PokerAlertView` instance.
     @discardableResult
     public func confirm(
         title: String,
@@ -92,6 +95,8 @@ extension PokerInputView {
     /// Add action to confitm button.
     ///
     /// - Parameter handler: The button click action.
+    ///
+    /// - Returns: The `PokerInputView` instance.
     @discardableResult
     public func confirm(_ handler: @escaping (_ text: String) -> Void) -> PokerInputView {
         inputText = handler
@@ -128,8 +133,10 @@ extension PokerInputView {
     /// - Parameter title:      The button title.
     /// - Parameter style:      The button color style, **blue** by default, see `PKColor` for more detail.
     /// - Parameter handler:    The button click action.
+    /// - Parameter fill: The button fill style, default is `true`.
+    /// - Parameter cancelTitle: The cancel button title, `nil` by default.
     ///
-    /// - Returns: The `PokerInputPresenter` instance.
+    /// - Returns: The `PokerInputView` instance.
     @discardableResult
     public func confirm(
         title: String,
@@ -149,10 +156,11 @@ extension PokerInputView {
     ///
     /// - Parameter predicate: The validation predicate closure.
     ///
-    /// - Returns: The `PokerInputPresenter` instance.
+    /// - Returns: The `PokerInputView` instance.
     @discardableResult
     public func validate(_ predicate: @escaping (String) -> Bool) -> PokerInputView {
         validation = predicate
+        
         return self
     }
     
@@ -161,21 +169,25 @@ extension PokerInputView {
     /// - Parameter promotionStyle: The promotion color style, **pink** by default, see `PKColor` for more detail.
     /// - Parameter placeholder: The promotion input text filed placeholder
     ///
-    /// - Returns: The `PokerInputPresenter` instance.
+    /// - Returns: The `PokerInputView` instance.
     @discardableResult
     public func appearance(promotionStyle: PokerStyle, placeholder: String? = nil) -> PokerInputView {
         promotionContainerView.backgroundColor = PKColor.fromAlertView(promotionStyle).withAlphaComponent(0.1)
         promotionLeftMarginView.backgroundColor = PKColor.fromAlertView(promotionStyle)
-        
         inputTextField.placeholder = placeholder
+        
         return self
     }
     
+    /// Regisiter the input view to first responder when popup.
+    ///
+    /// - Returns: The `PokerInputView` instance.
     @discardableResult
     public func shouldBecomeFirstResponder() -> PokerInputView {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.inputTextField.becomeFirstResponder()
         }
+        
         return self
     }
 }

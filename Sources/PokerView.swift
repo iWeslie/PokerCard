@@ -29,6 +29,12 @@ import UIKit
 /// Abstract Class for a Poker Bulletin View
 public class PokerView: UIView {
     
+    internal let baseWidth: CGFloat = 265.0
+    internal let lineSpacing: CGFloat = 8.0
+    internal let titleSpacing: CGFloat = 16.0
+    internal let internalSpacing: CGFloat = 12.0
+    
+    /// the top vc in the current view hierarchy
     lazy var topViewController: UIViewController? = {
         guard let rootViewController = currentWindow?.rootViewController else {
             return nil
