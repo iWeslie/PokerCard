@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PokerCard"
-  s.version      = "0.0.17"
+  s.version      = "0.1.0"
   s.summary      = "A new generation of Alert View with fluid design."
   s.homepage     = "https://github.com/iWeslie/PokerCard"
   s.license      = "MIT"
