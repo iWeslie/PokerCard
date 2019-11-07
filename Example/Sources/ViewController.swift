@@ -70,7 +70,7 @@ class ViewController: UIViewController {
                 }) {
                     print("auto selected")
             }
-            .setTitles(title: "选择外观", light: "浅色", dark: "深色", auto: "自动")
+            .setTitles(title: "Appearance", light: "Light", dark: "Dark", auto: "Auto")
             .addOption(title: "Show Theme", isChecked: false) { trigger in
                 print(trigger)
             }
@@ -81,10 +81,10 @@ class ViewController: UIViewController {
     
     // MARK:- Show Contacts
     @IBAction func showContacts(_ sender: Any) {
-        let emailOption = PKContactOption(type: .email(["feedback@iweslie.com"]), image: UIImage(named: "mail"), title: "邮件")
-        let messageOption = PKContactOption(type: .message(["iweslie@icloud.com"]), image: UIImage(named: "message"), title: "信息")
-        let weiboOption = PKContactOption(type: .weibo("6425782290"), image: UIImage(named: "weibo"), title: "微博")
-        let wechatOption = PKContactOption(type: .wechat("weslie-chen"), image: UIImage(named: "wechat"), title: "微信")
+        let emailOption = PKContactOption(type: .email(["feedback@iweslie.com"]), image: UIImage(named: "mail"), title: "Email")
+        let messageOption = PKContactOption(type: .message(["iweslie@icloud.com"]), image: UIImage(named: "message"), title: "iMessage")
+        let weiboOption = PKContactOption(type: .weibo("6425782290"), image: UIImage(named: "weibo"), title: "Weibo")
+        let wechatOption = PKContactOption(type: .wechat("weslie-chen"), image: UIImage(named: "wechat"), title: "WeChat")
         wechatOption.delay = 1.5
         wechatOption.completion = {
             print("something")
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         
         PokerCard.showContacts()
             .addOptions([emailOption, messageOption, weiboOption, wechatOption, githubOption], on: self)
-            .setTitle("联系我们")
+            .setTitle("Contact Us")
     }
     
     // MARK:- Show Language Picker
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
             }) {
                 print("auto selected")
             }
-        .setTitle("选择语言")
+        .setTitle("Language")
         .setImages(en: UIImage(named: "enLang")!, zh: UIImage(named: "zhLang")!, auto: UIImage(named: "autoLang")!, checkmark: UIImage(named: "checkmark")!)
     }
     
