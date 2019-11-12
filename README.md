@@ -11,11 +11,19 @@
 
 A new generation of an `AlertView` reactive programming UI framework with fluid design interface. Written in purely Swift. Adapted to Dark Mode. 
 
-![poker-alert-preview](https://photos.iweslie.com/github/pokercard/poker-alert-preview.png)
+![poker-alert-preview](https://photos.iweslie.com/github/pokercard/poker-card-preview-light.png)
 
 ## Example Project
 
 The example project is included in `PokerCard.xcworkspace`, and it contains various examples you can use and modify as you like. 
+
+## Dark Mode Support
+
+PokerCard fully supports Dark Mode now on iOS 13+.
+
+You do not need extra work to support it at all. All the work is already done for you.
+
+![dark mode support](https://photos.iweslie.com/github/pokercard/poker-card-preview-switch.png)
 
 ## Requirements
 
@@ -23,9 +31,9 @@ The example project is included in `PokerCard.xcworkspace`, and it contains vari
 - Xcode 11+
 - Swift 5+
 
-> *⚠️PokerCard has not been tested and there is a lack of UITest and other testing cases. This is a pre-release version only⚠️*
-
 ## Installation
+
+> *⚠️PokerCard has not been tested and there is a lack of UITest and other testing cases. This is a pre-release version only⚠️*
 
 PokerCard is compatible with Swift 5 as of pre-release 0.1.0.
 
@@ -53,32 +61,46 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for au
 https://github.com/iWeslie/PokerCard
 ```
 
+### Mannually
+
+If you prefer not to use any of the aforementioned dependency managers, you can integrate Alamofire into your project manually.
+
+#### Embedded Framework
+
+- Open up Terminal, `cd` into your top-level project directory, suppose your project has already been controlled by git. Then, add PokerCard as a git [submodule](https://git-scm.com/docs/git-submodule) by running the following command:
+
+  ```
+  $ git submodule add https://github.com/iWeslie/PokerCard.git
+  ```
+
+- Open the new `PokerCard` folder, and drag the `Alamofire.xcodeproj` into the Project Navigator of your application's Xcode project.
+
+  > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
+
+- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
+
+- In the tab bar at the top of that window, open the "General" panel.
+
+- Click on the `+` button under the “Frameworks, Libraries and Embedded Content" section.
+
+- You will see `PokerCard.xcodeproj` folders a `PokerCard.framework`. Select it and click `Add`.
+
+- And that's it!
+
 ## Basic Usage
 
 ```swift
-import PokerCard
-
-class ViewController: UIViewController {
-    override viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // present a poker card 
-        PokerCard.showAlert(title: "Please notice").confirm {
-            // do something ...
-        }
-    }
+// present a poker card 
+PokerCard.showAlert(title: "Please notice").confirm {
+    // do something ...
 }
 ```
 
 ### PokerAlertView
 
-![poker-alert](https://photos.iweslie.com/github/pokercard/poker-alert.png)
-
 ```swift
 PokerCard.showAlert(title: "Please notice", detail: "Here is some descripttion ...")
 ```
-
-![poker-laert-detail](https://photos.iweslie.com/github/pokercard/poker-laert-detail.png)
 
 Or if you want some customization on the `Confirm` button.
 
@@ -94,8 +116,6 @@ PokerCard.showAlert(title: "The Alert Title", detail: detailInfo)
 
 #### Default Style
 
-![poker-input](https://photos.iweslie.com/github/pokercard/poker-input.png)
-
 ```swift
 PokerCard.showInput(title: "Please input your name")
     .confirm(title: "Done", style: .color(.systemPink), cancelTitle: "Cancel") { inputText in 
@@ -104,8 +124,6 @@ PokerCard.showInput(title: "Please input your name")
 ```
 
 #### Promotion Style
-
-![pker-promotion](https://photos.iweslie.com/github/pokercard/poker-promotion.png)
 
 ```swift
 let warningInfo = "Some long paragraph of text"
@@ -117,12 +135,10 @@ PokerCard.showPromotion(title: "Notice", promotion: warningInfo)
     // confirm handler 
     .confirm { inputText in 
         print(inputText)
-}
+ }
 ```
 
 ### PokerAppearanceView
-
-![poker-appearance](https://photos.iweslie.com/github/pokercard/poker-appearance.png)
 
 ```swift
 // This is only available for iOS 13+
@@ -139,22 +155,12 @@ PokerCard.showAppearanceOptions()
     .addOption(title: "Show Background Image", isChecked: false) { trigger in
         print("is showing background image: \(trigger)")
         // do some stuff...
-    }
+}
 ```
 
 ### PokerContactView
 
-![poker-contact](https://photos.iweslie.com/github/pokercard/poker-contact.png)
-
 ```swift
-PokerCard.showContacts()
-    .config(with: [
-        .email("mail"),
-        .message("your icloud email"),
-        .wechat("your wechat id", wechatLogoImage),
-        .weibo(weiboURL, weiboImage),
-        .github("github address", githubImage)
-    ], on: self)
 // you can leave the image nil for `Email` and `Message` option in iOS 13+, it will use sfsymbol automatically.
 let emailOption = PKContactOption(type: .email(["domain@example.com"]), image: UIImage(named: "mail"), title: "Email")
 let messageOption = PKContactOption(type: .message(["domain@example.com"]), image: UIImage(named: "message"), title: "iMessage")
@@ -166,8 +172,6 @@ PokerCard.showContacts()
 ```
 
 ### PokerLanguageView
-
-![poker-lang](https://photos.iweslie.com/github/pokercard/poker-lang.png)
 
 ```swift
 PokerCard.showLanguagePicker()
