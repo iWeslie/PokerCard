@@ -118,6 +118,9 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func showAccessGranter(_ sender: Any) {
+        PokerCard.showAccessGranter()
+    }
 }
 
 extension ViewController: MFMessageComposeViewControllerDelegate {

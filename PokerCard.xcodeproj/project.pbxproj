@@ -36,6 +36,7 @@
 		D3924FEF234A29B70009420E /* PKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FEE234A29B70009420E /* PKAlertAction.swift */; };
 		D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF0234A2CF00009420E /* PKSelectionAction.swift */; };
 		D3924FF3234A35B90009420E /* PokerAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */; };
+		D3CBAD2123ADC1D600BE87AF /* PokerAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CBAD2023ADC1D600BE87AF /* PokerAuthorizationView.swift */; };
 		D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DE5EBC23336CBC001D901E /* PokerStyle.swift */; };
 		D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8B882233AFCE800D008D2 /* PokerContactView.swift */; };
 		D3FE18A72369B0D000DCE959 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = D3FE18A62369B0D000DCE959 /* .travis.yml */; };
@@ -86,6 +87,7 @@
 		D3924FEE234A29B70009420E /* PKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKAlertAction.swift; sourceTree = "<group>"; };
 		D3924FF0234A2CF00009420E /* PKSelectionAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKSelectionAction.swift; sourceTree = "<group>"; };
 		D3924FF2234A35B90009420E /* PokerAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertPresenter.swift; sourceTree = "<group>"; };
+		D3CBAD2023ADC1D600BE87AF /* PokerAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAuthorizationView.swift; sourceTree = "<group>"; };
 		D3DE5EBC23336CBC001D901E /* PokerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerStyle.swift; sourceTree = "<group>"; };
 		D3F8B882233AFCE800D008D2 /* PokerContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerContactView.swift; sourceTree = "<group>"; };
 		D3FC49302333E20900D4DBFB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				D36D34B62339B405004627BD /* PokerAppearanceView.swift */,
 				D3F8B882233AFCE800D008D2 /* PokerContactView.swift */,
 				D38C3570233DA54C0083F737 /* PokerLanguageView.swift */,
+				D3CBAD2023ADC1D600BE87AF /* PokerAuthorizationView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
 				D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */,
 				D3DE5EBD23336CBC001D901E /* PokerStyle.swift in Sources */,
+				D3CBAD2123ADC1D600BE87AF /* PokerAuthorizationView.swift in Sources */,
 				D3330DB5234B6BA700569207 /* PokerPresenter.swift in Sources */,
 				D3F8B883233AFCE800D008D2 /* PokerContactView.swift in Sources */,
 				D38001CE2328F8C900980988 /* PokerView.swift in Sources */,

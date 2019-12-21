@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G5A-tB-2km">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G5A-tB-2km">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -94,10 +94,25 @@
                                     <action selector="showLanguagePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oiT-C0-kYZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-VO-LZN">
+                                <rect key="frame" x="0.0" y="448" width="414" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="klj-1p-R1z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
+                                <state key="normal" title="showAccessGranter">
+                                    <color key="titleColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showAccessGranter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W0T-aY-NEg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="0w2-Y9-Bgu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="96O-d8-YPF"/>
+                            <constraint firstItem="cTs-VO-LZN" firstAttribute="top" secondItem="dH5-RQ-MyH" secondAttribute="bottom" id="L2T-cx-2Gu"/>
+                            <constraint firstItem="cTs-VO-LZN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LuU-Qm-WIc"/>
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NtX-eG-EzJ"/>
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="top" secondItem="KG4-h4-PiQ" secondAttribute="bottom" id="PuZ-4z-3xF"/>
                             <constraint firstItem="dH5-RQ-MyH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vgd-9d-LxE"/>
@@ -114,18 +129,19 @@
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="leading" secondItem="0w2-Y9-Bgu" secondAttribute="leading" id="pkV-e0-i1f"/>
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="top" secondItem="JcH-wv-5nx" secondAttribute="bottom" id="qHm-8H-Oyh"/>
                             <constraint firstItem="dH5-RQ-MyH" firstAttribute="top" secondItem="SDx-n1-sq1" secondAttribute="bottom" id="qKG-L7-wuk"/>
+                            <constraint firstItem="cTs-VO-LZN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vBb-13-TgL"/>
                             <constraint firstItem="JcH-wv-5nx" firstAttribute="trailing" secondItem="0w2-Y9-Bgu" secondAttribute="trailing" id="xcn-BQ-dcN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="PokerCard" id="BIK-oD-aaL">
                         <barButtonItem key="leftBarButtonItem" id="chb-sd-sJw">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L68-7g-pRE">
-                                <rect key="frame" x="20" y="7" width="80" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="L68-7g-pRE">
+                                <rect key="frame" x="20" y="0.0" width="113" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Light" image="sun.max" catalog="system">
+                                <state key="normal" title="Light" image="sun">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="light"/>
                                 </state>
@@ -135,12 +151,12 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="BBf-8Z-4n5">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CD7-ju-Tja">
-                                <rect key="frame" x="320" y="8" width="74" height="28.5"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="CD7-ju-Tja">
+                                <rect key="frame" x="290" y="0.0" width="104" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Dark" image="moon.fill" catalog="system">
+                                <state key="normal" title="Dark" image="moon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="light"/>
                                 </state>
@@ -175,7 +191,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="moon.fill" catalog="system" width="64" height="62"/>
-        <image name="sun.max" catalog="system" width="64" height="62"/>
+        <image name="moon" width="27" height="26"/>
+        <image name="sun" width="30" height="30"/>
     </resources>
 </document>

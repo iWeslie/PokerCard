@@ -1,8 +1,8 @@
 //
-//  PokerSelectionPresenter.swift
+//  PokerAuthorizationView.swift
 //  PokerCard
 //
-//  Created by Weslie on 2019/10/7.
+//  Created by Weslie Chen on 2019/12/21.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,36 +24,32 @@
 //  THE SOFTWARE.
 //
 
-/// Presenter for Poker View with selection style.
-class PokerSelectionPresenter: PokerPresenter {
+import UIKit
+
+public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
     
-    /// Create a `PokerAppearanceView` for appearance selection.
-    @available(iOS 13.0, *)
-    public func showAppearancePicker() -> PokerAppearanceView {
-        let pokerView = PokerAppearanceView()
-        backgroundView.pokerView = pokerView
-        return pokerView
+    var enTapped: PKAction?
+    var zhTapped: PKAction?
+    var autoTapped: PKAction?
+    
+    internal var titleLabel = PKLabel(fontSize: 20)
+    internal var detailLabel: PKLabel?
+    
+    internal var enLangView = PokerLanguageOptionView(type: .en)
+    internal var zhLangView = PokerLanguageOptionView(type: .zh)
+    internal var autoLangView = PokerLanguageOptionView(type: .auto)
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        
+        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
+        titleLabel = setupTitleLabel(for: self, with: "")
+        (titleLabel, detailLabel) = setupTitleDetailLabels(for: self, title: "Permission", detail: "This app requeires some authorizations. Please check them below.")
+        detailLabel?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
+        
     }
     
-    /// Create a `PokerContactView` for contacts selection.
-    public func showContactPicker() -> PokerContactView {
-        let pokerView = PokerContactView()
-        backgroundView.pokerView = pokerView
-        return pokerView
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
-    /// Create a `PokerLanguageView` for language selection.
-    public func showLanguagePicker() -> PokerLanguageView {
-        let pokerView = PokerLanguageView()
-        backgroundView.pokerView = pokerView
-        return pokerView
-    }
-    
-    /// Create a `PokerAuthorizationView` for permission granting.
-    public func showAccessGranter() -> PokerAuthorizationView {
-        let pokerView = PokerAuthorizationView()
-        backgroundView.pokerView = pokerView
-        return pokerView
-    }
-    
 }

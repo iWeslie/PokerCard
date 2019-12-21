@@ -112,3 +112,13 @@ public func showContacts() -> PokerContactView {
 public func showLanguagePicker() -> PokerLanguageView {
     return PokerSelectionPresenter().showLanguagePicker()
 }
+
+/// Create a `PokerAuthorizationView` for permission granting.
+///
+/// You may add other config options by calling `config` method.
+///
+/// - Returns: The created `PokerAuthorizationView` instance.
+@discardableResult
+public func showAccessGranter() -> PokerAuthorizationView {
+    return PokerSelectionPresenter().showAccessGranter()
+}

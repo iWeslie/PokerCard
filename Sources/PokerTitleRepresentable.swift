@@ -29,7 +29,7 @@ import UIKit
 protocol PokerTitleRepresentable { }
 
 extension PokerTitleRepresentable {
-    func setupTitleLabel(for aView: PokerView, with title: String) -> PKLabel {
+    internal func setupTitleLabel(for aView: PokerView, with title: String) -> PKLabel {
         let titleLabel = PKLabel(fontSize: 22)
         titleLabel.text = title
         aView.addSubview(titleLabel)
@@ -38,5 +38,22 @@ extension PokerTitleRepresentable {
         titleLabel.constraint(withLeadingTrailing: 16)
         
         return titleLabel
+    }
+    
+    func setupTitleDetailLabels(
+        for aView: PokerView,
+        title: String,
+        detail: String)
+    -> (PKLabel, PKLabel) {
+        let titleLabel = setupTitleLabel(for: aView, with: title)
+        
+        let detailLabel = PKLabel(fontSize: 14)
+        detailLabel.text = detail
+        aView.addSubview(detailLabel)
+        detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        detailLabel.textAlignment = .natural
+        detailLabel.constraint(withLeadingTrailing: 16)
+        
+        return (titleLabel, detailLabel)
     }
 }
