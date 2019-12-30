@@ -160,3 +160,15 @@ extension PokerLanguageView {
         return self
     }
 }
+
+extension PokerAuthorizationView {
+    @discardableResult
+    public func addOptions(_ options: [PKContactOption], on target: UIViewController) -> PokerAuthorizationView {
+//           contactOptions = options
+//           targetController = target
+        self.authOptions = [.camera]
+           
+           return self
+        
+    }
+}

@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showAccessGranter(_ sender: Any) {
-        PokerCard.showAccessGranter()
+        PokerCard.showAccessGranter().addOptions([], on: self)
     }
 }
 
