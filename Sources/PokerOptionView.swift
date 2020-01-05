@@ -27,33 +27,38 @@
 import UIKit
 
 enum PKOption {
-    case contact(_ type: PKContactType)
-    case language(_ type: LangType)
-    case auth(_ type: PKAuthType)
+    case contact
+    case language
+    case auth
 }
 
 internal class PokerOptionView: PokerSubView {
     
-    fileprivate var option: PKOption
-        
-    fileprivate var imageView = UIImageView()
-    fileprivate var detailLabel = PKLabel(fontSize: 20)
+    internal let spacing: CGFloat = 20
     
-    init(option: PKOption) {
-        self.option = option
+    fileprivate var imageView = UIImageView()
+    fileprivate var titileLabel = PKLabel(fontSize: 20)
+    
+    override init() {
         super.init()
         
+        [imageView, titileLabel].forEach(addSubview(_:))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(imageView)
-        addSubview(detailLabel)
         
-        imageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
-        detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupConstraints() {
+        imageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        titileLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
+        titileLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        heightAnchor.constraint(equalToConstant: 52).isActive = true
+        widthAnchor.constraint(equalToConstant: baseWidth - 2 * spacing).isActive = true
     }
 }

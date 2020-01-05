@@ -63,7 +63,7 @@ internal class PokerAuthOptionView: PokerSubView {
         
         if #available(iOS 13.0, *) {
             let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .thin)
-            var symbolName = "camera"
+            let symbolName = "camera"
             symbolImageView.image = UIImage(systemName: symbolName, withConfiguration: config)
             symbolImageView.tintColor = PKColor.label
             
@@ -114,6 +114,8 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
             addAuthOption(options.first!)
         }
     }
+    
+    var authViews: [PokerOptionView] = []
     
     internal var titleLabel = PKLabel(fontSize: 20)
     internal var detailLabel: PKLabel?
