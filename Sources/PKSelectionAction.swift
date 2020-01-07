@@ -96,7 +96,7 @@ extension PokerContactView {
     ///
     /// - Returns: The `PokerContactView` instance.
     @discardableResult
-    public func addOptions(_ options: [PKContactOption], on target: UIViewController) -> PokerContactView {
+    public func addOptions(_ options: [PKOption.Contact], on target: UIViewController) -> PokerContactView {
         contactOptions = options
         targetController = target
         
@@ -163,12 +163,8 @@ extension PokerLanguageView {
 
 extension PokerAuthorizationView {
     @discardableResult
-    public func addOptions(_ options: [PKContactOption], on target: UIViewController) -> PokerAuthorizationView {
-//           contactOptions = options
-//           targetController = target
-//        self.authOptions = [.camera]
-           
-           return self
-        
+    public func addOptions(_ options: [PKOption.Auth]) -> PokerAuthorizationView {
+        authOptions = options
+        return self
     }
 }

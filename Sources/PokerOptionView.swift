@@ -26,20 +26,17 @@
 
 import UIKit
 
-enum PKOption {
-    case contact
-    case language
-    case auth
-}
-
 internal class PokerOptionView: PokerSubView {
+    
+    var option: PokerOptionBaseElements
     
     internal let spacing: CGFloat = 20
     
-    fileprivate var imageView = UIImageView()
-    fileprivate var titileLabel = PKLabel(fontSize: 20)
+    var imageView = UIImageView()
+    var titileLabel = PKLabel(fontSize: 20)
     
-    override init() {
+    init(option: PokerOptionBaseElements) {
+        self.option = option
         super.init()
         
         [imageView, titileLabel].forEach(addSubview(_:))

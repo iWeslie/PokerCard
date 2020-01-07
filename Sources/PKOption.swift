@@ -1,8 +1,8 @@
 //
-//  PKSymbol.swift
+//  PKOption.swift
 //  PokerCard
 //
-//  Created by Weslie Chen on 2019/10/24.
+//  Created by Weslie Chen on 2020/1/7.
 //  Copyright © 2019 Weslie (https://www.iweslie.com)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,22 +26,39 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
-let pokerConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .thin)
-
-@available(iOS 13.0, *)
-public enum PKSymbol {
-    
-    public static var checkmark: UIImage? {
-        return UIImage(systemName: "checkmark", withConfiguration: pokerConfiguration)
-    }
-    
-    public static var circleArrow: UIImage? {
-        return UIImage(systemName: "arrow.2.circlepath", withConfiguration: pokerConfiguration)
-    }
-    
-    public static func name(_ symbolName: String) -> UIImage? {
-        return UIImage(systemName: symbolName, withConfiguration: pokerConfiguration)
-    }
+public protocol PokerOptionBaseElements {
+    var title: String { get set }
+    var image: UIImage? { get set }
+    var action: PKAction? { get set }
+    var delay: TimeInterval { get set }
 }
 
+public enum PKOption {
+    
+    public class BaseOption: PokerOptionBaseElements {
+        public var title: String
+        public var image: UIImage?
+        public var action: PKAction?
+        public var delay: TimeInterval = 0.0
+        
+        public init(title: String, image: UIImage?, action: PKAction? = nil) {
+            self.title = title
+            self.image = image
+            self.action = action
+        }
+    }
+    
+    public class Contact: BaseOption {
+        var type: PKContactType
+        
+        public init(type: PKContactType, title: String, image: UIImage) {
+            self.type = type
+            super.init(title: title, image: image)
+        }
+    }
+    
+    public class Auth: BaseOption {
+        
+    }
+    
+}

@@ -29,119 +29,146 @@ import MessageUI
 import SafariServices
 
 public enum PKContactType {
-    case email(_ recipients: [String])
-    case message(_ recipients: [String])
+    case email(_ entity: MailEntity)
+    case message(_ entity: MessageEntity)
     case wechat(_ id: String)
     case weibo(_ weiboUID: String)
-    case github(_ name: String)
+    case github(_ id: String)
     case other(_ url: URL)
-}
-
-/// Contact options enum
-public class PKContactOption {
     
-    /// Delay time for an action.
-    public var delay: TimeInterval = 0
-    /// Completion handler for a action.
-    public var completion: PKAction?
-    
-    fileprivate var type: PKContactType
-    fileprivate var recipients: [String]?
-    fileprivate var contactKey: String?
-    fileprivate var image: UIImage?
-    fileprivate var title: String
-    
-    /// Create a `PKContactOption` instance.
-    ///
-    /// - Parameter type:   The contact type.
-    /// - Parameter image:  The contact logo imge, you can pass `nil` for email and message in iOS13+.
-    /// - Parameter title:  The contact title.
-    public init(type: PKContactType, image: UIImage?, title: String) {
-        self.image = image
-        self.title = title
-        self.type = type
+    /// This class is an mediator for mail composing.
+    /// To get detailed information, see documetation for `MFMailComposeViewController`.
+    public class MailEntity {
+        /// A string specifying the message's Subject header.
+        public var subject: String?
+        /// A string array instances specifying the email addresses of recipients.
+        public var toRecipients: [String]?
+        /// A string array instances specifying the email addresses of recipients.
+        public var ccRecipients: [String]?
+        /// A string array instances specifying the email addresses of recipients.
+        public var bccRecipients: [String]?
+        /// A string containing the body contents of the email message.
+        public var body: String?
+        /// A boolean value indicating if the body argument is to be interpreted as HTML content. `False` by default.
+        public var isBodyHTML: Bool = false
         
-        switch type {
-        case .email(let recipients):
-            self.recipients = recipients
-            if #available(iOS 13.0, *) {
-                self.image = UIImage(systemName: "envelope", withConfiguration: pokerConfiguration)
-            }
-        case .message(let recipients):
-            self.recipients = recipients
-            if #available(iOS 13.0, *) {
-                self.image = UIImage(systemName: "captions.bubble", withConfiguration: pokerConfiguration)
-            }
-        case .github(let name): self.contactKey = name
-        case .wechat(let id): self.contactKey = id
-        case .weibo(let weiboURL): self.contactKey = weiboURL
-        default: break
-        }
-    }
-}
-
-fileprivate class PokerContactOptionView: PokerSubView {
-    
-    fileprivate let option: PKContactOption
-    fileprivate var isSymbolImage = false
-    fileprivate var imageView = UIImageView()
-    fileprivate var detailLabel = PKLabel(fontSize: 20)
-    
-    init(option: PKContactOption) {
-        self.option = option
-        super.init()
+        /// A closure that you can customize your `MFMailComposeViewController`.
+        ///
+        /// You can access all methods and properties of through this configuration.
+        public var configuration: ((MFMailComposeViewController) -> Void)?
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(imageView)
-        addSubview(detailLabel)
+        internal var attachment: Data?
+        internal var mimeType: String!
+        internal var filename: String!
+        internal var preferredSendingEmailAddress: String?
         
-        detailLabel.text = option.title
+        public init() {}
         
-        if #available(iOS 13.0, *) {
-            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .thin)
-            switch option.type {
-            case .email:
-                isSymbolImage = true
-                imageView.image = UIImage(systemName: "envelope", withConfiguration: config)
-            case .message:
-                isSymbolImage = true
-                imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
-            default:
-                isSymbolImage = false
-                imageView.image = option.image
-            }
-            imageView.tintColor = PKColor.label
-            if !isSymbolImage {
-                imageView.constraint(withWidthHeight: 32)
-                imageView.contentMode = .scaleAspectFill
-            }
-        } else {
-            imageView.constraint(withWidthHeight: 32)
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = option.image
+        /// This method sets the body of the email message to the specified content.
+        ///
+        /// To get detailed information, see documetation for `MFMailComposeViewController`.
+        ///
+        /// - Parameters:
+        ///   - body:   A string containing the body contents of the email message.
+        ///   - isHTML: A boolean value indicating if the body argument is to be interpreted as HTML content.
+        public func setMessageBody(_ body: String, isHTML: Bool) {
+            self.body = body
+            self.isBodyHTML = isHTML
         }
         
-        imageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
-        detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        /// This method adds the specified attachment to the email message.
+        ///
+        /// To get detailed information, see documetation for `MFMailComposeViewController`.
+        ///
+        /// - Parameters:
+        ///   - attachment: The Data containing the contents of the attachment.
+        ///   - mimeType:   A String specifying the MIME type for the attachment.
+        ///   - filename:   A String specifying the intended filename for the attachment.
+        public func addAttachmentData(_ attachment: Data, mimeType: String, fileName filename: String) {
+            self.attachment = attachment
+            self.mimeType = mimeType
+            self.filename = filename
+        }
         
+        /// This method sets the preferred sending account of the email message.
+        ///
+        /// To get detailed information, see documetation for `MFMailComposeViewController`.
+        ///
+        /// - Parameter emailAddress: A string specifying the preferred email address used to send this message.
+        @available(iOS 11.0, *)
+        public func setPreferredSendingEmailAddress(_ emailAddress: String) {
+            self.preferredSendingEmailAddress = emailAddress
+        }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    /// This class is an mediator for mail composing.
+    /// To get detailed information, see documetation for `MFMessageComposeViewController`.
+    public class MessageEntity {
+        /// This property sets the initial value of the To field for the message to the specified addresses.
+        public var recipients: [String]?
+        /// This property sets the initial value of the body of the message to the specified content.
+        public var body: String?
+        /// This property sets the initial value of the subject of the message to the specified content.
+        public var subject: String?
+        
+        /// A closure that you can customize your `MFMessageComposeViewController`.
+        ///
+        /// You can access all methods and properties of through this configuration.
+        public var configuration: ((MFMessageComposeViewController) -> Void)?
+        
+        public init() {}
     }
 }
+
+//fileprivate class PokerContactOptionView: PokerOptionView {
+//
+//    fileprivate let option: PKContactOption
+//    fileprivate var isSymbolImage = false
+//
+//    init(option: PKContactOption) {
+//        self.option = option
+//        super.init()
+
+//        if #available(iOS 13.0, *) {
+//            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .thin)
+//            switch option.type {
+//            case .email:
+//                isSymbolImage = true
+//                imageView.image = UIImage(systemName: "envelope", withConfiguration: config)
+//            case .message:
+//                isSymbolImage = true
+//                imageView.image = UIImage(systemName: "captions.bubble", withConfiguration: config)
+//            default:
+//                isSymbolImage = false
+//                imageView.image = option.image
+//            }
+//            imageView.tintColor = PKColor.label
+//            if !isSymbolImage {
+//                imageView.constraint(withWidthHeight: 32)
+//                imageView.contentMode = .scaleAspectFill
+//            }
+//        } else {
+//            imageView.constraint(withWidthHeight: 32)
+//            imageView.contentMode = .scaleAspectFit
+//            imageView.image = option.image
+//        }
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}
 
 /// Poker View for contact options
 public class PokerContactView: PokerView, PokerTitleRepresentable {
     
     internal var targetController: UIViewController?
-    internal var contactOptions: [PKContactOption]? {
+    internal var contactOptions: [PKOption.Contact]? {
         didSet {
             let options = contactOptions
             options?.forEach { option in
-                addContactOption(option)
+                addContactOptionView(with: option)
             }
             lastContact?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
         }
@@ -167,8 +194,10 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addContactOption(_ contactOption: PKContactOption) {
-        let contactView = PokerContactOptionView(option: contactOption)
+    private func addContactOptionView(with contactOption: PKOption.Contact) {
+        let contactView = PokerOptionView(option: contactOption)
+        contactView.titileLabel.text = contactOption.title
+        contactView.imageView.image = contactOption.image
         addSubview(contactView)
         
         contactView.heightAnchor.constraint(equalToConstant: contactViewHeight).isActive = true
@@ -182,74 +211,99 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
     }
     
     @objc
-    func contactViewTapped(_ gesture: UITapGestureRecognizer) {
-        guard let contactOptionView = gesture.view as? PokerContactOptionView else { return }
-        let delay = contactOptionView.option.delay
-        let completion = contactOptionView.option.completion
+    private func contactViewTapped(_ gesture: UITapGestureRecognizer) {
+        guard let contactOptionView = gesture.view as? PokerOptionView else { return }
+        let option = contactOptionView.option
         
-        switch contactOptionView.option.type {
-        case .email(let recipients): composeMail(to: recipients, afterDelay: delay, completion: completion)
-        case .message(let recipients): composeMessage(to: recipients, afterDelay: delay, completion: completion)
-        case .github(let name): presentGitHubWebPage(with: name, afterDelay: delay, completion: completion)
-        case .wechat(let id): jumpToWeChat(withID: id, afterDelay: delay, completion: completion)
-        case .weibo(let weiboUID): jumpToWeibo(withID: weiboUID, afterDelay: delay, completion: completion)
+        guard let contactType = (contactOptionView.option as? PKOption.Contact)?.type else {
+            fatalError("PokerContactView can only hold Contact Options.")
+        }
+        
+        switch contactType {
+        case .email(let mailEntity): composeMail(with: mailEntity, on: option)
+        case .message(let messageEntity): composeMessage(with: messageEntity, on: option)
+        case .github(let name): presentGitHubWebPage(with: name, on: option)
+        case .wechat(let id): jumpToWeChat(withID: id, on: option)
+        case .weibo(let weiboUID): jumpToWeibo(withID: weiboUID, on: option)
         case .other: break
         }
         UISelectionFeedbackGenerator().selectionChanged()
     }
     
-    private func composeMail(to recipients: [String], afterDelay interval: TimeInterval, completion: PKAction?) {
+    // MARK: - Aidded methods
+    private func composeMail(with entity: PKContactType.MailEntity, on option: PokerOptionBaseElements) {
         guard MFMailComposeViewController.canSendMail() else {
             debugPrint("You can not sent email on simulator. Please do it on a device.")
             return
         }
         let mailViewController = MFMailComposeViewController()
         mailViewController.mailComposeDelegate = targetController as? MFMailComposeViewControllerDelegate
-        mailViewController.setToRecipients(recipients)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-            self.targetController?.present(mailViewController, animated: true, completion: completion)
+        mailViewController.setToRecipients(entity.toRecipients)
+        mailViewController.setCcRecipients(entity.ccRecipients)
+        mailViewController.setBccRecipients(entity.bccRecipients)
+        if let subject = entity.subject {
+            mailViewController.setSubject(subject)
+        }
+        if let body = entity.body {
+            mailViewController.setMessageBody(body, isHTML: entity.isBodyHTML)
+        }
+        if #available(iOS 11.0, *), let preferredAddress = entity.preferredSendingEmailAddress {
+            mailViewController.setPreferredSendingEmailAddress(preferredAddress)
+        }
+        if let attachment = entity.attachment {
+            mailViewController.addAttachmentData(attachment, mimeType: entity.mimeType, fileName: entity.filename)
+        }
+        
+        entity.configuration?(mailViewController)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + option.delay) {
+            self.targetController?.present(mailViewController, animated: true, completion: option.action)
         }
     }
     
-    private func composeMessage(to recipients: [String], afterDelay interval: TimeInterval, completion: PKAction?) {
+    private func composeMessage(with entity: PKContactType.MessageEntity, on option: PokerOptionBaseElements) {
         guard MFMessageComposeViewController.canSendText() else {
             debugPrint("You can not sent message on simulator. Please do it on a device.")
             return
         }
         let messageViewController = MFMessageComposeViewController()
         messageViewController.messageComposeDelegate = targetController as? MFMessageComposeViewControllerDelegate
-        messageViewController.recipients = recipients
+        messageViewController.recipients = entity.recipients
+        messageViewController.body = entity.body
+        messageViewController.subject = entity.subject
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-            self.targetController?.present(messageViewController, animated: true, completion: completion)
+        entity.configuration?(messageViewController)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + option.delay) {
+            self.targetController?.present(messageViewController, animated: true, completion: option.action)
         }
     }
     
-    private func jumpToWeChat(withID wechatID: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+    private func jumpToWeChat(withID wechatID: String, on option: PokerOptionBaseElements) {
         let url = URL(string: "weixin://\(wechatID)")!
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + option.delay) {
             UIApplication.shared.open(url, options: [:]) { _ in
-                completion?()
+                option.action?()
             }
         }
     }
     
-    private func jumpToWeibo(withID weiboUID: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+    private func jumpToWeibo(withID weiboUID: String, on option: PokerOptionBaseElements) {
         let weiboURL = URL(string: "sinaweibo://userinfo?uid=\(weiboUID)")!
         let weiboIURL = URL(string: "weibointernational://userinfo?uid=\(weiboUID)")!
         
         if UIApplication.shared.canOpenURL(weiboURL) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + option.delay) {
                 UIApplication.shared.open(weiboURL, options: [:]) { _ in
-                    completion?()
+                    option.action?()
                 }
             }
         } else if UIApplication.shared.canOpenURL(weiboIURL) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + option.delay) {
                 UIApplication.shared.open(weiboIURL, options: [:]) { _ in
-                    completion?()
+                    option.action?()
                 }
             }
         } else {
@@ -257,7 +311,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
         }
     }
     
-    private func presentGitHubWebPage(with name: String, afterDelay interval: TimeInterval, completion: PKAction?) {
+    private func presentGitHubWebPage(with name: String, on option: PokerOptionBaseElements) {
         let safariController = SFSafariViewController(url: URL(string: "https://github.com/\(name)")!)
         safariController.modalPresentationStyle = .popover
         targetController?.present(safariController, animated: true, completion: nil)

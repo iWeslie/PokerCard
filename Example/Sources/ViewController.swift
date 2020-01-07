@@ -81,19 +81,28 @@ class ViewController: UIViewController {
     
     // MARK:- Show Contacts
     @IBAction func showContacts(_ sender: Any) {
-        let emailOption = PKContactOption(type: .email(["feedback@iweslie.com"]), image: UIImage(named: "mail"), title: "Email")
-        let messageOption = PKContactOption(type: .message(["iweslie@icloud.com"]), image: UIImage(named: "message"), title: "iMessage")
-        let weiboOption = PKContactOption(type: .weibo("6425782290"), image: UIImage(named: "weibo"), title: "Weibo")
-        let wechatOption = PKContactOption(type: .wechat("weslie-chen"), image: UIImage(named: "wechat"), title: "WeChat")
-        wechatOption.delay = 1.5
-        wechatOption.completion = {
+        // mail
+        let mailEntity = PKContactType.MailEntity()
+        let email = PKOption.Contact(type: .email(mailEntity), title: "Email", image: UIImage(named: "mail")!)
+        // iMessage
+        let messageEntity = PKContactType.MessageEntity()
+        messageEntity.recipients = ["iweslie@icloud.com"]
+        let message = PKOption.Contact(type: .message(messageEntity), title: "iMessage", image: UIImage(named: "message")!)
+        // weibo
+        let weibo = PKOption.Contact(type: .weibo("6425782290"), title: "Weibo", image: UIImage(named: "weibo")!)
+        // wechat
+        let wechat = PKOption.Contact(type: .wechat("weslie-chen"), title: "WeChat", image: UIImage(named: "wechat")!)
+        wechat.delay = 1.5
+        wechat.action = {
             print("something")
         }
-        let githubOption = PKContactOption(type: .github("iWeslie"), image: UIImage(named: "github"), title: "GitHub")
+        // github
+        let github = PKOption.Contact(type: .github("iWeslie"), title: "GitHub", image: UIImage(named: "github")!)
         
         PokerCard.showContacts()
-            .addOptions([emailOption, messageOption, weiboOption, wechatOption, githubOption], on: self)
             .setTitle("Contact Us")
+            .addOptions([email, message, weibo, wechat, github], on: self)
+            
     }
     
     // MARK:- Show Language Picker
@@ -119,7 +128,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showAccessGranter(_ sender: Any) {
-        PokerCard.showAccessGranter().addOptions([], on: self)
+        
+//        let camera = PKOption.Auth(title: "Camera", image: UIImage()) {
+//            print("camera")
+//        }
+        PokerCard.showAccessGranter().addOptions([])
     }
 }
 
