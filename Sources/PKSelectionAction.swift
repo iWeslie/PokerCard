@@ -167,4 +167,11 @@ extension PokerAuthorizationView {
         authOptions = options
         return self
     }
+    
+    @discardableResult
+    public func setTitle(_ title: String) -> PokerAuthorizationView {
+        titleLabel.text = title
+        
+        return self
+    }
 }

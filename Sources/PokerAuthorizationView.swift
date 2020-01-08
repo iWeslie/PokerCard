@@ -26,20 +26,6 @@
 
 import UIKit
 
-public enum PKAuthType {
-    case bluetooth
-    case camera
-    case contacts
-    case faceID
-    case health
-    case homeKit
-    case location
-    case microphone
-    case music
-    case notification
-    case photoLibrary
-}
-
 //        if #available(iOS 13.0, *) {
 //            let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .thin)
 //            let symbolName = "camera"
@@ -76,23 +62,23 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
                 fatalError("You cannot apply for too many permissions at once.")
             }
             
-            options.forEach { authOption in
-                addAuthOption(with: authOption)
-            }
+            options.forEach { addAuthOption(with: $0) }
+            lastAuthView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
         }
     }
     
     internal var titleLabel = PKLabel(fontSize: 20)
     internal var detailLabel: PKLabel?
     
-    init() {
+    private var lastAuthView: PokerSubView?
+    
+    public init() {
         super.init(frame: CGRect.zero)
         
-        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
         titleLabel = setupTitleLabel(for: self, with: "")
         (titleLabel, detailLabel) = setupTitleDetailLabels(for: self, title: "Permission", detail: "This app requeires some authorizations. Please check them below.")
-//        detailLabel?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
         
+        widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -107,9 +93,9 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
         
         authView.heightAnchor.constraint(equalToConstant: 52).isActive = true
         authView.constraint(withLeadingTrailing: 20)
+        authView.topAnchor.constraint(equalTo: (lastAuthView ?? detailLabel ?? titleLabel).bottomAnchor, constant: internalSpacing).isActive = true
         
-        authView.topAnchor.constraint(equalTo: detailLabel!.bottomAnchor, constant: titleSpacing).isActive = true
-        authView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
+        lastAuthView = authView
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(authViewTapped(_:)))
         authView.addGestureRecognizer(tap)

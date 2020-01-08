@@ -129,13 +129,16 @@ class ViewController: UIViewController {
     
     @IBAction func showAccessGranter(_ sender: Any) {
         
-//        let camera = PKOption.Auth(title: "Camera", image: UIImage()) {
-//            print("camera")
-//        }
-        PokerCard.showAccessGranter().addOptions([])
+        let camera = PKOption.Auth(type: .camera, title: "Camera", image: UIImage())
+        let location = PKOption.Auth(type: .location, title: "Location", image: UIImage())
+        
+        PokerCard.showAccessGranter()
+            .setTitle("Auth")
+            .addOptions([camera, location])
     }
 }
 
+// MARK: - MFMessageComposeViewControllerDelegate
 extension ViewController: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true) {

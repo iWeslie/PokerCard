@@ -28,12 +28,6 @@ import UIKit
 
 let appleLanguageKey = "AppleLanguages"
 
-internal enum LangType: String {
-    case en = "en"
-    case zh = "zh-Hans"
-    case auto
-}
-
 internal protocol PKLanguageSelectionDelegate: class {
     func didSelect(_ languageOptionView: PokerLanguageOptionView, with language: LangType)
 }

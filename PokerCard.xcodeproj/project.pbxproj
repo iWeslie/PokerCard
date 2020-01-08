@@ -23,11 +23,12 @@
 		D36B3FD92328CCB900E0B4D8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36B3FD72328CCB900E0B4D8 /* Info.plist */; };
 		D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D34B62339B405004627BD /* PokerAppearanceView.swift */; };
 		D372261823C43B5200A0EF56 /* PKObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372261723C43B5200A0EF56 /* PKObjects.swift */; };
-		D372261A23C456DD00A0EF56 /* PKOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372261923C456DD00A0EF56 /* PKOption.swift */; };
+		D372261A23C456DD00A0EF56 /* PKOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D372261923C456DD00A0EF56 /* PKOptions.swift */; };
 		D38001CE2328F8C900980988 /* PokerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001CD2328F8C900980988 /* PokerView.swift */; };
 		D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D02328FCF400980988 /* UIView+KeyWindow.swift */; };
 		D38001D72328FF2000980988 /* PKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001D62328FF2000980988 /* PKColor.swift */; };
 		D38001EA232911B300980988 /* PokerAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38001E9232911B300980988 /* PokerAlertView.swift */; };
+		D383D7F823C6069A0081CBC2 /* PKTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D383D7F723C6069A0081CBC2 /* PKTypes.swift */; };
 		D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C3570233DA54C0083F737 /* PokerLanguageView.swift */; };
 		D38D5E35235CAE5600DF7279 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */; };
 		D3924FEF234A29B70009420E /* PKAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3924FEE234A29B70009420E /* PKAlertAction.swift */; };
@@ -71,11 +72,12 @@
 		D36B3FE02328CD4300E0B4D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36D34B62339B405004627BD /* PokerAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAppearanceView.swift; sourceTree = "<group>"; };
 		D372261723C43B5200A0EF56 /* PKObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKObjects.swift; sourceTree = "<group>"; };
-		D372261923C456DD00A0EF56 /* PKOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKOption.swift; sourceTree = "<group>"; };
+		D372261923C456DD00A0EF56 /* PKOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKOptions.swift; sourceTree = "<group>"; };
 		D38001CD2328F8C900980988 /* PokerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerView.swift; sourceTree = "<group>"; };
 		D38001D02328FCF400980988 /* UIView+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+KeyWindow.swift"; sourceTree = "<group>"; };
 		D38001D62328FF2000980988 /* PKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKColor.swift; sourceTree = "<group>"; };
 		D38001E9232911B300980988 /* PokerAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerAlertView.swift; sourceTree = "<group>"; };
+		D383D7F723C6069A0081CBC2 /* PKTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKTypes.swift; sourceTree = "<group>"; };
 		D38C3570233DA54C0083F737 /* PokerLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerLanguageView.swift; sourceTree = "<group>"; };
 		D38D5E34235CAE5600DF7279 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		D3924FEE234A29B70009420E /* PKAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKAlertAction.swift; sourceTree = "<group>"; };
@@ -229,7 +231,8 @@
 			children = (
 				D38001D62328FF2000980988 /* PKColor.swift */,
 				D372261723C43B5200A0EF56 /* PKObjects.swift */,
-				D372261923C456DD00A0EF56 /* PKOption.swift */,
+				D372261923C456DD00A0EF56 /* PKOptions.swift */,
+				D383D7F723C6069A0081CBC2 /* PKTypes.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 			files = (
 				D33892C92356C9A000EEE611 /* PokerTitleRepresentable.swift in Sources */,
 				D38001EA232911B300980988 /* PokerAlertView.swift in Sources */,
+				D383D7F823C6069A0081CBC2 /* PKTypes.swift in Sources */,
 				D38C3571233DA54C0083F737 /* PokerLanguageView.swift in Sources */,
 				D372261823C43B5200A0EF56 /* PKObjects.swift in Sources */,
 				D3CBAD2123ADC1D600BE87AF /* PokerAuthorizationView.swift in Sources */,
@@ -381,7 +385,7 @@
 				D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */,
 				D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */,
 				D33892CB2356E01200EEE611 /* PokerConfirmRepresentable.swift in Sources */,
-				D372261A23C456DD00A0EF56 /* PKOption.swift in Sources */,
+				D372261A23C456DD00A0EF56 /* PKOptions.swift in Sources */,
 				D330802E23433F28009E7CC4 /* Extension+UILabel.swift in Sources */,
 				D3924FF1234A2CF00009420E /* PKSelectionAction.swift in Sources */,
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
@@ -536,8 +540,10 @@
 		D36B3FC32328CB1F00E0B4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4UXX38SJ8T;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -551,6 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weslie.PokerCard;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -561,8 +568,10 @@
 		D36B3FC42328CB1F00E0B4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4UXX38SJ8T;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -576,6 +585,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weslie.PokerCard;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;

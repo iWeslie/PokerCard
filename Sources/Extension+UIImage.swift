@@ -32,7 +32,7 @@ extension UIImage {
             let configuration = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .light)
             self.init(systemName: name, withConfiguration: configuration)
         } else {
-            self.init()
+            self.init(named: name)
         }
     }
 }

@@ -51,14 +51,19 @@ public enum PKOption {
     public class Contact: BaseOption {
         var type: PKContactType
         
-        public init(type: PKContactType, title: String, image: UIImage) {
+        public init(type: PKContactType, title: String, image: UIImage?) {
             self.type = type
             super.init(title: title, image: image)
         }
     }
     
     public class Auth: BaseOption {
+        var type: PKAuthType
         
+        public init(type: PKAuthType, title: String, image: UIImage?) {
+            self.type = type
+            super.init(title: title, image: image)
+        }
     }
     
 }
