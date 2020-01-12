@@ -25,6 +25,8 @@
 //
 
 import UIKit
+import UserNotifications
+import CoreLocation
 
 //        if #available(iOS 13.0, *) {
 //            let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .thin)
@@ -72,6 +74,8 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
     
     private var lastAuthView: PokerSubView?
     
+    private lazy var locationManager = CLLocationManager()
+    
     public init() {
         super.init(frame: CGRect.zero)
         
@@ -87,8 +91,14 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
     
     private func addAuthOption(with authOption: PKOption.Auth) {
         let authView = PokerOptionView(option: authOption)
-        authView.titileLabel.text = authOption.title
+        authView.titleLabel.text = authOption.title
         authView.imageView.image = authOption.image
+        if #available(iOS 13.0, *) {
+            let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .thin)
+            authView.imageView.image = UIImage(systemName: authOption.type.rawValue, withConfiguration: config)
+        }
+        authView.imageView.tintColor = PKColor.label
+
         addSubview(authView)
         
         authView.heightAnchor.constraint(equalToConstant: 52).isActive = true
@@ -103,6 +113,42 @@ public class PokerAuthorizationView: PokerView, PokerTitleRepresentable {
     
     @objc
     func authViewTapped(_ gesture: UITapGestureRecognizer) {
+        guard
+            let authOptionView = gesture.view as? PokerOptionView,
+            let authType = (authOptionView.option as? PKOption.Auth)?.type
+        else {
+            fatalError("Cannot retrive Auth Options.")
+        }
         
+        switch authType {
+        case .location: requestLocationAccess()
+        case .photoLibrary: break
+        case .notification: requestPushNotifications()
+        default: break
+        }
+    }
+    
+    private func requestLocationAccess() {
+        let locStatus = CLLocationManager.authorizationStatus()
+        switch locStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            return
+        case .denied, .restricted:
+            let alert = UIAlertController(title: "Location Services are disabled", message: "Please enable Location Services in your Settings", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+//            present(alert, animated: true, completion: nil)
+            return
+        case .authorizedAlways, .authorizedWhenInUse: break
+        @unknown default: break
+        }
+    }
+    
+    private func requestPushNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            // Enable or disable features based on authorization.
+        }
     }
 }

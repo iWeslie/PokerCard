@@ -107,16 +107,13 @@ class ViewController: UIViewController {
     
     // MARK:- Show Language Picker
     @IBAction func showLanguagePicker(_ sender: Any) {
+        let en = PKOption.Language(type: .en, title: "English", image: UIImage(named: "enLang"))
+        let zh = PKOption.Language(type: .zh, title: "简体中文", image: UIImage(named: "zhLang"))
+        let auto = PKOption.Language(type: .auto, title: "Follow System", image: UIImage(named: "autoLang"))
         PokerCard.showLanguagePicker()
-            .config(en: {
-                print("en selected")
-            }, zh: {
-                print("zh selected")
-            }) {
-                print("auto selected")
-            }
-        .setTitle("Language")
-        .setImages(en: UIImage(named: "enLang")!, zh: UIImage(named: "zhLang")!, auto: UIImage(named: "autoLang")!, checkmark: UIImage(named: "checkmark")!)
+            .setTitle("Language")
+            .addLanguages([en, zh, auto])
+        
     }
     
     func validatePassword(_ password: String) -> Bool {
@@ -131,10 +128,11 @@ class ViewController: UIViewController {
         
         let camera = PKOption.Auth(type: .camera, title: "Camera", image: UIImage())
         let location = PKOption.Auth(type: .location, title: "Location", image: UIImage())
+        let notification = PKOption.Auth(type: .notification, title: "Notification", image: UIImage())
         
         PokerCard.showAccessGranter()
             .setTitle("Auth")
-            .addOptions([camera, location])
+            .addOptions([camera, location, notification])
     }
 }
 

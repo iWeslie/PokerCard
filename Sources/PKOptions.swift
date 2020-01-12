@@ -66,4 +66,13 @@ public enum PKOption {
         }
     }
     
+    public class Language: BaseOption {
+        var type: PKLangType
+        
+        public init(type: PKLangType, title: String, image: UIImage?) {
+            self.type = type
+            super.init(title: title, image: image)
+        }
+    }
+    
 }

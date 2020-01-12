@@ -47,5 +47,7 @@
 		<string>sinaweibo</string>
 		<string>weibointernational</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location Request</string>
 </dict>
 </plist>

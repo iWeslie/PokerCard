@@ -33,13 +33,21 @@ internal class PokerOptionView: PokerSubView {
     internal let spacing: CGFloat = 20
     
     var imageView = UIImageView()
-    var titileLabel = PKLabel(fontSize: 20)
+    var titleLabel = PKLabel(fontSize: 20)
+    
+    lazy var checkmarkImageView: UIImageView = {
+        let checkmark = UIImageView()
+        checkmark.translatesAutoresizingMaskIntoConstraints = false
+        checkmark.isHidden = true
+        addSubview(checkmark)
+        return checkmark
+    }()
     
     init(option: PokerOptionBaseElements) {
         self.option = option
         super.init()
         
-        [imageView, titileLabel].forEach(addSubview(_:))
+        [imageView, titleLabel].forEach(addSubview(_:))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         setupConstraints()
@@ -52,8 +60,8 @@ internal class PokerOptionView: PokerSubView {
     private func setupConstraints() {
         imageView.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 36).isActive = true
         imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        titileLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
-        titileLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         heightAnchor.constraint(equalToConstant: 52).isActive = true
         widthAnchor.constraint(equalToConstant: baseWidth - 2 * spacing).isActive = true

@@ -118,7 +118,10 @@ public enum PKContactType {
     }
 }
 
-internal enum LangType: String {
+/// User Defaults key for app language configuration
+public let appleLanguageKey = "AppleLanguages"
+
+public enum PKLangType: String {
     case en = "en"
     case zh = "zh-Hans"
     case auto

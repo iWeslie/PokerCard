@@ -69,8 +69,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
     internal var targetController: UIViewController?
     internal var contactOptions: [PKOption.Contact]? {
         didSet {
-            let options = contactOptions
-            options?.forEach { addContactOptionView(with: $0) }
+            contactOptions?.forEach { addContactOptionView(with: $0) }
             lastContactView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -titleSpacing).isActive = true
         }
     }
@@ -97,7 +96,7 @@ public class PokerContactView: PokerView, PokerTitleRepresentable {
     
     private func addContactOptionView(with contactOption: PKOption.Contact) {
         let contactView = PokerOptionView(option: contactOption)
-        contactView.titileLabel.text = contactOption.title
+        contactView.titleLabel.text = contactOption.title
         contactView.imageView.image = contactOption.image
         addSubview(contactView)
         

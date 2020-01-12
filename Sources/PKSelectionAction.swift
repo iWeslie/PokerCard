@@ -96,6 +96,7 @@ extension PokerContactView {
     ///
     /// - Returns: The `PokerContactView` instance.
     @discardableResult
+    // TODO: - Remove target, compose on custom object.
     public func addOptions(_ options: [PKOption.Contact], on target: UIViewController) -> PokerContactView {
         contactOptions = options
         targetController = target
@@ -103,7 +104,13 @@ extension PokerContactView {
         return self
     }
     
+    /// Set the title for the created `PokerContactView` instance.
+    ///
+    /// - Parameter title: The PokerView title.
+    ///
+    /// - Returns: The `PokerContactView` instance.
     @discardableResult
+    // TODO: - refactor
     public func setTitle(_ title: String) -> PokerContactView {
         titleLabel.text = title
         
@@ -120,10 +127,8 @@ extension PokerLanguageView {
     ///
     /// - Returns: The `PokerContactView` instance.
     @discardableResult
-    public func config(en: @escaping PKAction, zh: @escaping PKAction, auto: @escaping PKAction) -> PokerLanguageView {
-        enTapped = en
-        zhTapped = zh
-        autoTapped = auto
+    public func addLanguages(_ languages: [PKOption.Language]) -> PokerLanguageView {
+        langOptions = languages
         
         return self
     }
@@ -139,35 +144,27 @@ extension PokerLanguageView {
         
         return self
     }
-    
-    /// Set the images for the created `PokerLanguageView` instance.
-    ///
-    /// - Parameter en: The English language option image.
-    /// - Parameter zh: The Chinese language option image.
-    /// - Parameter auto: The Auto language option image.
-    /// - Parameter checkmark: The checkmark image.
-    ///
-    /// - Returns: The `PokerLanguageView` instance.
-    @discardableResult
-    public func setImages(en: UIImage?, zh: UIImage?, auto: UIImage?, checkmark: UIImage?) -> PokerLanguageView {
-        enLangView.symbolImageView.image = en
-        enLangView.checkmarkImageView.image = checkmark
-        zhLangView.symbolImageView.image = zh
-        zhLangView.checkmarkImageView.image = checkmark
-        autoLangView.symbolImageView.image = auto
-        autoLangView.checkmarkImageView.image = checkmark
-        
-        return self
-    }
 }
 
 extension PokerAuthorizationView {
+    /// Configure auth options.
+    ///
+    /// You should not grant more than 3 permissions at the same time.
+    ///
+    /// - Parameter options: The auth options array.
+    ///
+    /// - Returns: The `PokerAuthorizationView` instance.
     @discardableResult
     public func addOptions(_ options: [PKOption.Auth]) -> PokerAuthorizationView {
         authOptions = options
         return self
     }
     
+    /// Set the title for the created `PokerAuthorizationView` instance.
+    ///
+    /// - Parameter title: The PokerView title.
+    ///
+    /// - Returns: The `PokerAuthorizationView` instance.
     @discardableResult
     public func setTitle(_ title: String) -> PokerAuthorizationView {
         titleLabel.text = title
