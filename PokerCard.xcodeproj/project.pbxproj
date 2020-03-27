@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA9CD5EC242E201C003C5171 /* PokerDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9CD5EB242E201C003C5171 /* PokerDateView.swift */; };
 		D312ABB4232F62B5000E3BCD /* PokerPresenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */; };
 		D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */; };
 		D312ABB8232F7ED8000E3BCD /* PokerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA9CD5EB242E201C003C5171 /* PokerDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerDateView.swift; sourceTree = "<group>"; };
 		D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPresenterView.swift; sourceTree = "<group>"; };
 		D312ABB5232F684E000E3BCD /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerInputView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				D312ABB3232F62B5000E3BCD /* PokerPresenterView.swift */,
 				D38001E9232911B300980988 /* PokerAlertView.swift */,
 				D312ABB7232F7ED8000E3BCD /* PokerInputView.swift */,
+				BA9CD5EB242E201C003C5171 /* PokerDateView.swift */,
 				D36D34B62339B405004627BD /* PokerAppearanceView.swift */,
 				D3F8B882233AFCE800D008D2 /* PokerContactView.swift */,
 				D38C3570233DA54C0083F737 /* PokerLanguageView.swift */,
@@ -391,6 +394,7 @@
 				D38001D72328FF2000980988 /* PKColor.swift in Sources */,
 				D36D34B72339B405004627BD /* PokerAppearanceView.swift in Sources */,
 				D312ABB6232F684E000E3BCD /* Extension+UIButton.swift in Sources */,
+				BA9CD5EC242E201C003C5171 /* PokerDateView.swift in Sources */,
 				D38D5E35235CAE5600DF7279 /* Extension+UIImage.swift in Sources */,
 				D38001D12328FCF400980988 /* UIView+KeyWindow.swift in Sources */,
 			);

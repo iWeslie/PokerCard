@@ -134,6 +134,12 @@ class ViewController: UIViewController {
             .setTitle("Auth")
             .addOptions([camera, location, notification])
     }
+    
+    // MARK: - Show Date Picker
+    @IBAction func showDatePicker(_ sender: Any) {
+        let date = PokerCard.showDatePicker(title: "Example", detail: "Pick a date")
+            .confirm(title: "Done", style: .default)
+    }
 }
 
 // MARK: - MFMessageComposeViewControllerDelegate

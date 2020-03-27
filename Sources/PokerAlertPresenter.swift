@@ -60,4 +60,16 @@ public class PokerAlertPresenter: PokerPresenter {
         backgroundView.pokerView = pokerView
         return pokerView
     }
+    
+    /// Create a `PokerDateView` with title and detail decription.
+    ///
+    /// - Parameter title:  The picker title.
+    /// - Parameter detail: The picker detail description, `nil` by default.
+    ///
+    /// - Returns: The created `PokerDateView` instance.
+    public func showDatePicker(title: String, detail: String?) -> PokerAlertView {
+        let pokerView = PokerAlertView(title: title, detail: detail)
+        backgroundView.pokerView = pokerView
+        return pokerView
+    }
 }

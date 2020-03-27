@@ -62,6 +62,26 @@ public func showInput(title: String, detail: String? = nil) -> PokerInputView {
     return PokerAlertPresenter().showInput(title: title, detail: detail)
 }
 
+/// Present a basic style of `PokerDateView` with popup animation from bottom.
+///
+/// The basic style of `PokerDateView` contains a title label and detail labelyou can customize confirmButton
+/// color by calling `confirm(title:style:)`.
+///
+/// **Example:**
+/// ```
+/// let date = PokerCard.showDatePicker(title: "Example", detail: "Pick a date")
+/// .confirm(title: "Done", style: .default)
+/// ```
+///
+/// - Parameter title:  The alert title.
+/// - Parameter detail: The alert detail description, `nil` by default.
+///
+/// - Returns: The created `PokerAlertView` instance.
+@discardableResult
+public func showDatePicker(title: String, detail: String? = nil) -> PokerAlertView {
+    return PokerAlertPresenter().showDatePicker(title: title, detail: detail)
+}
+
 /// Present a promotion `PokerInputView` with popup animation from bottom.
 ///
 /// This is promotion style of input view, you may call `showInput` for less options.
