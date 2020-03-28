@@ -138,7 +138,9 @@ class ViewController: UIViewController {
     // MARK: - Show Date Picker
     @IBAction func showDatePicker(_ sender: Any) {
         PokerCard.showDatePicker(title: "Example", detail: "Pick a time")
-            .confirm(title: "Done", style: .default, cancelTitle: "Woops...")
+            .confirm(title: "Done", style: .success, fill: true, cancelTitle: "Woops") { date in
+                print(date)
+        }
     }
 }
 

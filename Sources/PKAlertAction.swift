@@ -196,5 +196,51 @@ extension PokerInputView {
 
 // MARK: - PokerDateView
 extension PokerDateView {
-    // TODO
+    /// Modify confirm button style and add action to it.
+    ///
+    /// - Parameter title:      The button title.
+    /// - Parameter style:      The button color style, **blue** by default, see `PKColor` for more detail.
+    /// - Parameter handler:    The button click action.
+    /// - Parameter fill: The button fill style, default is `true`.
+    /// - Parameter cancelTitle: The cancel button title, `nil` by default.
+    /// - Parameter handler: The handler to handle the date.
+    ///
+    /// - Returns: The `PokerDateView` instance.
+    @discardableResult
+    public func confirm(
+        title: String,
+        style: PokerStyle = .default,
+        fill: Bool = true,
+        cancelTitle: String?,
+        handler: @escaping (_ date: Date) -> Void)
+        -> PokerDateView
+    {
+        confirm(title: title, style: style, fill: fill, cancelTitle: cancelTitle)
+        confirm(handler)
+        
+        return self
+    }
+    
+    @objc
+    private func submitInput(_ sender: PKButton) {
+        guard let superView = sender.superview, let inputView = superView as? PokerDateView else { return }
+        
+        inputDate(datePicker.date)
+        inputView.dismiss(sender)
+    }
+    
+    /// Add action to confitm button.
+    ///
+    /// - Parameter handler: The button click action.
+    ///
+    /// - Returns: The `PokerDateView` instance.
+    @discardableResult
+    public func confirm(_ handler: @escaping (_ date: Date) -> Void) -> PokerDateView {
+        inputDate = handler
+        
+        confirmButton.removeTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(submitInput(_:)), for: .touchUpInside)
+        
+        return self
+    }
 }

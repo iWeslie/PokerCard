@@ -32,14 +32,18 @@ public class PokerDateView: PokerAlertView {
     // Picker for dateView
     public var datePicker: UIDatePicker = UIDatePicker(frame: CGRect.zero)
     
+    /// input date closure
+    internal var inputDate: ((_ date: Date) -> Void)!
+    
     internal var pickerContainerViewHeight: CGFloat!
     
     internal var pickerContainerView = PKContainerView()
     
-    convenience init(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode) {
+    convenience init(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode, defaultTime: Date) {
         self.init(title: title, detail: detail)
         
         datePicker.datePickerMode = pickerMode
+        datePicker.date = defaultTime
         
         setupDatePickerView()
     }

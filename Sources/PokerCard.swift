@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Present a basic style of `PokerAlertView` with popup animation from bottom.
 ///
@@ -64,7 +65,7 @@ public func showInput(title: String, detail: String? = nil) -> PokerInputView {
 
 /// Present a basic style of `PokerDateView` with popup animation from bottom.
 ///
-/// The basic style of `PokerDateView` contains a title label and detail labelyou can customize confirmButton
+/// The basic style of `PokerDateView` contains a title label and detail label you can customize confirmButton
 /// color by calling `confirm(title:style:)`.
 ///
 /// **Example:**
@@ -75,10 +76,12 @@ public func showInput(title: String, detail: String? = nil) -> PokerInputView {
 ///
 /// - Parameter title:  The alert title.
 /// - Parameter detail: The alert detail description, `nil` by default.
+/// - Parameter pickerMode: Mode for `UIDatePicker`. `.time` by default.
+/// - Parameter defaultTime: The default time for `UIDatePicker`. Now by default.
 ///
 /// - Returns: The created `PokerAlertView` instance.
 @discardableResult
-public func showDatePicker(title: String, detail: String? = nil) -> PokerAlertView {
+public func showDatePicker(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode = .time, defaultTime: Date = Date()) -> PokerDateView {
     return PokerAlertPresenter().showDatePicker(title: title, detail: detail)
 }
 
