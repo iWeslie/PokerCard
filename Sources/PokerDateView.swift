@@ -28,5 +28,42 @@ import UIKit
 
 /// Base Poker Date View which let user pick date & time.
 public class PokerDateView: PokerAlertView {
-    // TODO
+    
+    // Picker for dateView
+    public var datePicker: UIDatePicker = UIDatePicker(frame: CGRect.zero)
+    
+    internal var pickerContainerViewHeight: CGFloat!
+    
+    internal var pickerContainerView = PKContainerView()
+    
+    convenience init(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode) {
+        self.init(title: title, detail: detail)
+        
+        datePicker.datePickerMode = pickerMode
+        
+        setupDatePickerView()
+    }
+    
+    private func setupDatePickerView() {
+        pickerContainerViewHeight = 150
+
+        pickerContainerView.layer.cornerRadius = 8
+        insertSubview(pickerContainerView, at: 0)
+        
+        pickerContainerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerContainerView.topAnchor.constraint(equalTo: (detailLabel ?? titleLabel).bottomAnchor, constant: lineSpacing).isActive = true
+        pickerContainerView.constraint(withLeadingTrailing: titleSpacing)
+        pickerContainerView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -lineSpacing).isActive = true
+        pickerContainerView.heightAnchor.constraint(equalToConstant: pickerContainerViewHeight).isActive = true
+        
+        pickerContainerView.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.topAnchor.constraint(equalTo: pickerContainerView.topAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: pickerContainerView.bottomAnchor).isActive = true
+        datePicker.leftAnchor.constraint(equalTo: pickerContainerView.leftAnchor).isActive = true
+        datePicker.rightAnchor.constraint(equalTo: pickerContainerView.rightAnchor).isActive = true
+        
+//        datePicker.frame.size.width = 168
+    }
+    
 }
