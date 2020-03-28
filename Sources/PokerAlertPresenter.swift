@@ -67,7 +67,8 @@ public class PokerAlertPresenter: PokerPresenter {
     ///
     /// - Parameter title:  The picker title.
     /// - Parameter detail: The picker detail description, `nil` by default.
-    /// - Parameter pickerMode: Mode for UIDatePicker. `time` by default
+    /// - Parameter pickerMode: Mode for `UIDatePicker`. `time` by default
+    /// - Parameter defaultTime: Default time for `UIDatePicker`. Now by default.
     ///
     /// - Returns: The created `PokerDateView` instance.
     public func showDatePicker(title: String, detail: String?, pickerMode: UIDatePicker.Mode = .time, defaultTime: Date = Date()) -> PokerDateView {

@@ -65,13 +65,14 @@ public func showInput(title: String, detail: String? = nil) -> PokerInputView {
 
 /// Present a basic style of `PokerDateView` with popup animation from bottom.
 ///
-/// The basic style of `PokerDateView` contains a title label and detail label you can customize confirmButton
-/// color by calling `confirm(title:style:)`.
+/// A basic `PokerDateView` with an extra `UIDatePicker` you can modify.
 ///
 /// **Example:**
 /// ```
-/// let date = PokerCard.showDatePicker(title: "Example", detail: "Pick a date")
-/// .confirm(title: "Done", style: .default)
+/// PokerCard.showDatePicker(title: "Example", detail: "Pick a time")
+///    .confirm(title: "Done", style: .success, fill: true, cancelTitle: "Woops") { date in
+///        print(date)
+/// }
 /// ```
 ///
 /// - Parameter title:  The alert title.

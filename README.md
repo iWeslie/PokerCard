@@ -187,6 +187,14 @@ PokerCard.showLanguagePicker()
     .setImages(en: UIImage(named: "enLang")!, zh: UIImage(named: "zhLang")!, auto: UIImage(named: "autoLang")!, checkmark: UIImage(named: "checkmark")!)
 ```
 
+### PokerDateView
+```swift
+PokerCard.showDatePicker(title: "Example", detail: "Pick a time")
+    .confirm(title: "Done", style: .success, fill: true, cancelTitle: "Woops") { date in
+        print(date)
+}
+```
+
 ## Documentation
 
 Documentation will be available soon. You may view the usage inside Xcode.
