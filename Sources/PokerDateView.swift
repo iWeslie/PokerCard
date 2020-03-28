@@ -33,7 +33,7 @@ public class PokerDateView: PokerAlertView {
     public var datePicker: UIDatePicker = UIDatePicker(frame: CGRect.zero)
     
     /// input date closure
-    internal var inputDate: ((_ date: Date) -> Void)!
+    internal var inputDate: ((_ date: Date) -> Void)?
     
     internal var pickerContainerViewHeight: CGFloat = 150
     

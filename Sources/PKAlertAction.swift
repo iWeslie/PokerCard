@@ -225,7 +225,11 @@ extension PokerDateView {
     private func submitInput(_ sender: PKButton) {
         guard let superView = sender.superview, let inputView = superView as? PokerDateView else { return }
         
-        inputDate(datePicker.date)
+        guard let inputDateClosure = inputDate else {
+            fatalError("This should not be happened but handler is nil.")
+        }
+        
+        inputDateClosure(datePicker.date)
         inputView.dismiss(sender)
     }
     
