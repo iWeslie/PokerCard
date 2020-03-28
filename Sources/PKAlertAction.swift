@@ -27,6 +27,8 @@
 import Foundation
 import UIKit
 
+// TODO: Crash when not calling confirm
+
 // MARK: - PokerAlertView
 extension PokerAlertView {
     /// Modify confirm button title and background style.
