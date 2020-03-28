@@ -35,7 +35,7 @@ public class PokerDateView: PokerAlertView {
     /// input date closure
     internal var inputDate: ((_ date: Date) -> Void)!
     
-    internal var pickerContainerViewHeight: CGFloat!
+    internal var pickerContainerViewHeight: CGFloat = 150
     
     internal var pickerContainerView = PKContainerView()
     
@@ -49,7 +49,6 @@ public class PokerDateView: PokerAlertView {
     }
     
     private func setupDatePickerView() {
-        pickerContainerViewHeight = 150
 
         pickerContainerView.layer.cornerRadius = 8
         insertSubview(pickerContainerView, at: 0)
