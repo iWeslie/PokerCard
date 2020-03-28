@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Present a basic style of `PokerAlertView` with popup animation from bottom.
 ///
@@ -60,6 +61,29 @@ public func showAlert(title: String, detail: String? = nil) -> PokerAlertView {
 @discardableResult
 public func showInput(title: String, detail: String? = nil) -> PokerInputView {
     return PokerAlertPresenter().showInput(title: title, detail: detail)
+}
+
+/// Present a basic style of `PokerDateView` with popup animation from bottom.
+///
+/// A basic `PokerDateView` with an extra `UIDatePicker` you can modify.
+///
+/// **Example:**
+/// ```
+/// PokerCard.showDatePicker(title: "Example", detail: "Pick a time")
+///    .confirm(title: "Done", style: .success, fill: true, cancelTitle: "Woops") { date in
+///        print(date)
+/// }
+/// ```
+///
+/// - Parameter title:  The alert title.
+/// - Parameter detail: The alert detail description, `nil` by default.
+/// - Parameter pickerMode: Mode for `UIDatePicker`. `.time` by default.
+/// - Parameter defaultTime: The default time for `UIDatePicker`. Now by default.
+///
+/// - Returns: The created `PokerAlertView` instance.
+@discardableResult
+public func showDatePicker(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode = .time, defaultTime: Date = Date()) -> PokerDateView {
+    return PokerAlertPresenter().showDatePicker(title: title, detail: detail)
 }
 
 /// Present a promotion `PokerInputView` with popup animation from bottom.

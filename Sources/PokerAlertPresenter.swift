@@ -24,6 +24,8 @@
 //  THE SOFTWARE.
 //
 
+import UIKit
+
 /// Presenter for Poker View with alert style.
 public class PokerAlertPresenter: PokerPresenter {
     /// Create a `PokerAlertView` with title and detail decription.
@@ -57,6 +59,20 @@ public class PokerAlertPresenter: PokerPresenter {
     /// - Parameter detail:     The alert detail description, `nil` by default.
     public func showPromotion(title: String, promotion: String?, detail: String? = nil) -> PokerInputView {
         let pokerView = PokerInputView(title: title, promotion: promotion, secondary: detail, style: .warn)
+        backgroundView.pokerView = pokerView
+        return pokerView
+    }
+    
+    /// Create a `PokerDateView` with title and detail decription.
+    ///
+    /// - Parameter title:  The picker title.
+    /// - Parameter detail: The picker detail description, `nil` by default.
+    /// - Parameter pickerMode: Mode for `UIDatePicker`. `time` by default
+    /// - Parameter defaultTime: Default time for `UIDatePicker`. Now by default.
+    ///
+    /// - Returns: The created `PokerDateView` instance.
+    public func showDatePicker(title: String, detail: String?, pickerMode: UIDatePicker.Mode = .time, defaultTime: Date = Date()) -> PokerDateView {
+        let pokerView = PokerDateView(title: title, detail: detail, pickerMode: pickerMode, defaultTime: defaultTime)
         backgroundView.pokerView = pokerView
         return pokerView
     }
