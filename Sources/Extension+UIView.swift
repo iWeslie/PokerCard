@@ -34,7 +34,7 @@ extension UIView {
         self.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset).isActive = true
     }
     
-    /// Set leading and trailing anchor
+    /// Set top and bottom anchor
     internal func constraint(withTopBottom inset: CGFloat) {
         guard let superView = self.superview else { return }
         self.topAnchor.constraint(equalTo: superView.topAnchor, constant: inset).isActive = true

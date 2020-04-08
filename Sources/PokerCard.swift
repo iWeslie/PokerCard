@@ -83,7 +83,7 @@ public func showInput(title: String, detail: String? = nil) -> PokerInputView {
 /// - Returns: The created `PokerAlertView` instance.
 @discardableResult
 public func showDatePicker(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode = .time, defaultTime: Date = Date()) -> PokerDateView {
-    return PokerAlertPresenter().showDatePicker(title: title, detail: detail)
+    return PokerAlertPresenter().showDatePicker(title: title, detail: detail, pickerMode: pickerMode, defaultTime: defaultTime)
 }
 
 /// Present a promotion `PokerInputView` with popup animation from bottom.

@@ -57,6 +57,8 @@ public class PokerAlertView: PokerView, PokerTitleRepresentable, PokerConfirmRep
         widthAnchor.constraint(equalToConstant: baseWidth).isActive = true
         layoutIfNeeded()
         confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
+        
+        confirm(title: "Confirm")
     }
 
     private func setupDetail(with detail: String?) {

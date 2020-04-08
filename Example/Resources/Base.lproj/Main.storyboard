@@ -108,12 +108,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Viz-sf-jhT">
-                                <rect key="frame" x="0.0" y="516" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="508" width="414" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="aSY-T4-cXS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="28"/>
-                                <state key="normal" title="showDatePicker"/>
+                                <state key="normal" title="showDatePicker">
+                                    <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="showDatePicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b6o-8K-0ch"/>
                                 </connections>
@@ -124,7 +126,7 @@
                             <constraint firstItem="0w2-Y9-Bgu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="96O-d8-YPF"/>
                             <constraint firstItem="cTs-VO-LZN" firstAttribute="top" secondItem="dH5-RQ-MyH" secondAttribute="bottom" id="L2T-cx-2Gu"/>
                             <constraint firstItem="cTs-VO-LZN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LuU-Qm-WIc"/>
-                            <constraint firstItem="Viz-sf-jhT" firstAttribute="top" secondItem="cTs-VO-LZN" secondAttribute="bottom" constant="8" id="NMj-ju-NgS"/>
+                            <constraint firstItem="Viz-sf-jhT" firstAttribute="top" secondItem="cTs-VO-LZN" secondAttribute="bottom" id="NMj-ju-NgS"/>
                             <constraint firstItem="SDx-n1-sq1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NtX-eG-EzJ"/>
                             <constraint firstItem="uUw-Wg-8Rq" firstAttribute="top" secondItem="KG4-h4-PiQ" secondAttribute="bottom" id="PuZ-4z-3xF"/>
                             <constraint firstItem="dH5-RQ-MyH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vgd-9d-LxE"/>

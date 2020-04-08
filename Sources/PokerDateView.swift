@@ -30,16 +30,20 @@ import UIKit
 public class PokerDateView: PokerAlertView {
     
     // Picker for dateView
-    public var datePicker: UIDatePicker = UIDatePicker(frame: CGRect.zero)
+    public let datePicker: UIDatePicker = UIDatePicker(frame: CGRect.zero)
     
     /// input date closure
     internal var inputDate: ((_ date: Date) -> Void)?
     
-    internal var pickerContainerViewHeight: CGFloat = 150
+    internal let pickerContainerViewHeight: CGFloat = 150
     
-    internal var pickerContainerView = PKContainerView()
+    internal let pickerContainerView = PKContainerView()
     
-    convenience init(title: String, detail: String? = nil, pickerMode: UIDatePicker.Mode, defaultTime: Date) {
+    convenience init(title: String,
+                     detail: String? = nil,
+                     pickerMode: UIDatePicker.Mode = .date,
+                     defaultTime: Date)
+    {
         self.init(title: title, detail: detail)
         
         datePicker.datePickerMode = pickerMode
@@ -61,12 +65,9 @@ public class PokerDateView: PokerAlertView {
         
         pickerContainerView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.topAnchor.constraint(equalTo: pickerContainerView.topAnchor).isActive = true
-        datePicker.bottomAnchor.constraint(equalTo: pickerContainerView.bottomAnchor).isActive = true
-        datePicker.leftAnchor.constraint(equalTo: pickerContainerView.leftAnchor).isActive = true
-        datePicker.rightAnchor.constraint(equalTo: pickerContainerView.rightAnchor).isActive = true
+        datePicker.constraint(withLeadingTrailing: 0)
+        datePicker.constraint(withTopBottom: 0)
         
-//        datePicker.frame.size.width = 168
     }
     
 }
