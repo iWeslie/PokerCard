@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode11.3
+osx_image: xcode12.2
 
 env:
   global:
@@ -7,7 +7,7 @@ env:
   - SCHEME="PokerCard"
   - EXAMPLE_SCHEME="Example"
   matrix:
-  - DESTINATION="platform=iOS Simulator,name=iPhone 8"
+  - DESTINATION="platform=iOS Simulator,name=iPhone X"
 
 script:
 - set -o pipefail
@@ -15,8 +15,6 @@ script:
 - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
 - pod lib lint
 
-before_deploy:
-- carthage build --archive
 deploy:
   provider: releases
   file: PokerCard.framework.zip
