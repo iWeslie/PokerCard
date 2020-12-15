@@ -6,13 +6,11 @@ env:
   - WORKSPACE=PokerCard.xcworkspace
   - SCHEME="PokerCard"
   - EXAMPLE_SCHEME="Example"
-  matrix:
-  - DESTINATION="platform=iOS Simulator,name=iPhone X"
-
+  
 script:
 - set -o pipefail
-- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
-- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" | xcpretty
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME"| xcpretty
 
 deploy:
   provider: releases
