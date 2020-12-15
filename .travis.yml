@@ -13,7 +13,6 @@ script:
 - set -o pipefail
 - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
 - xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" | xcpretty
-- pod lib lint
 
 deploy:
   provider: releases
