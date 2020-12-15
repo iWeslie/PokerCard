@@ -9,8 +9,8 @@ env:
   
 script:
 - set -o pipefail
-- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" | xcpretty
-- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME"| xcpretty
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=13.6,name=iPhone 11' | xcpretty
+- xcodebuild clean build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=13.6,name=iPhone 11' | xcpretty
 
 deploy:
   provider: releases
